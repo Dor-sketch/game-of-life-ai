@@ -25,6 +25,7 @@ public:
   static void setLightTheme();
 
 private:
+  static void saveScreenshot();
   static void createButtons();
   static void connectSignals();
   static void createWindow();

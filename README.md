@@ -1,11 +1,12 @@
 # Genetic Algorithm for Conway's Game of Life 🧬
 
-This project implements a genetic algorithm to discover configurations in Conway's Game of Life that meet specific criteria, showcasing the power of AI in software development. The project developed for the **Biological Computation (20581)** Advanced Course at the _Open University of Israel_ in 2024 and earned a perfect score.
+This project implements a genetic algorithm to discover configurations in Conway's Game of Life that meet specific criteria, showcasing the power of AI in software development. The project developed for the **Biological Computation (20581)** Advanced Course at the _Open University of Israel_ in 2024 and earned a perfect score of `100`.
 
 <p align = "center">
-    <img src="https://github.com/Dor-sketch/GameOfLifeAI/assets/138825033/20fde250-2bf2-4a35-8748-0fb9e675c921" width="600"/>
+    <img src="./images/dragon/dragon.gif" width="600"/>
+    <br>
+    <i>Dragon Shape Evolution</i>
 </p>
-
 
 ---
 
@@ -13,13 +14,13 @@ This project implements a genetic algorithm to discover configurations in Conway
 
 <!-- code_chunk_output -->
 
-- [Overview 📖](#overview-)
-  - [Backround](#backround)
+- [Overview](#overview)
+  - [Background](#background)
     - [Game of Life](#game-of-life)
     - [Evolutionary Algorithms](#evolutionary-algorithms)
   - [Project Objectives](#project-objectives)
   - [Project Structure](#project-structure)
-- [Technical Details 🛠️](#technical-details-️)
+- [Technical Details](#technical-details)
   - [Game of Life Implementation](#game-of-life-implementation)
     - [Static Board Padding](#static-board-padding)
     - [Efficient Update Process](#efficient-update-process)
@@ -36,27 +37,27 @@ This project implements a genetic algorithm to discover configurations in Conway
     - [Report](#report)
     - [Save](#save)
   - [GUI](#gui)
-- [Getting Started 🚀](#getting-started-)
+- [Getting Started](#getting-started)
   - [Using the GUI](#using-the-gui)
     - [Running the Algorithm](#running-the-algorithm)
   - [Using the Command Line](#using-the-command-line)
-- [Examples 🎯](#examples-)
+- [Examples](#examples)
   - [Selected Individuals Showcase and Insights](#selected-individuals-showcase-and-insights)
   - [T_shape](#t_shape)
   - [Dragon](#dragon)
   - [Other Examples](#other-examples)
   - [Insights](#insights)
-- [Contributions and Feedback 🤝](#contributions-and-feedback-)
-- [Acknowledgements 🙏](#acknowledgements-)
-- [License 📜](#license-)
+- [Contributions and Feedback](#contributions-and-feedback)
+- [Acknowledgements](#acknowledgements)
+- [License](#license)
 
 <!-- /code_chunk_output -->
 
 ---
 
-## Overview 📖
+## Overview
 
-### Backround
+### Background
 
 #### Game of Life
 
@@ -66,6 +67,8 @@ The `Game of Life` is a cellular automaton devised by the British mathematician 
 2. **Survival:** Any live cell with two or three live neighbors lives on to the next generation.
 3. **Overpopulation:** Any live cell with more than three live neighbors dies, as if by overpopulation.
 4. **Reproduction:** Any dead cell with exactly three live neighbors becomes a live cell, as if by reproduction.
+
+For more information on the Game of Life, you can visit the [Wikipedia page](https://en.wikipedia.org/wiki/Conway's_Game_of_Life).
 
 #### Evolutionary Algorithms
 
@@ -83,6 +86,8 @@ The program utilising a genetic algorithm in order to discover configurations in
 2. **Long Evolution Time:** The configuration should take a considerable amount of time to reach stability.
 3. **Expansion Before Stability:** During evolution, the configuration must expand significantly beyond its initial size.
 
+This kind of patterns are known as `Metuselahs` in the Game of Life terminology. The project aims to explore the potential of genetic algorithms in discovering such configurations, showcasing the power of AI in software development. For more about `Metuselahs`, you can visit the [Wikipedia page](https://en.wikipedia.org/wiki/Methuselah_(cellular_automaton)).
+
 ### Project Structure
 
 The implementation is modular, consisting of:
@@ -95,7 +100,7 @@ The implementation is modular, consisting of:
 
 ---
 
-## Technical Details 🛠️
+## Technical Details
 
 ### Game of Life Implementation
 
@@ -272,7 +277,6 @@ Selection within the population is governed by `selectionPressure` and `selectio
 To regenerate the population for the next generation, the `Population` class leverages the `Chromosome` API, utilizing `selectionPressure` and the chosen selection method to guide the process. This design ensures versatility, enabling the class to support a wide array of problems beyond the specific challenge addressed by this program. The aim is to foster a generic, adaptable framework for genetic algorithm applications.
 
 ```cpp
-
 void Population::crossover() {
  // create a new population
  std::vector<std::shared_ptr<Chromosome>> newPopulation;
@@ -399,7 +403,7 @@ Users have the flexibility to initiate runs from the GUI or via command line arg
 
 **Note**: The GUI prompts for a directory and memorizes the last accessed location, streamlining subsequent runs within the same directory without the need for reselection. Command line executions automatically recall and open the last used directory.
 
-## Getting Started 🚀
+## Getting Started
 
 The program can be executed from the command line or via the GUI. The following instructions detail both approaches.
 
@@ -442,7 +446,7 @@ A notable drawback of this method is the storage inefficiency for `sparse matric
 
 ---
 
-## Examples 🎯
+## Examples
 
 ### Selected Individuals Showcase and Insights
 
@@ -460,6 +464,10 @@ To explore these examples firsthand, utilize the GUI's `Load` button to access t
 
 ### T_shape
 
+<p align = "center">
+    <img src="./images/t_shape/t_shape.gif" width="600"/>
+</p>
+
 `T_shape` is called after the mighty T-rex, and its `T` shape. The initial state starts with 6 alive cells. It is a very small shape, and it is very likely to be selected as a parent for the next generation. It evolves into a heart (see figure 2), and continues as a musk (see figure 3). It continues to evolve into a goat face (see figure 4), and then into a skull face (see figure 5). It continues to grow and become stable at generation 225 (see figure 6). At its peak, it has about 100 alive cells.
 
 | ![T_shape Initial](./images/t_shape1.png) | ![T_shape Heart Evolution](./images/t_shape2.png) |
@@ -475,6 +483,10 @@ To explore these examples firsthand, utilize the GUI's `Load` button to access t
 | _Figure 5: Skull Face Evolution_ | _Figure 6: Stable State at Gen 225_ |
 
 ### Dragon
+
+<p align = "center">
+    <img src="./images/dragon/dragon.gif" width="600"/>
+</p>
 
 Dragon's initial state starts with 6 alive cells. It is a very small shape, and it is very likely to be selected as a parent for the next generation. It evolves into a dragon with open wings (see figure 2), and continues as a dragon with closed wings (see figure 3). It continues to evolve into a dragon with big open wings (see figure 4), and then into a dragon with very big open wings (see figure 5). It continues to grow and become stable at generation 132 (see figure 6). At its peak, it has about 10 times more alive cells than the initial shape.
 
@@ -513,14 +525,14 @@ The algorithm produced some interesting results. Here are more insights:
 
 5. **Cycles Tracking**: To address undesired individuals surviving for a long time, a hash table that keeps track of visited boards during the simulation was added. To enhance performance, the boards are encoded into occurrences string, and the hash table is implemented as a `std::unordered_set<std::string>`.
 
-## Contributions and Feedback 🤝
+## Contributions and Feedback
 
 Feel free to fork this project, submit pull requests, or send me suggestions to improve the algorithm or the implementation. Your feedback is highly appreciated!
 
-## Acknowledgements 🙏
+## Acknowledgements
 
 This project was inspired by my continuous exploration of computational biology and my desire to blend software engineering with biological systems' complexity. Special thanks to my course instructors and peers for their invaluable insights and support.
 
-## License 📜
+## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.

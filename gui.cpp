@@ -3,15 +3,161 @@
 #include <cstdlib>
 #include <ctime>
 #include <fstream>
+#include <iomanip>
 #include <iostream>
+#include <sstream>
 #include <sys/stat.h>
 #include <thread>
 #include <time.h>
 #include <unistd.h>
 
-static bool shouldDrawGraph = false;
-
 extern void gameOfLife(int board[BOARD_SIZE][BOARD_SIZE], int boardColSize);
+static bool shouldDrawGraph = false;
+static int saveScreenshotCounter = 0;
+int GUI::generationCount = 0;
+int GUI::populationSize = 0;
+int GUI::maxAliveCells = 0;
+bool GUI::isPaused = true;
+std::string GUI::lastSavePath = "";
+std::vector<int> GUI::aliveCellsData;
+GtkWidget *GUI::window;
+GtkWidget *GUI::grid;
+GtkWidget *GUI::stopButton;
+GtkWidget *GUI::clearButton;
+GtkWidget *GUI::randomButton;
+GtkWidget *GUI::nextButton;
+GtkWidget *GUI::saveButton;
+GtkWidget *GUI::loadButton;
+GtkWidget *GUI::quitButton;
+GtkWidget *GUI::loadFromFileButton;
+GtkWidget *GUI::buttons[BOARD_SIZE][BOARD_SIZE];
+GtkWidget *GUI::graphArea;
+GtkWidget *GUI::graphDrawingArea;
+GtkWidget *GUI::graphDrawingAreaContainer;
+GtkWidget *GUI::runGeneticAlgorithmButton;
+GtkLabel *GUI::generationLabel;
+GtkLabel *GUI::maxAliveCellsLabel;
+GtkLabel *GUI::startAliveCellsLabel;
+GtkLabel *GUI::populationLabel;
+
+namespace Themes {
+const std::string pastelRed = "FF6961";
+const std::string pastelOrange = "FFA07A";
+const std::string pastelPink = "FFD1DC";
+
+const std::string lightTheme = R"(
+window, button, label, grid, drawingarea {
+	background-color: #FFFFFF;             // White background
+	color: #000000;                        // Black text
+	font-family: 'Courier New', monospace; // Monospace font
+}
+button { // White background, black text, black border
+	background: #FFFFFF;
+	color: #000000;
+	border-color: #000000;
+	border-radius: 0; // Remove rounded corners
+}
+button:hover { // Darken black on hover
+	background: #000000;
+	color: #FFFFFF;               // White text on hover
+	box-shadow: 0 0 10px #000000; // Black glow on hover
+}
+.alive {
+	background-color: #FF43A4;     // Neon pink for "alive" cells
+	box-shadow: 0 0 10px #FF43A4; // Neon pink glow
+	animation: pulse 1s infinite; // Pulse animation
+}
+@keyframes pulse { // Define pulse animation
+	0% { box-shadow: 0 0 5px #FF43A4; }
+	50% { box-shadow: 0 0 20px #FF43A4, 0 0 30px #FF43A4; }
+	100% { box-shadow: 0 0 5px #FF43A4; }
+}
+)";
+
+const std::string darkTheme = R"(
+window, button, label, grid, drawingarea {
+	background-color: #000000;             // Pure black background
+	color: #FFFFFF;                        // White text
+	font-family: 'Courier New', monospace; // Monospace font
+}
+button { // Black background, neon green text, neon green border
+	background: #000000;
+	color: #39FF14;
+	border-color: #39FF14;
+	border-radius: 0; // Remove rounded corners
+	box-shadow: 0 0 10px #39FF14; // Neon green glow
+}
+button:hover { // Brighten neon green on hover
+	background: #39FF14;
+	color: #000000;               // Black text on hover
+	box-shadow: 0 0 20px #39FF14; // Increase glow on hover
+}
+.alive {
+	background-color: #FF43A4;     // Neon pink for "alive" cells
+	box-shadow: 0 0 10px #FF43A4; // Neon pink glow
+	animation: pulse 1s infinite; // Pulse animation
+}
+@keyframes pulse { // Define pulse animation
+	0% { box-shadow: 0 0 5px #FF43A4; }
+	50% { box-shadow: 0 0 20px #FF43A4, 0 0 30px #FF43A4; }
+	100% { box-shadow: 0 0 5px #FF43A4; }
+}
+)";
+
+const std::string salmonTheme = R"(
+window, button, label, grid, drawingarea {
+	background-color: #F8F8F8;
+	color: #333333;
+	font-family: 'Courier New', monospace;
+}
+button {
+ background: #F8F8F8;
+ color: #333333;
+ border-color: #333333;
+ border-radius: 0;
+}
+button:hover {
+ box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19), 0 8px 10px 0 rgba(0, 0, 0, 0.2), 0 0 10px #333333;
+ background: #333333;
+ color: #F8F8F8;
+}
+.alive {
+ box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19), 0 8px 10px 0 rgba(0, 0, 0, 0.2);
+ background-color: #FFA07A;
+}
+drawingarea {
+ background: #FFFFFF;
+ border: 2px solid #333333;
+}
+)";
+
+const std::string redTheme = R"(
+window, button, label, grid, drawingarea {
+	background-color: #F8F8F8;
+	color: #333333;
+	font-family: 'Courier New', monospace;
+}
+button {
+ background: #F8F8F8;
+ color: #333333;
+ border-color: #333333;
+ border-radius: 0;
+}
+button:hover {
+ box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19), 0 8px 10px 0 rgba(0, 0, 0, 0.2), 0 0 10px #333333;
+ background: #333333;
+ color: #F8F8F8;
+}
+.alive {
+ box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19), 0 8px 10px 0 rgba(0, 0, 0, 0.2);
+ background-color: #FF6961;
+}
+drawingarea {
+ background: #FFFFFF;
+ border: 2px solid #333333;
+}
+)";
+} // namespace Themes
 
 GUI::GUI(const std::string &boardFile) {
   initGUI();
@@ -32,31 +178,6 @@ void GUI::initGUI() {
 
 int GUI::board[BOARD_SIZE][BOARD_SIZE] = {{0}}; // double braces to silence
                                                 // warning
-bool GUI::isPaused = true;
-GtkWidget *GUI::window;
-GtkWidget *GUI::grid;
-GtkWidget *GUI::stopButton;
-GtkWidget *GUI::clearButton;
-GtkWidget *GUI::randomButton;
-GtkWidget *GUI::nextButton;
-GtkWidget *GUI::saveButton;
-GtkWidget *GUI::loadButton;
-GtkWidget *GUI::quitButton;
-GtkWidget *GUI::loadFromFileButton;
-GtkWidget *GUI::buttons[BOARD_SIZE][BOARD_SIZE];
-GtkWidget *GUI::graphArea;
-GtkWidget *GUI::graphDrawingArea;
-GtkWidget *GUI::graphDrawingAreaContainer;
-GtkWidget *GUI::runGeneticAlgorithmButton;
-GtkLabel *GUI::generationLabel;
-GtkLabel *GUI::maxAliveCellsLabel;
-GtkLabel *GUI::startAliveCellsLabel;
-GtkLabel *GUI::populationLabel;
-std::string GUI::lastSavePath = "";
-std::vector<int> GUI::aliveCellsData;
-int GUI::generationCount = 0;
-int GUI::populationSize = 0;
-int GUI::maxAliveCells = 0;
 
 void GUI::createWindow() {
   window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
@@ -73,85 +194,25 @@ void GUI::createWindow() {
   gtk_container_set_border_width(GTK_CONTAINER(window), 10);
 }
 
-void GUI::setLightTheme(){
-	// set non-neon light theme, use soft colors
-	GtkCssProvider *provider = gtk_css_provider_new();
-        gtk_css_provider_load_from_data(
-            provider,
-            "window, button, label, grid, drawingarea {"
-            "   background-color: #F8F8F8;"             // Soft white background
-            "   color: #333333;"                        // Soft black text
-            "   font-family: 'Courier New', monospace;" // Monospace font
-            "}"
-            "button {" // Soft white background, soft black text, soft black
-                       // border
-            " background: #F8F8F8;"
-            " color: #333333;"
-            " border-color: #333333;"
-            " border-radius: 0;" // Remove rounded corners
-            " box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, "
-            "0, 0, 0.19);" // Add box shadow for 3D effect
-
-            " transition: all 0.3s ease;" // Smooth transition for hover effects
-            "}"
-            "button:hover {" // Soften color on hover
-            " background: #333333;"
-            " color: #F8F8F8;" // Soft white text on hover
-            "}"
-            ".alive {"
-            "background-color: #FFA07A;"  // Light salmon for "alive" cells
-            " transition: all 0.3s ease;" // Smooth transition for hover effects
-            "}"
-            "drawingarea {"
-            " background: #FFFFFF;"       // White background for graph
-            " border: 2px solid #333333;" // Soft black border for graph
-            "}",
-            -1, NULL);
-        gtk_style_context_add_provider_for_screen(gdk_screen_get_default(),
-																						GTK_STYLE_PROVIDER(provider),
-																						GTK_STYLE_PROVIDER_PRIORITY_USER);
-	g_object_unref(provider);
+void GUI::setLightTheme() {
+  GtkCssProvider *provider = gtk_css_provider_new();
+  gtk_css_provider_load_from_data(provider, Themes::salmonTheme.c_str(), -1,
+                                  NULL);
+  gtk_style_context_add_provider_for_screen(gdk_screen_get_default(),
+                                            GTK_STYLE_PROVIDER(provider),
+                                            GTK_STYLE_PROVIDER_PRIORITY_USER);
+  g_object_unref(provider);
 }
 
 void GUI::setDarkTheme() {
-	// Set dark and cool theme
-	GtkCssProvider *provider = gtk_css_provider_new();
-        gtk_css_provider_load_from_data(
-            provider,
-            "window, button, label, grid, drawingarea {"
-            "   background-color: #000000;"             // Pure black background
-            "   color: #FFFFFF;"                        // White text
-            "   font-family: 'Courier New', monospace;" // Monospace font
-            "}"
-            "button {" // Black background, neon green text, neon green border
-            " background: #000000;"
-            " color: #39FF14;"
-            " border-color: #39FF14;"
-            " border-radius: 0;" // Remove rounded corners
-
-            // commiting out this line for performance reasons
-            // " box-shadow: 0 0 10px #39FF14;" // Neon green glow
-            "}"
-            "button:hover {" // Brighten neon green on hover
-            " background: #39FF14;"
-            " color: #000000;"               // Black text on hover
-            " box-shadow: 0 0 20px #39FF14;" // Increase glow on hover
-            "}"
-            ".alive {"
-            "background-color: #FF43A4;"     // Neon pink for "alive" cells
-            " box-shadow: 0 0 10px #FF43A4;" // Neon pink glow
-            " animation: pulse 1s infinite;" // Pulse animation
-            "}"
-            "@keyframes pulse {" // Define pulse animation
-            " 0% { box-shadow: 0 0 5px #FF43A4; }"
-            " 50% { box-shadow: 0 0 20px #FF43A4, 0 0 30px #FF43A4; }"
-            " 100% { box-shadow: 0 0 5px #FF43A4; }"
-            "}",
-            -1, NULL);
-        gtk_style_context_add_provider_for_screen(gdk_screen_get_default(),
-																						GTK_STYLE_PROVIDER(provider),
-																						GTK_STYLE_PROVIDER_PRIORITY_USER);
-	g_object_unref(provider);
+  // Set dark and cool theme
+  GtkCssProvider *provider = gtk_css_provider_new();
+  gtk_css_provider_load_from_data(provider, Themes::darkTheme.c_str(), -1,
+                                  NULL);
+  gtk_style_context_add_provider_for_screen(gdk_screen_get_default(),
+                                            GTK_STYLE_PROVIDER(provider),
+                                            GTK_STYLE_PROVIDER_PRIORITY_USER);
+  g_object_unref(provider);
 }
 
 void GUI::createLayoutContainers() {
@@ -204,9 +265,9 @@ void GUI::createButtons() {
 
   // make all buttons flat
   for (int i = 0; i < BOARD_SIZE; i++) {
-	for (int j = 0; j < BOARD_SIZE; j++) {
-	  gtk_button_set_relief(GTK_BUTTON(buttons[i][j]), GTK_RELIEF_NONE);
-	}
+    for (int j = 0; j < BOARD_SIZE; j++) {
+      gtk_button_set_relief(GTK_BUTTON(buttons[i][j]), GTK_RELIEF_NONE);
+    }
   }
 }
 void GUI::createButtonsAndLabels() {
@@ -524,41 +585,41 @@ void GUI::open_from_file() {
   generationCount = 1;
 }
 gboolean GUI::draw_graph(GtkWidget *widget, cairo_t *cr, gpointer data) {
-	(void)data;
-	if (!shouldDrawGraph) {
-		return FALSE;
-	}
-	shouldDrawGraph = false;
-	// draw population (y axis) changes over generation (x axis)
-	// adjust to fit the graph inside the drawing area
-	int width, height;
-	width = gtk_widget_get_allocated_width(widget);
-	height = gtk_widget_get_allocated_height(widget);
-	cairo_scale(cr, width / 200.0, height / 200.0);
+  (void)data;
+  if (!shouldDrawGraph) {
+    return FALSE;
+  }
+  shouldDrawGraph = false;
+  // draw population (y axis) changes over generation (x axis)
+  // adjust to fit the graph inside the drawing area
+  int width, height;
+  width = gtk_widget_get_allocated_width(widget);
+  height = gtk_widget_get_allocated_height(widget);
+  cairo_scale(cr, width / 200.0, height / 200.0);
 
-	// draw background
-	cairo_set_source_rgb(cr, 0, 0, 0); // Change background to black
-	cairo_paint(cr);
+  // draw background
+  cairo_set_source_rgb(cr, 0, 0, 0); // Change background to black
+  cairo_paint(cr);
 
-	// draw axis
-	cairo_set_source_rgb(cr, 0.227, 1, 0.078); // Change axis to neon green
-	cairo_set_line_width(cr, 1);
-	cairo_move_to(cr, 0, 0);
-	cairo_line_to(cr, 0, 200);
-	cairo_line_to(cr, 200, 200);
-	cairo_stroke(cr);
+  // draw axis
+  cairo_set_source_rgb(cr, 0.227, 1, 0.078); // Change axis to neon green
+  cairo_set_line_width(cr, 1);
+  cairo_move_to(cr, 0, 0);
+  cairo_line_to(cr, 0, 200);
+  cairo_line_to(cr, 200, 200);
+  cairo_stroke(cr);
 
-	// draw data
-	cairo_set_source_rgb(cr, 1, 0.263, 0.639); // Change data to neon purple
-	cairo_set_line_width(cr, 1);
-	cairo_move_to(cr, 0, 200);
-	for (int i = 0; i < static_cast<int>(aliveCellsData.size()); i++) {
-		cairo_line_to(cr, i * 200.0 / aliveCellsData.size(),
-									200 - aliveCellsData[i] * 200.0 / maxAliveCells);
-	}
-	cairo_stroke(cr);
+  // draw data
+  cairo_set_source_rgb(cr, 1, 0.263, 0.639); // Change data to neon purple
+  cairo_set_line_width(cr, 1);
+  cairo_move_to(cr, 0, 200);
+  for (int i = 0; i < static_cast<int>(aliveCellsData.size()); i++) {
+    cairo_line_to(cr, i * 200.0 / aliveCellsData.size(),
+                  200 - aliveCellsData[i] * 200.0 / maxAliveCells);
+  }
+  cairo_stroke(cr);
 
-	return FALSE;
+  return FALSE;
 }
 void GUI::quit() {
   if (gtk_main_level() > 0) {
@@ -606,6 +667,34 @@ void GUI::update() {
   shouldDrawGraph = true;
   gtk_widget_show_all(window);
   gtk_widget_queue_draw(graphArea);
+}
+
+void GUI::saveScreenshot() {
+  int cellWidth = gtk_widget_get_allocated_width(buttons[0][0]);
+  int cellHeight = gtk_widget_get_allocated_height(buttons[0][0]);
+  int cellsWidth = cellWidth * BOARD_SIZE;
+  int cellsHeight = cellHeight * BOARD_SIZE;
+  // Capture screenshot
+  GtkWidget *parent =
+      gtk_widget_get_parent(buttons[0][0]);          // get parent of a cell
+  GdkWindow *window = gtk_widget_get_window(parent); // get window of the parent
+
+  int cellX, cellY;
+  gtk_widget_translate_coordinates(buttons[0][0], parent, 0, 0, &cellX, &cellY);
+  if (window != nullptr) {
+    GdkPixbuf *screenshot =
+        gdk_pixbuf_get_from_window(window, 10, 10, cellsWidth, cellsHeight);
+    // get unique filename monotonic increasing
+
+    std::ostringstream paddedCounter;
+    paddedCounter << std::setw(7) << std::setfill('0')
+                  << saveScreenshotCounter++;
+    std::string filename = "screenshot" + paddedCounter.str() + ".png";
+    if (screenshot != nullptr) {
+      gdk_pixbuf_save(screenshot, filename.c_str(), "png", nullptr, nullptr);
+      g_object_unref(screenshot);
+    }
+  }
 }
 
 void GUI::buttonClicked(GtkWidget *widget, gpointer data) {
