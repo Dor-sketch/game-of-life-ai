@@ -20,7 +20,7 @@ void guiThread() {
 		cv.wait(lock); // release lock and wait
 	}
 	// after the wait, we own the lock again
-	g_timeout_add(200, GUI::start, NULL);
+	g_timeout_add(100, GUI::start, NULL);
 }
 
 int main(int argc, char *argv[]) {
