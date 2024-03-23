@@ -25,8 +25,9 @@ GUI::GUI(const std::string &boardFile) {
 
 GUI::GUI() {
 	createWindow();
+    setDarkTheme();
 	createLayoutContainers();
-	createButtonsAndLabels();
+    createButtonsAndLabels();
 	connectSignals();
 	showWindow();
 }
@@ -68,12 +69,28 @@ void GUI::createWindow() {
 	GdkRectangle geometry;
 	gdk_monitor_get_geometry(monitor, &geometry);
 	int scale = gdk_monitor_get_scale_factor(monitor);
-
 	int new_width =
 		std::min(geometry.width * scale * 0.8, geometry.height * scale * 0.8);
 	int new_height = new_width;
 	gtk_window_resize(GTK_WINDOW(window), new_width, new_height);
 	gtk_container_set_border_width(GTK_CONTAINER(window), 10);
+	// set dark and cool theme
+	GtkCssProvider *provider = gtk_css_provider_new();
+	gtk_css_provider_load_from_data(provider,
+									"button { background: #003333; color: #80FFFF; border-color: #006666; }",
+									-1, NULL);
+	gtk_style_context_add_provider_for_screen( gdk_screen_get_default(),
+											   GTK_STYLE_PROVIDER(provider),
+											   GTK_STYLE_PROVIDER_PRIORITY_USER);
+	g_object_unref(provider);
+	// set black background to all widgets
+	GdkRGBA color = {0, 0, 0, 1};
+	gtk_widget_override_background_color(window, GTK_STATE_FLAG_NORMAL, &color);
+}
+
+void GUI::setDarkTheme() {
+	GtkSettings *settings = gtk_settings_get_default();
+	g_object_set(G_OBJECT(settings), "gtk-application-prefer-dark-theme", TRUE, NULL);
 }
 void GUI::createLayoutContainers() {
 	grid = gtk_grid_new();
@@ -222,35 +239,13 @@ GUI::~GUI() { gtk_widget_destroy(window); }
 
 void GUI::runGeneticAlgorithm() {
 	// Run the genetic algorithm in a new thread
-	std::thread t([]() {
-		GeneticAlgorithm *ga = new GeneticAlgorithm(
-			POPULATION_SIZE, GENERATIONS, MUTATION_RATE, CROSSOVER_RATE);
-		ga->run();
-		lastSavePath = ga->resultsPath;
-		delete ga; // Don't forget to delete the dynamically allocated object
-	});
-
-	// Wait for the genetic algorithm to finish
-	t.join();
-
-	// Now that we're back on the main thread, we can interact with GUI elements
-	GtkWidget *dialog;
-
-	dialog = gtk_message_dialog_new(
-		GTK_WINDOW(window), GTK_DIALOG_DESTROY_WITH_PARENT, GTK_MESSAGE_INFO,
-		GTK_BUTTONS_OK,
-		"Finished running genetic algorithm\n"
-		"The algorithm results are saved in the populations folder"
-		"Choose a configuration to load from the populations folder"
-		"You can reload different configurations from the populations folder"
-		"by clicking the Load from file button\n");
-
-	gtk_window_set_title(GTK_WINDOW(dialog), "Genetic Algorithm");
-	gtk_dialog_run(GTK_DIALOG(dialog));
-	gtk_widget_destroy(dialog);
-	open_folder(lastSavePath);
+        std::thread gaThread([]() {
+          GeneticAlgorithm ga(POPULATION_SIZE, GENERATIONS, MUTATION_RATE,
+                              CROSSOVER_RATE);
+          ga.run();
+        });
+        gaThread.detach(); // Detach the thread to let it run independently
 }
-
 gboolean GUI::start(gpointer /*data*/) {
 	if (!isPaused) {
 		gameOfLife(board, BOARD_SIZE);
@@ -259,6 +254,7 @@ gboolean GUI::start(gpointer /*data*/) {
 	}
 	return TRUE; // return TRUE to keep the timeout
 }
+
 
 void GUI::pauseResume() {
 	// pause game (dont quit)
@@ -294,6 +290,16 @@ void GUI::random() {
 		random = arc4random_uniform(BOARD_SIZE * BOARD_SIZE);
 		board[random / BOARD_SIZE][random % BOARD_SIZE] = 1;
 		count++;
+	}
+	update();
+}
+
+void GUI::setBoard(int newBoard[BOARD_SIZE][BOARD_SIZE]) {
+	// set board
+	for (int i = 0; i < BOARD_SIZE; i++) {
+		for (int j = 0; j < BOARD_SIZE; j++) {
+			board[i][j] = newBoard[i][j];
+		}
 	}
 	update();
 }
@@ -352,6 +358,7 @@ void GUI::save() {
 }
 
 void GUI::load(const std::string &path) {
+	std::cout<<"Loading board from file: " << path << std::endl;
 	// load board
 	std::ifstream file;
 	file.open(path);
@@ -537,6 +544,7 @@ void GUI::update() {
 	shouldDrawGraph = true;
 	gtk_widget_show_all(window);
 	gtk_widget_queue_draw(graphArea);
+	std::cout<< "draw graph" << std::endl;
 }
 
 void GUI::buttonClicked(GtkWidget *widget, gpointer data) {
@@ -545,8 +553,8 @@ void GUI::buttonClicked(GtkWidget *widget, gpointer data) {
 	setButtonColor(widget, *cell);
 }
 
-constexpr const char *css1 = "button { background: #383; color: #fff; }";
-constexpr const char *css2 = "button { background: #fff; color: #383; }";
+constexpr const char *css1 = "button { background: #003333; color: #80FFFF; border-color: #006666; }";
+constexpr const char *css2 = "button { background: #006666; color: #E0FFFF; border-color: #003333; }";
 
 void GUI::setButtonColor(GtkWidget *button, int cell_state) {
 	provider = gtk_css_provider_new();

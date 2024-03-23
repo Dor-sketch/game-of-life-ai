@@ -18,6 +18,7 @@ class Chromosome {
 	void calculateFitness(double totalFitnessScore);
 	void printBoard();
 	void printBoard(std::ostream &os, int board[BOARD_SIZE][BOARD_SIZE]);
+	std::string printBoardToFile();
 
 	std::string filename;
 	int board[BOARD_SIZE][BOARD_SIZE];

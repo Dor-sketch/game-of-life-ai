@@ -1,9 +1,11 @@
 #include "ga.hpp"
 #include "chromosome.hpp"
+#include "gui.hpp"
 #include "population.hpp"
 #include "utils.hpp"
 #include <chrono>
 #include <ctime> // for time() - used to seed the random number generator
+#include <dispatch/dispatch.h>
 #include <fstream>
 #include <iostream>
 #include <map>
@@ -11,6 +13,7 @@
 #include <string_view>
 #include <sys/stat.h>
 #include <unordered_map>
+#include <thread> // Add this line at the top of your file
 
 GeneticAlgorithm::GeneticAlgorithm(int populationSize, int maxGenerations,
 								   double mutationRate,
@@ -22,7 +25,7 @@ GeneticAlgorithm::GeneticAlgorithm(int populationSize, int maxGenerations,
 }
 
 void GeneticAlgorithm::run() {
-	while (population->generation < maxGenerations) {
+	while (population->generation < 1000) {
 		population->calculateTotalScore();
 		report();
 		population->selection(selectionPressure,
@@ -30,7 +33,12 @@ void GeneticAlgorithm::run() {
 		population->crossover();
 		population->mutation(mutationRate);
 		population->generation++;
-	}
+        dispatch_async(dispatch_get_main_queue(), ^{
+          GUI::setBoard(population->bestChromosome->board);
+        });
+                // sleep for 3 seconds
+		std::this_thread::sleep_for(std::chrono::milliseconds(100)); // Sleep for 100 milliseconds
+		   }
 	population->calculateTotalScore();
 	save();
 	printSummary();

@@ -140,6 +140,17 @@ void Chromosome::printBoard() {
 	}
 }
 
+std::string Chromosome::printBoardToFile() {
+	std::string boardStr;
+	for (int row = 0; row < BOARD_SIZE; row++) {
+		for (int col = 0; col < BOARD_SIZE; col++) {
+			boardStr += std::to_string(board[row][col]);
+		}
+		boardStr += "\n";
+	}
+	return boardStr;
+}
+
 bool compareBoard(int board1[BOARD_SIZE][BOARD_SIZE],
 				  int board2[BOARD_SIZE][BOARD_SIZE]) {
 	// compare two boards
