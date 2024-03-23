@@ -27,7 +27,7 @@ void GUI::initGUI() {
   createButtonsAndLabels();
   connectSignals();
   showWindow();
-  setDarkTheme();
+  setLightTheme();
 }
 
 int GUI::board[BOARD_SIZE][BOARD_SIZE] = {{0}}; // double braces to silence
@@ -73,34 +73,85 @@ void GUI::createWindow() {
   gtk_container_set_border_width(GTK_CONTAINER(window), 10);
 }
 
+void GUI::setLightTheme(){
+	// set non-neon light theme, use soft colors
+	GtkCssProvider *provider = gtk_css_provider_new();
+        gtk_css_provider_load_from_data(
+            provider,
+            "window, button, label, grid, drawingarea {"
+            "   background-color: #F8F8F8;"             // Soft white background
+            "   color: #333333;"                        // Soft black text
+            "   font-family: 'Courier New', monospace;" // Monospace font
+            "}"
+            "button {" // Soft white background, soft black text, soft black
+                       // border
+            " background: #F8F8F8;"
+            " color: #333333;"
+            " border-color: #333333;"
+            " border-radius: 0;" // Remove rounded corners
+            " box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, "
+            "0, 0, 0.19);" // Add box shadow for 3D effect
+
+            " transition: all 0.3s ease;" // Smooth transition for hover effects
+            "}"
+            "button:hover {" // Soften color on hover
+            " background: #333333;"
+            " color: #F8F8F8;" // Soft white text on hover
+            "}"
+            ".alive {"
+            "background-color: #FFA07A;"  // Light salmon for "alive" cells
+            " transition: all 0.3s ease;" // Smooth transition for hover effects
+            "}"
+            "drawingarea {"
+            " background: #FFFFFF;"       // White background for graph
+            " border: 2px solid #333333;" // Soft black border for graph
+            "}",
+            -1, NULL);
+        gtk_style_context_add_provider_for_screen(gdk_screen_get_default(),
+																						GTK_STYLE_PROVIDER(provider),
+																						GTK_STYLE_PROVIDER_PRIORITY_USER);
+	g_object_unref(provider);
+}
+
 void GUI::setDarkTheme() {
-  // Set dark and cool theme
-  GtkCssProvider *provider = gtk_css_provider_new();
-  gtk_css_provider_load_from_data(
-      provider,
-      "window, button, label, grid, drawingarea {"
-      "   background-color: #121212;"
-      "   color: #E0E0E0;"
-      "   font-family: 'Arial', sans-serif;"
-      "}"
-      "button {" // dark black background, neon green text, neon green border
-      " background: #000000;"
-      " color: #00FF00;"
-      " border-color: #00FF00;"
-      "}"
-      "button:hover {" // brighten neon green on hover
-      " background: #00FF00;"
-      " color: #00FF00;"
-      "}"
-      ".alive {"
-      "background-color: #18BC9C;"
-      " box-shadow: 0 0 10px #18BC9C"
-      "}",
-      -1, NULL);
-  gtk_style_context_add_provider_for_screen(gdk_screen_get_default(),
-                                            GTK_STYLE_PROVIDER(provider),
-                                            GTK_STYLE_PROVIDER_PRIORITY_USER);
-  g_object_unref(provider);
+	// Set dark and cool theme
+	GtkCssProvider *provider = gtk_css_provider_new();
+        gtk_css_provider_load_from_data(
+            provider,
+            "window, button, label, grid, drawingarea {"
+            "   background-color: #000000;"             // Pure black background
+            "   color: #FFFFFF;"                        // White text
+            "   font-family: 'Courier New', monospace;" // Monospace font
+            "}"
+            "button {" // Black background, neon green text, neon green border
+            " background: #000000;"
+            " color: #39FF14;"
+            " border-color: #39FF14;"
+            " border-radius: 0;" // Remove rounded corners
+
+            // commiting out this line for performance reasons
+            // " box-shadow: 0 0 10px #39FF14;" // Neon green glow
+            "}"
+            "button:hover {" // Brighten neon green on hover
+            " background: #39FF14;"
+            " color: #000000;"               // Black text on hover
+            " box-shadow: 0 0 20px #39FF14;" // Increase glow on hover
+            "}"
+            ".alive {"
+            "background-color: #FF43A4;"     // Neon pink for "alive" cells
+            " box-shadow: 0 0 10px #FF43A4;" // Neon pink glow
+            " animation: pulse 1s infinite;" // Pulse animation
+            "}"
+            "@keyframes pulse {" // Define pulse animation
+            " 0% { box-shadow: 0 0 5px #FF43A4; }"
+            " 50% { box-shadow: 0 0 20px #FF43A4, 0 0 30px #FF43A4; }"
+            " 100% { box-shadow: 0 0 5px #FF43A4; }"
+            "}",
+            -1, NULL);
+        gtk_style_context_add_provider_for_screen(gdk_screen_get_default(),
+																						GTK_STYLE_PROVIDER(provider),
+																						GTK_STYLE_PROVIDER_PRIORITY_USER);
+	g_object_unref(provider);
 }
 
 void GUI::createLayoutContainers() {
@@ -149,6 +200,13 @@ void GUI::createButtons() {
       gtk_fixed_put(GTK_FIXED(buttonContainer), buttons[i][j], i * buttonWidth,
                     j * buttonHeight);
     }
+  }
+
+  // make all buttons flat
+  for (int i = 0; i < BOARD_SIZE; i++) {
+	for (int j = 0; j < BOARD_SIZE; j++) {
+	  gtk_button_set_relief(GTK_BUTTON(buttons[i][j]), GTK_RELIEF_NONE);
+	}
   }
 }
 void GUI::createButtonsAndLabels() {
@@ -465,45 +523,43 @@ void GUI::open_from_file() {
   gtk_widget_destroy(fileChooser);
   generationCount = 1;
 }
-
 gboolean GUI::draw_graph(GtkWidget *widget, cairo_t *cr, gpointer data) {
-  (void)data;
-  if (!shouldDrawGraph) {
-    return FALSE;
-  }
-  shouldDrawGraph = false;
-  // draw populaion (y axis) changes over generation (x axix)
-  // adjust to fit the graph inside the drawing area
-  int width, height;
-  width = gtk_widget_get_allocated_width(widget);
-  height = gtk_widget_get_allocated_height(widget);
-  cairo_scale(cr, width / 200.0, height / 200.0);
+	(void)data;
+	if (!shouldDrawGraph) {
+		return FALSE;
+	}
+	shouldDrawGraph = false;
+	// draw population (y axis) changes over generation (x axis)
+	// adjust to fit the graph inside the drawing area
+	int width, height;
+	width = gtk_widget_get_allocated_width(widget);
+	height = gtk_widget_get_allocated_height(widget);
+	cairo_scale(cr, width / 200.0, height / 200.0);
 
-  // draw background
-  cairo_set_source_rgb(cr, 1, 1, 1);
-  cairo_paint(cr);
+	// draw background
+	cairo_set_source_rgb(cr, 0, 0, 0); // Change background to black
+	cairo_paint(cr);
 
-  // draw axis
-  cairo_set_source_rgb(cr, 0, 0, 0);
-  cairo_set_line_width(cr, 1);
-  cairo_move_to(cr, 0, 0);
-  cairo_line_to(cr, 0, 200);
-  cairo_line_to(cr, 200, 200);
-  cairo_stroke(cr);
+	// draw axis
+	cairo_set_source_rgb(cr, 0.227, 1, 0.078); // Change axis to neon green
+	cairo_set_line_width(cr, 1);
+	cairo_move_to(cr, 0, 0);
+	cairo_line_to(cr, 0, 200);
+	cairo_line_to(cr, 200, 200);
+	cairo_stroke(cr);
 
-  // draw data
-  cairo_set_source_rgb(cr, 0, 0, 1);
-  cairo_set_line_width(cr, 1);
-  cairo_move_to(cr, 0, 200);
-  for (int i = 0; i < static_cast<int>(aliveCellsData.size()); i++) {
-    cairo_line_to(cr, i * 200.0 / aliveCellsData.size(),
-                  200 - aliveCellsData[i] * 200.0 / maxAliveCells);
-  }
-  cairo_stroke(cr);
+	// draw data
+	cairo_set_source_rgb(cr, 1, 0.263, 0.639); // Change data to neon purple
+	cairo_set_line_width(cr, 1);
+	cairo_move_to(cr, 0, 200);
+	for (int i = 0; i < static_cast<int>(aliveCellsData.size()); i++) {
+		cairo_line_to(cr, i * 200.0 / aliveCellsData.size(),
+									200 - aliveCellsData[i] * 200.0 / maxAliveCells);
+	}
+	cairo_stroke(cr);
 
-  return FALSE;
+	return FALSE;
 }
-
 void GUI::quit() {
   if (gtk_main_level() > 0) {
     gtk_main_quit();

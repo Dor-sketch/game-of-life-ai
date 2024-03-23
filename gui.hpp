@@ -22,6 +22,7 @@ public:
   static void quit();
   static void buttonClicked(GtkWidget *widget, gpointer data);
   static void setDarkTheme();
+  static void setLightTheme();
 
 private:
   static void createButtons();
