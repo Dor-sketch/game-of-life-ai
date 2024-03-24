@@ -12,6 +12,10 @@
 #include <unistd.h>
 
 extern void gameOfLife(int board[BOARD_SIZE][BOARD_SIZE], int boardColSize);
+static int ageBoard[BOARD_SIZE][BOARD_SIZE] = {{0}};
+int GUI::board[BOARD_SIZE][BOARD_SIZE] = {{0}}; // double braces to silence
+                                                // warning
+
 static bool shouldDrawGraph = false;
 static int saveScreenshotCounter = 0;
 int GUI::generationCount = 0;
@@ -29,6 +33,8 @@ GtkWidget *GUI::nextButton;
 GtkWidget *GUI::saveButton;
 GtkWidget *GUI::loadButton;
 GtkWidget *GUI::quitButton;
+GtkWidget *GUI::screenshotsButton;
+GtkWidget *GUI::changeThemeButton;
 GtkWidget *GUI::loadFromFileButton;
 GtkWidget *GUI::buttons[BOARD_SIZE][BOARD_SIZE];
 GtkWidget *GUI::graphArea;
@@ -39,125 +45,6 @@ GtkLabel *GUI::generationLabel;
 GtkLabel *GUI::maxAliveCellsLabel;
 GtkLabel *GUI::startAliveCellsLabel;
 GtkLabel *GUI::populationLabel;
-
-namespace Themes {
-const std::string pastelRed = "FF6961";
-const std::string pastelOrange = "FFA07A";
-const std::string pastelPink = "FFD1DC";
-
-const std::string lightTheme = R"(
-window, button, label, grid, drawingarea {
-	background-color: #FFFFFF;             // White background
-	color: #000000;                        // Black text
-	font-family: 'Courier New', monospace; // Monospace font
-}
-button { // White background, black text, black border
-	background: #FFFFFF;
-	color: #000000;
-	border-color: #000000;
-	border-radius: 0; // Remove rounded corners
-}
-button:hover { // Darken black on hover
-	background: #000000;
-	color: #FFFFFF;               // White text on hover
-	box-shadow: 0 0 10px #000000; // Black glow on hover
-}
-.alive {
-	background-color: #FF43A4;     // Neon pink for "alive" cells
-	box-shadow: 0 0 10px #FF43A4; // Neon pink glow
-	animation: pulse 1s infinite; // Pulse animation
-}
-@keyframes pulse { // Define pulse animation
-	0% { box-shadow: 0 0 5px #FF43A4; }
-	50% { box-shadow: 0 0 20px #FF43A4, 0 0 30px #FF43A4; }
-	100% { box-shadow: 0 0 5px #FF43A4; }
-}
-)";
-
-const std::string darkTheme = R"(
-window, button, label, grid, drawingarea {
-	background-color: #000000;             // Pure black background
-	color: #FFFFFF;                        // White text
-	font-family: 'Courier New', monospace; // Monospace font
-}
-button { // Black background, neon green text, neon green border
-	background: #000000;
-	color: #39FF14;
-	border-color: #39FF14;
-	border-radius: 0; // Remove rounded corners
-	box-shadow: 0 0 10px #39FF14; // Neon green glow
-}
-button:hover { // Brighten neon green on hover
-	background: #39FF14;
-	color: #000000;               // Black text on hover
-	box-shadow: 0 0 20px #39FF14; // Increase glow on hover
-}
-.alive {
-	background-color: #FF43A4;     // Neon pink for "alive" cells
-	box-shadow: 0 0 10px #FF43A4; // Neon pink glow
-	animation: pulse 1s infinite; // Pulse animation
-}
-@keyframes pulse { // Define pulse animation
-	0% { box-shadow: 0 0 5px #FF43A4; }
-	50% { box-shadow: 0 0 20px #FF43A4, 0 0 30px #FF43A4; }
-	100% { box-shadow: 0 0 5px #FF43A4; }
-}
-)";
-
-const std::string salmonTheme = R"(
-window, button, label, grid, drawingarea {
-	background-color: #F8F8F8;
-	color: #333333;
-	font-family: 'Courier New', monospace;
-}
-button {
- background: #F8F8F8;
- color: #333333;
- border-color: #333333;
- border-radius: 0;
-}
-button:hover {
- box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19), 0 8px 10px 0 rgba(0, 0, 0, 0.2), 0 0 10px #333333;
- background: #333333;
- color: #F8F8F8;
-}
-.alive {
- box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19), 0 8px 10px 0 rgba(0, 0, 0, 0.2);
- background-color: #FFA07A;
-}
-drawingarea {
- background: #FFFFFF;
- border: 2px solid #333333;
-}
-)";
-
-const std::string redTheme = R"(
-window, button, label, grid, drawingarea {
-	background-color: #F8F8F8;
-	color: #333333;
-	font-family: 'Courier New', monospace;
-}
-button {
- background: #F8F8F8;
- color: #333333;
- border-color: #333333;
- border-radius: 0;
-}
-button:hover {
- box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19), 0 8px 10px 0 rgba(0, 0, 0, 0.2), 0 0 10px #333333;
- background: #333333;
- color: #F8F8F8;
-}
-.alive {
- box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19), 0 8px 10px 0 rgba(0, 0, 0, 0.2);
- background-color: #FF6961;
-}
-drawingarea {
- background: #FFFFFF;
- border: 2px solid #333333;
-}
-)";
-} // namespace Themes
 
 GUI::GUI(const std::string &boardFile) {
   initGUI();
@@ -173,11 +60,8 @@ void GUI::initGUI() {
   createButtonsAndLabels();
   connectSignals();
   showWindow();
-  setLightTheme();
+  setTheme("theme.css");
 }
-
-int GUI::board[BOARD_SIZE][BOARD_SIZE] = {{0}}; // double braces to silence
-                                                // warning
 
 void GUI::createWindow() {
   window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
@@ -194,24 +78,63 @@ void GUI::createWindow() {
   gtk_container_set_border_width(GTK_CONTAINER(window), 10);
 }
 
-void GUI::setLightTheme() {
-  GtkCssProvider *provider = gtk_css_provider_new();
-  gtk_css_provider_load_from_data(provider, Themes::salmonTheme.c_str(), -1,
-                                  NULL);
-  gtk_style_context_add_provider_for_screen(gdk_screen_get_default(),
-                                            GTK_STYLE_PROVIDER(provider),
-                                            GTK_STYLE_PROVIDER_PRIORITY_USER);
-  g_object_unref(provider);
+void GUI::changeTheme() {
+  // Change the theme of the GUI
+  GtkSettings *settings = gtk_settings_get_default();
+  g_object_set(settings, "gtk-application-prefer-dark-theme", TRUE, NULL);
+
+  // Create a new file chooser dialog
+  GtkWidget *dialog = gtk_file_chooser_dialog_new(
+      "Open File", NULL, GTK_FILE_CHOOSER_ACTION_OPEN, "_Cancel",
+      GTK_RESPONSE_CANCEL, "_Open", GTK_RESPONSE_ACCEPT, NULL);
+
+  // Set the filter for CSS files
+  GtkFileFilter *filter = gtk_file_filter_new();
+  gtk_file_filter_set_name(filter, "CSS Files");
+  gtk_file_filter_add_pattern(filter, "*.css");
+  gtk_file_chooser_add_filter(GTK_FILE_CHOOSER(dialog), filter);
+
+  // Show the dialog and get the user response
+  gint res = gtk_dialog_run(GTK_DIALOG(dialog));
+
+  if (res == GTK_RESPONSE_ACCEPT) {
+    char *filename;
+    GtkFileChooser *chooser = GTK_FILE_CHOOSER(dialog);
+    filename = gtk_file_chooser_get_filename(chooser);
+
+    // Use the selected file to set the theme
+    setTheme(filename);
+
+    g_free(filename);
+  }
+
+  gtk_widget_destroy(dialog);
 }
 
-void GUI::setDarkTheme() {
-  // Set dark and cool theme
+void GUI::setTheme(const char *filename) {
   GtkCssProvider *provider = gtk_css_provider_new();
-  gtk_css_provider_load_from_data(provider, Themes::darkTheme.c_str(), -1,
-                                  NULL);
-  gtk_style_context_add_provider_for_screen(gdk_screen_get_default(),
-                                            GTK_STYLE_PROVIDER(provider),
-                                            GTK_STYLE_PROVIDER_PRIORITY_USER);
+  GError *error = NULL;
+
+  // Load the CSS file
+  gtk_css_provider_load_from_path(provider, filename, &error);
+
+  // Check for errors in loading the CSS
+  if (error) {
+    std::cerr << "Error loading CSS: " << error->message << std::endl;
+    g_error_free(error);
+  } else {
+    // Apply the CSS to the application
+    GdkDisplay *display = gdk_display_get_default();
+    GdkScreen *screen = gdk_display_get_default_screen(display);
+
+    gtk_style_context_add_provider_for_screen(
+        screen, GTK_STYLE_PROVIDER(provider),
+        GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
+
+    std::cout << "Theme applied: " << filename << std::endl;
+  }
+
+  // Decrease the reference count of the provider object
   g_object_unref(provider);
 }
 
@@ -253,13 +176,16 @@ void GUI::createButtons() {
       gtk_fixed_new(); // Create a fixed container for buttons
   gtk_grid_attach(GTK_GRID(grid), buttonContainer, 0, 0, BOARD_SIZE,
                   BOARD_SIZE); // Attach the container to the grid
-
   for (int i = 0; i < BOARD_SIZE; i++) {
     for (int j = 0; j < BOARD_SIZE; j++) {
       buttons[i][j] = gtk_button_new();
       gtk_widget_set_size_request(buttons[i][j], buttonWidth, buttonHeight);
       gtk_fixed_put(GTK_FIXED(buttonContainer), buttons[i][j], i * buttonWidth,
                     j * buttonHeight);
+
+      // Store the button's grid coordinates as object data
+      g_object_set_data(G_OBJECT(buttons[i][j]), "x", GINT_TO_POINTER(i));
+      g_object_set_data(G_OBJECT(buttons[i][j]), "y", GINT_TO_POINTER(j));
     }
   }
 
@@ -308,8 +234,7 @@ void GUI::createButtonsAndLabels() {
                   1);
 
   // create button to run the genetic algorithm
-  runGeneticAlgorithmButton =
-      gtk_button_new_with_label("Run Genetic Algorithm");
+  runGeneticAlgorithmButton = gtk_button_new_with_label("Run GA");
   gtk_grid_attach(GTK_GRID(grid), runGeneticAlgorithmButton, (BOARD_SIZE + 1),
                   11, 1, 1);
 
@@ -332,6 +257,20 @@ void GUI::createButtonsAndLabels() {
   startAliveCellsLabel = GTK_LABEL(gtk_label_new("Start alive cells: 0"));
   gtk_grid_attach(GTK_GRID(grid), GTK_WIDGET(startAliveCellsLabel),
                   (BOARD_SIZE + 1), 16, 1, 1);
+
+  // create change theme button
+  changeThemeButton = gtk_button_new_with_label("Change Theme");
+  gtk_grid_attach(GTK_GRID(grid), changeThemeButton, (BOARD_SIZE + 1), 17, 1,
+                  1);
+
+  // create save screenshot button
+  GtkWidget *saveScreenshotButton =
+      gtk_button_new_with_label("Save Screenshot");
+  gtk_grid_attach(GTK_GRID(grid), saveScreenshotButton, (BOARD_SIZE + 1), 18, 1,
+                  1);
+  // save screenshot
+  g_signal_connect(saveScreenshotButton, "clicked", G_CALLBACK(saveScreenshot),
+                   NULL);
 }
 
 void GUI::connectSignals() {
@@ -351,7 +290,10 @@ void GUI::connectSignals() {
                    NULL);
   g_signal_connect(runGeneticAlgorithmButton, "clicked",
                    G_CALLBACK(runGeneticAlgorithm), NULL);
+  g_signal_connect(changeThemeButton, "clicked", G_CALLBACK(changeTheme), NULL);
 
+  g_signal_connect(graphDrawingArea, "Screenshot", G_CALLBACK(saveScreenshot),
+                   NULL);
   // connect buttons to board
   for (int i = 0; i < BOARD_SIZE; i++) {
     for (int j = 0; j < BOARD_SIZE; j++) {
@@ -491,7 +433,7 @@ void GUI::load(const std::string &path) {
   file.open(path);
   if (!file.is_open()) {
     // open the saved folder instead
-    std::cout << "Error opening file" << std::endl;
+    std::cout << "Errofr opening file" << std::endl;
     open_folder(std::string("saves"));
     return;
   }
@@ -627,6 +569,25 @@ void GUI::quit() {
   }
 }
 
+int GUI::updateBoard(int board[BOARD_SIZE][BOARD_SIZE]) {
+  int aliveCells = 0;
+  for (int i = 0; i < BOARD_SIZE; i++) {
+    for (int j = 0; j < BOARD_SIZE; j++) {
+      if (board[i][j] == 1) {
+        aliveCells++;
+        ageBoard[i][j]++;
+      } else {
+        ageBoard[i][j] = 0;
+      }
+      // color the cell
+      setButtonColor(buttons[i][j]);
+    }
+  }
+  // used for GIF creation
+  //   saveScreenshot();
+  return aliveCells;
+}
+
 void GUI::update() {
   static int lastGeneration = 0, lastPopulation = 0;
 
@@ -649,13 +610,8 @@ void GUI::update() {
         std::to_string(static_cast<int>(generationCount)).c_str());
     lastGeneration = generationCount;
   }
-  populationSize = 0;
-  for (int i = 0; i < BOARD_SIZE; i++) {
-    for (int j = 0; j < BOARD_SIZE; ++j) {
-      setButtonColor(buttons[i][j], board[i][j]);
-      populationSize += board[i][j];
-    }
-  }
+  populationSize = updateBoard(board);
+
   aliveCellsData.push_back(populationSize);
 
   if (populationSize > maxAliveCells) {
@@ -668,6 +624,33 @@ void GUI::update() {
   gtk_widget_show_all(window);
   gtk_widget_queue_draw(graphArea);
 }
+// This version captures the entire window
+// void GUI::saveScreenshot() {
+//   // Get the parent of a cell, which is the window
+//   GtkWidget *parent = gtk_widget_get_parent(buttons[0][0]);
+//   GdkWindow *window = gtk_widget_get_window(parent);
+
+//   if (window != nullptr) {
+//     // Get the width and height of the window
+//     int windowWidth = gdk_window_get_width(window);
+//     int windowHeight = gdk_window_get_height(window);
+
+//     // Capture screenshot of the entire window
+//     GdkPixbuf *screenshot =
+//         gdk_pixbuf_get_from_window(window, 0, 0, windowWidth, windowHeight);
+
+//     // Get unique filename with monotonic increasing counter
+//     std::ostringstream paddedCounter;
+//     paddedCounter << std::setw(7) << std::setfill('0')
+//                   << saveScreenshotCounter++;
+//     std::string filename = "screenshot" + paddedCounter.str() + ".png";
+
+//     if (screenshot != nullptr) {
+//       gdk_pixbuf_save(screenshot, filename.c_str(), "png", nullptr, nullptr);
+//       g_object_unref(screenshot);
+//     }
+//   }
+// }
 
 void GUI::saveScreenshot() {
   int cellWidth = gtk_widget_get_allocated_width(buttons[0][0]);
@@ -700,18 +683,40 @@ void GUI::saveScreenshot() {
 void GUI::buttonClicked(GtkWidget *widget, gpointer data) {
   int *cell = static_cast<int *>(data);
   *cell = !*cell;
-  setButtonColor(widget, *cell);
+  setButtonColor(widget);
 }
 
-void GUI::setButtonColor(GtkWidget *button, int cell_state) {
-  // Obtain the style context for the widget
+void GUI::setButtonColor(GtkWidget *button) {
+  int x = GPOINTER_TO_INT(g_object_get_data(G_OBJECT(button), "x"));
+  int y = GPOINTER_TO_INT(g_object_get_data(G_OBJECT(button), "y"));
+  int age = ageBoard[x][y];
+
+  // Debugging output
+  std::cout << "Age: " << age << std::endl;
+  std::cout << "X: " << x << " Y: " << y << std::endl;
+  std::cout << "Board: " << board[x][y] << std::endl;
+
   GtkStyleContext *context = gtk_widget_get_style_context(button);
 
-  if (cell_state == 1) { // If the cell is alive
-    // Add the 'alive' class to the button
+  // Clear previous classes to avoid styling conflicts
+  gtk_style_context_remove_class(context, "young");
+  gtk_style_context_remove_class(context, "old");
+  gtk_style_context_remove_class(context, "alive");
+  gtk_style_context_remove_class(context, "veteran");
+
+  if (board[x][y] == 1) { // If the cell is alive
     gtk_style_context_add_class(context, "alive");
-  } else { // If the cell is dead
-    // Remove the 'alive' class from the button
-    gtk_style_context_remove_class(context, "alive");
+    if (age > 2 && age < 5) {
+      // Apply young cell styling
+      gtk_style_context_add_class(context, "young");
+    } else if (age >= 5 && age < 10) {
+      // Apply old cell styling
+      gtk_style_context_add_class(context, "old");
+    } else if (age >= 10) {
+      // Apply veteran cell styling
+      gtk_style_context_add_class(context, "veteran");
+    }
+  } else {
+    std::cout << "Cell is dead" << std::endl;
   }
 }

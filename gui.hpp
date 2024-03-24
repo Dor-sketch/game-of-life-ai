@@ -21,16 +21,17 @@ public:
   static void load(const std::string &path);
   static void quit();
   static void buttonClicked(GtkWidget *widget, gpointer data);
-  static void setDarkTheme();
-  static void setLightTheme();
-
+  static void setTheme(const char *themeName);
+  static void changeTheme();
 private:
+
+  static int updateBoard(int board[BOARD_SIZE][BOARD_SIZE]);
   static void saveScreenshot();
   static void createButtons();
   static void connectSignals();
   static void createWindow();
   static void showWindow();
-  static void setButtonColor(GtkWidget *button, int cell_state);
+  static void setButtonColor(GtkWidget *button);
   static void open_folder(const std::string &path);
   static void open_from_file();
   static void createLayoutContainers();
@@ -46,6 +47,7 @@ private:
   static int maxAliveCells;
   static int board[BOARD_SIZE][BOARD_SIZE];
   static const int boardColSize = BOARD_SIZE;
+  static GtkWidget *screenshotsButton;
   static GtkLabel *generationLabel;
   static GtkLabel *populationLabel;
   static GtkLabel *maxAliveCellsLabel;
@@ -59,6 +61,7 @@ private:
   static GtkWidget *nextButton;
   static GtkWidget *saveButton;
   static GtkWidget *loadButton;
+  static GtkWidget *changeThemeButton;
   static GtkWidget *quitButton;
   static GtkWidget *graphArea;
   static GtkWidget *graphDrawingArea;

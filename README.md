@@ -1,52 +1,37 @@
 # Genetic Algorithm for Conway's Game of Life 🧬
 
-This project implements a genetic algorithm to discover configurations in Conway's Game of Life that meet specific criteria, showcasing the power of AI in software development. The project developed for the **Biological Computation (20581)** Advanced Course at the _Open University of Israel_ in 2024 and earned a perfect score of `100`.
+This project implements a genetic algorithm to discover configurations in Conway's Game of Life that meet specific criteria, showcasing the power of AI in software development. This project was developed for the **Biological Computation (20581)** Advanced Course at the *Open University of Israel* in 2024 and earned a perfect score of `100`.
 
 <p align = "center">
-    <img src="./images/dragon/dragon.gif" width="600"/>
+    <img src="./images/individual_purple_long.gif"
+    width="600"/>
     <br>
-    <i>Dragon Shape Evolution</i>
+    <i>Algorithm Evolution of a Fitted Individual</i>
 </p>
 
 ---
 
-<!-- @import "[TOC]" {cmd="toc" depthFrom=2 depthTo=4 orderedList=false} -->
+<!-- @import "[TOC]" {cmd="toc" depthFrom=2 depthTo=3 orderedList=false} -->
 
 <!-- code_chunk_output -->
 
 - [Overview](#overview)
   - [Background](#background)
-    - [Game of Life](#game-of-life)
-    - [Evolutionary Algorithms](#evolutionary-algorithms)
   - [Project Objectives](#project-objectives)
   - [Project Structure](#project-structure)
-- [Technical Details](#technical-details)
-  - [Game of Life Implementation](#game-of-life-implementation)
-    - [Static Board Padding](#static-board-padding)
-    - [Efficient Update Process](#efficient-update-process)
-  - [Chromosome Representation](#chromosome-representation)
-    - [Initial State](#initial-state)
-    - [Crossover (The Binary Genetic Operator)](#crossover-the-binary-genetic-operator)
-    - [Mutation](#mutation)
-    - [Evaluation Function](#evaluation-function)
-    - [Fitness vs Score](#fitness-vs-score)
-  - [Population Implementation](#population-implementation)
-    - [Crossover (Reproduction Part)](#crossover-reproduction-part)
-  - [GeneticAlgorithm Implementation](#geneticalgorithm-implementation)
-    - [Roulette Wheel Selection](#roulette-wheel-selection)
-    - [Report](#report)
-    - [Save](#save)
-  - [GUI](#gui)
 - [Getting Started](#getting-started)
   - [Using the GUI](#using-the-gui)
-    - [Running the Algorithm](#running-the-algorithm)
   - [Using the Command Line](#using-the-command-line)
 - [Examples](#examples)
-  - [Selected Individuals Showcase and Insights](#selected-individuals-showcase-and-insights)
   - [T_shape](#t_shape)
   - [Dragon](#dragon)
-  - [Other Examples](#other-examples)
+  - [Hi](#hi)
   - [Insights](#insights)
+- [Technical Details](#technical-details)
+  - [Game of Life Implementation](#game-of-life-implementation)
+  - [Chromosome Representation](#chromosome-representation)
+  - [Population Implementation](#population-implementation)
+  - [Genetic Algorithm Implementation](#genetic-algorithm-implementation)
 - [Contributions and Feedback](#contributions-and-feedback)
 - [Acknowledgements](#acknowledgements)
 - [License](#license)
@@ -59,44 +44,365 @@ This project implements a genetic algorithm to discover configurations in Conway
 
 ### Background
 
-#### Game of Life
-
-The `Game of Life` is a cellular automaton devised by the British mathematician John Horton Conway in 1970. It is a zero-player game, meaning that its evolution is determined by its initial state, requiring no further input. The game unfolds on an infinite two-dimensional grid, with each cell in the grid being either alive or dead. The game progresses through generations, with each generation determined by the previous one according to a set of rules. These rules are as follows:
+The `Game of Life` is a [cellular automaton](https://en.wikipedia.org/wiki/Cellular_automaton) devised by the British mathematician John Horton Conway in 1970. It is a zero-player game, meaning that its evolution is determined by its initial state, requiring no further input. The game unfolds on an infinite two-dimensional grid, with each cell in the grid being either alive or dead. The game progresses through generations, with each generation determined by the previous one according to only four rules:
 
 1. **Underpopulation:** Any live cell with fewer than two live neighbors dies, as if by underpopulation.
+
+<p align = "center">
+    <img src="./images/rule1.gif"
+    width="500"/>
+    <br>
+    <i>Example of Rule 1: Underpopulation</i>
+</p>
+
 2. **Survival:** Any live cell with two or three live neighbors lives on to the next generation.
+
+<p align = "center">
+    <img src="./images/rule2.gif"
+    width="500"/>
+    <br>
+    <i>Examle of Rule 2: Survival</i>
+</p>
+
 3. **Overpopulation:** Any live cell with more than three live neighbors dies, as if by overpopulation.
+
+<p align = "center">
+    <img src="./images/over.gif"
+    width="500"/>
+    <br>
+    <i>Example of rule 3: Overpopulation
+    <br>
+    Note the blue cell to the right dies when it has more than three live neighbors.
+    </i>
+</p>
+
 4. **Reproduction:** Any dead cell with exactly three live neighbors becomes a live cell, as if by reproduction.
 
-For more information on the Game of Life, you can visit the [Wikipedia page](https://en.wikipedia.org/wiki/Conway's_Game_of_Life).
+<p align = "center">
+    <img src="./images/rule3_and_4.gif"
+    width="500"/>
+    <br>
+    <i>Blinker Shape
+    <br>
+    Rule 3 and 4 (Overpopulation and Reproduction) apply on the cross edges (brighter cells), leading to each pair of cells dying and the other pair being born every other generation</i>
+</p>
+<p align = "center">
+    <img src="./images/gliders.gif"
+    width="500"/>
+    <br>
+    <i>Glider Shape
+    <br>
+    Rule 4 (Reproduction) enables the glider to move diagonally</i>
+</p>
 
-#### Evolutionary Algorithms
+The project is focused on evolutionary algorithms for optimizations problem, and Conway's Game of Life serves as the world or the search space for the genetic algorithm. The algorithm is designed with a level of abstraction that allows it to be applicable to any problem that can be modeled as a search space. For a deeper understanding of the Game of Life, refer to its [Wikipedia page](https://en.wikipedia.org/wiki/Conway's_Game_of_Life).
 
 The concept of an `Evolutionary algorithm` encompasses a group of algorithms inspired by evolution to solve various problems, primarily optimization problems, although not limited to them. The core idea involves initializing a population of potential solutions and leveraging an evolution-inspired process to refine this population based on the principle of `survival of the fittest`. Initially, each solution in the population undergoes evaluation using a fitness function to assess its quality and likelihood for selection in subsequent generations. The next generation is then formed by selecting the best solutions from the current generation and subjecting them to `crossover` and `mutation` operations. This iterative process continues until predefined criteria are met. Key characteristics of evolutionary algorithms include `simultaneous evolution of a solution population`, incorporation of `crossover mechanisms`, and introducing `stochasticity` in the optimization process.
 
-A `Genetic algorithm` represents a specific instance within the evolutionary algorithm family, emphasizing `selection`, `crossover` or `recombination`, and `mutation` operations to refine the solution population. As highlighted in the book, genetic algorithms typically prioritize the `crossover` phase over `mutation`. Additionally, they commonly employ `binary` representations for solutions and utilize fitness functions to evaluate solution quality, although alternative representations may sometimes yield better results. Genetic algorithms leverage individuals for exploring new solution directions while preserving promising solutions. They are particularly effective in identifying promising areas within the search space rather than focusing solely on finding the optimal solution within those regions.
+<p align = "center">
+    <img src="./images/cross_over.gif"
+    width="600"/>
+    <br>
+    <i>Uniform Crossover
+    <br>Two parents (up) are combined to create a new child (down).
+    Child have a 50% chance to inherit each cell from one of the parents. <br>
+    In this case the child fitness seems to be better than the its left parent, but worse than the right parent.</i>
+</p>
+
+A `Genetic algorithm` represents a specific instance within the evolutionary algorithm family, emphasizing `selection`, `crossover` or `recombination`, and `mutation` operations to refine the solution population. As highlighted in the book, genetic algorithms typically prioritize the `crossover` phase over `mutation`. Additionally, they commonly employ `binary` representations for solutions and utilize `fitness function`s` to evaluate solution quality, although alternative representations may sometimes yield better results. Genetic algorithms leverage individuals for exploring new solution directions while preserving promising solutions. They are particularly effective in identifying promising areas within the search space rather than focusing solely on finding the optimal solution within those regions.
 
 `Genetic Programming` constitutes an evolutionary computation model where solutions are represented as programs, often structured as trees. The distinctive aspect lies in the genetic operations performed on these program representations. Mutation involves altering the tree structure, while crossover entails swapping subtrees. Genetic programming incorporates the concepts of `terminals set` and `functions set`, where the former encompasses all possible terminals in the tree, and the latter includes all possible functions. Another notable difference lies in the chromosome representation: genetic programming may involve trees of varying sizes, contrasting with genetic algorithms where chromosomes typically have uniform sizes.
+
+To summerize, the flow of the genetic algorithm is as follows:
+
+$p_0 \rightarrow \text{Evaluation} \rightarrow \text{Selection} \rightarrow \text{Crossover} \rightarrow \text{Mutation} \rightarrow p_1 \rightarrow \text{Evaluation} \rightarrow \text{Selection} \rightarrow \text{Crossover} \rightarrow \text{Mutation} \rightarrow p_2 \rightarrow \text{Evaluation} \rightarrow \text{Selection} \rightarrow \text{Crossover} \rightarrow \text{Mutation} \rightarrow \ldots$
+
+where $p_0$ is the initial population, and $p_1, p_2, \ldots$ are the next generations. The algorithm continues until a stopping criterion is met, such as a maximum number of generations or a satisfactory solution.
+
+---
 
 ### Project Objectives
 
 The program utilising a genetic algorithm in order to discover configurations in Conway's Game of Life that meet the following criteria:
 
 1. **Reach a Stable State:** The configuration must end in a state that is static or oscillating, containing at least one live cell.
+
 2. **Long Evolution Time:** The configuration should take a considerable amount of time to reach stability.
+
 3. **Expansion Before Stability:** During evolution, the configuration must expand significantly beyond its initial size.
 
-This kind of patterns are known as `Metuselahs` in the Game of Life terminology. The project aims to explore the potential of genetic algorithms in discovering such configurations, showcasing the power of AI in software development. For more about `Metuselahs`, you can visit the [Wikipedia page](https://en.wikipedia.org/wiki/Methuselah_(cellular_automaton)).
+This kind of patterns are known as `Methuselahs` in the Game of Life terminology. The project aims to explore the potential of genetic algorithms in discovering such configurations, showcasing the power of AI in software development. For more about `Methuselahs`, you can visit the [Wikipedia page](https://en.wikipedia.org/wiki/Methuselah_(cellular_automaton)).
+
+<p align = "center">
+  <img src="./images/hot.gif" width="600"/>
+  <br>
+  <i>Start of the evolution of a fitted individual in the GUI.
+  <br>
+  Note: (a) Small initial size (b) Large population size at its peak (c) Long time to reach a stable state. Other factors could have been considered, such as symmetry, but were not implemented.
+  </i>
+</p>
 
 ### Project Structure
 
 The implementation is modular, consisting of:
 
-- **Game Logic**: `game.cpp` - A Game of Life implementation optimized for speed, using C-style memory management for efficiency.
 - **Chromosome Representation**: `chromosome.cpp` - Encapsulates a configuration within the game, implementing genetic operations like crossover and mutation.
+
 - **Genetic Algorithm Core**: `ga.cpp` & `population.cpp` - The heart of the genetic algorithm, handling the population of configurations and their evolution over generations.
+
+- **Game Logic**: `game.cpp` - A Game of Life implementation optimized for speed, using C-style memory management for efficiency.
+
 - **GUI**: `gui.cpp` - An advanced graphical user interface for real-time visualization of the algorithm's progress.
+
 - **Main Application**: `main.cpp` - Orchestrates the execution of all components.
+
+The program utilizes advanced C++ features and design patterns to ensure efficiency, modularity, and scalability. For a detailes explanation of the implementation, please refer to the [Technical Details](#technical-details) section (previous knowledge of C++ is recommended).
+
+---
+
+## Getting Started
+
+The program is designed to be user-friendly, offering both a graphical user interface (GUI) and command line execution. The GUI is required installion of the `gtk` library. If you are not interested in the GUI, please refer to the [Using the Command Line](#using-the-command-line) section.
+
+### Using the GUI
+
+<p align = "center">
+    <img src="./images/GUI.gif"
+    width="600"/>
+    <br>
+    <i>Graphical User Interface (GUI) for the Genetic Algorithm</i>
+</p>
+
+The GUI, implemented in `gui.cpp`, utilizes the `gtk` library to deliver an intuitive user experience. It presents a real-time interactive game display, highlighting key metrics such as the current generation, the count of initial and currently alive cells, and the top score. It also includes a graphical representation of the population size, with the flexibility to manually or automatically execute the algorithm.
+
+This GUI, designed to be user-friendly, provides a real-time visualization platform for the genetic algorithm's progress. Its intuitive and interactive design ensures a seamless user experience, enabling users to monitor the algorithm's execution and delve into the results.
+
+To ensure thread safety and enhance responsiveness, the GUI employs a `Mutex` to synchronize access to its board. This allows all I/O calls to be made from the main thread, thereby enhancing stability and preventing potential crashes or freezes.
+
+Before running the GUI, ensure the `gtk` library is installed on your system. If absent, it can be installed with the following command:
+
+```bash
+sudo apt-get install libgtk-3-dev
+```
+
+or on mac:
+
+```bash
+brew install gtk+3
+```
+
+The program can be compiled with the included `makefile` by running the following command:
+
+```bash
+make
+```
+
+After compilation, the GUI can be launched by executing the following command:
+
+```bash
+./met
+```
+
+The GUI window will appear, providing a comprehensive interface for executing the genetic algorithm. Users can interact with the GUI to tye the game of life, initiate the algorithm, monitor its progress, and explore the evolving configurations within the Game of Life.
+
+<p align = "center">
+    <img src="./images/game.gif" width="600"/>
+    <br>
+    <i>Game of Life Interactive Board in the GUI
+    <br>
+    Click on the cells to toggle their state (alive or dead)</i>
+    </i>
+</p>
+
+The GUI window is compartmentalized into three primary sections:
+
+1. Game of Life Board: This section visually represents the current state of the Game of Life board, dynamically illustrating the evolving configurations.
+
+      - A distinctive feature of the board is its ability to track the age of each cell, in addition to the overall configuration. This capability enables users to color-code cells according to their age, thereby enriching the visualization of the algorithm's progression and offering insights into the evolution of configurations.
+
+      - The board also offers the flexibility to toggle the grid display. Users can choose to view or hide the grid as per their preference, which enhances the clarity of the board's structure and improves the overall user experience.
+
+    <p align = "center">
+        <img src="./images/cool.gif" width="400"/>
+        <br>
+        <i>Darker cells are older than lighter cells.<br>The 'heart' shape is evolving in the white theme. Grid is hidden.</i>
+    </p>
+
+1. Control Panel: This section provides users with a range of interactive controls to manage the genetic algorithm's execution. Key functionalities include:
+
+      - `Start \ Pause`: Enables users to initiate or pause the Game of Life simulation, providing control over the algorithm's execution and facilitating real-time monitoring of the evolving configurations.
+
+      - `Clear`: Allows users to reset the board to its initial state, clearing all cells and enabling the creation of new configurations. This feature enhances user flexibility and enables the exploration of diverse configurations within the Game of Life.
+
+      - `Random`: Facilitates the generation of random configurations on the board, enabling users to explore a variety of initial states and observe the algorithm's evolution from different starting points. This feature enhances user engagement and provides opportunities for experimentation and exploration.
+
+      - `Next`: Allows users to advance the simulation by a single generation, enabling step-by-step progression through the algorithm's execution. This feature enhances user control and provides detailed insights into the evolution of configurations.
+
+      - `Save`: Facilitates the archiving of current configurations as `.txt` files within the `saves` directory. This feature ensures that users can preserve their current configurations for future reference and analysis, enhancing the program's utility and enabling users to revisit specific configurations as needed.
+
+      - `Run GA`: Initiates the genetic algorithm's execution, enabling users to observe the algorithm's progress in real-time. This feature offers a streamlined approach to executing the algorithm, enhancing user convenience and facilitating efficient monitoring of the algorithm's evolution.
+
+      - `Load`: Enables users to load saved configurations from the `saves` directory, providing access to previously executed configurations for further analysis and exploration. This feature enhances user flexibility and enables the retrieval of specific configurations for detailed examination.
+
+      - `Quit`: Provides users with a convenient option to exit the GUI, ensuring a seamless user experience and enabling users to conclude their interaction with the program efficiently.
+
+      - `Change Theme`: Allows users to personalize the GUI's appearance by loading custom `css` files. This feature enhances user customization options, enabling users to tailor the GUI's visual style to their preferences and create a personalized user experience.
+
+2. Information Panel: This section offers users a comprehensive overview of the algorithm's progress, displaying key metrics and insights to enhance user understanding and facilitate informed decision-making. The information panel includes:
+
+      - `Generation`: Displays the current generation number, enabling users to track the algorithm's progress and monitor the evolution of configurations over successive generations.
+
+      - `Population Size`: Illustrates the size of the population, offering users a visual representation of the algorithm's progress and enabling users to track the evolution of configurations over successive generations.
+
+      - `Currently Alive Cells`: Highlights the current count of alive cells in the evolving configuration, enabling users to monitor the algorithm's progress and observe the development of configurations over time.
+
+      - `Max Alive`: Showcases the maximum alive cells in a generation of the current board configuration, providing users with insights into the algorithm's performance and the evolution of configurations over successive generations.
+
+      - `Initial Alive Cells`: Indicates the count of alive cells in the initial generation  of the current board configuration, enabling users to track the algorithm's progress and observe the development of configurations over time.
+
+When the user is ready to run the genetic algorithm, they can press the `Run GA` button. The algorithm will continue until the maximum number of generations is reached, at which point the final generation will be displayed.
+
+<p align = "center">
+    <img src="./images/run_ga.gif" width="600"/>
+    <br>
+    <i>GA is running on the background,<br>GUI displays the best  individual from each iterations</i>
+</p>
+
+After execution, a new window displays the final generation, with the `load from file button` enabling navigation through different individuals.
+
+<p align = "center">
+    <img src="./images/gui_finished_algo.png" width="600"/>
+    <br>
+    <i>Window diaglog after final generation of the GA in the GUI</i>
+</p>
+
+Note: The GUI prompts for a directory and remembers the last accessed location, simplifying subsequent runs within the same directory by eliminating the need for reselection. Command line executions automatically retrieve and open the last used directory.
+
+Post-activation of the `Run GA` button and subsequent algorithm completion, the user is presented with the following interface sequence:
+
+| ![Alt text](./images/gui_finished_algo.png) | ![Alt text](images/open_file_pop_window.png) |
+|:--:|:--:|
+| ![Alt text](images/gui_init_config.png) | ![Alt text](images/gui_evolvong_config.png) |
+| ![Alt text](images/gui_stable_config.png) | ![Alt text](images/save.png) |
+
+Additionally, a `save` function is integrated, allowing current configurations to be archived as `.txt` files within the `saves` directory for future access. This feature is complemented by a `Load` button for convenient retrieval of these saved configurations.
+
+---
+
+<p align = "center">
+    <img src="./images/themes.gif" width="600"/>
+    <br>
+    <i>Changing themes in the GUI</i>
+</p>
+
+At any time users can personalize the interface's appearance. To apply a custom theme, simply load the desired `css` file via the `Load CSS` button. The GUI will automatically update to reflect the new theme, enhancing the user experience. The deafult `theme.css` file is included for reference, as well as 2 additional themes: `theme2.css` and `theme3.css`. Note that too many visual effect, such as `box-shadow` and `border-radius` can slow down the GUI. It is recommended to use simple `css` files.
+
+<p align = "center">
+    <img src="./images/t_new2.gif" width="600"/>
+    <br>
+    <i>Evolution of the 'T' shape in the new white theme</i>
+</p>
+
+<p align = "center">
+    <img src="./images/t_black.gif" width="600"/>
+    <br>
+    <i>Same evolution of the 'T' shape in the black theme</i>
+</p>
+
+### Using the Command Line
+
+Note that the program can also be run without the GUI. In such cases, output is directed to the console, and results are saved as `.txt` files within the `populations` directory. This approach was chosen to ensure program accessibility on any machine, regardless of the presence of the `gtk` library, and to maintain output configuration flexibility.
+
+A notable drawback of this method is the storage inefficiency for `sparse matrices` in the `populations` directory. In different scenarios, encoding these matrices would be a practical solution to conserve space. However, for this specific application, the sparse matrices represent the desired output, making their direct storage justifiable.
+
+---
+
+## Examples
+
+The evaluation of two distinct individuals, namely the `T_shape` and the `Dragon` shape, provides insightful observations into the algorithm's performance. The `T_shape` emerges as an intriguing pattern, while the `Dragon` shape captivates with its evolutionary complexity. These shapes frequently recur across various individuals, highlighting their significance within the genetic algorithm's exploration space.
+
+To explore these examples firsthand, utilize the GUI's `Load` button to access the `saves` directory or execute the following commands:
+
+```bash
+./met saves/dragon.txt
+```
+
+```bash
+./met saves/t_shape.txt
+```
+
+### T_shape
+
+<p align = "center">
+    <img src="./images/inception_full.gif" width="600"/>
+    <br>
+    <i>T_shape Evolution in Inception theme</i>
+</p>
+
+`T_shape` is called after the mighty T-rex, and its `T` shape. The initial state starts with 6 alive cells. It is a very small shape, and it is very likely to be selected as a parent for the next generation. It evolves into a heart (see figure 2), and continues as a musk (see figure 3). It continues to evolve into a goat face (see figure 4), and then into a skull face (see figure 5). It continues to grow and become stable at generation 225 (see figure 6). At its peak, it has about 100 alive cells.
+
+| ![T_shape Initial](./images/t_shape1.png) | ![T_shape Heart Evolution](./images/t_shape2.png) |
+|:--:|:--:|
+| *Figure 1: Initial State* | *Figure 2: Heart Evolution* |
+
+| ![T_shape Musk Evolution](./images/t_shape3.png) | ![T_shape Goat Face Evolution](./images/t_shape4.png) |
+|:--:|:--:|
+| *Figure 3: Musk Evolution* | *Figure 4: Goat Face Evolution* |
+
+| ![T_shape Skull Face Evolution](./images/t_shape5.png) | ![T_shape Stable State at Gen 225](./images/t_shape6.png) |
+|:--:|:--:|
+| *Figure 5: Skull Face Evolution* | *Figure 6: Stable State at Gen 225* |
+
+### Dragon
+
+<p align = "center">
+    <img src="./images/dragon_inc.gif" width="600"/>
+    <br>
+    <i>Dragon Evolution in red Inception theme</i>
+</p>
+
+Dragon's initial state starts with 6 alive cells. It is a very small shape, and it is very likely to be selected as a parent for the next generation. It evolves into a dragon with open wings (see figure 2), and continues as a dragon with closed wings (see figure 3). It continues to evolve into a dragon with big open wings (see figure 4), and then into a dragon with very big open wings (see figure 5). It continues to grow and become stable at generation 132 (see figure 6). At its peak, it has about 10 times more alive cells than the initial shape.
+
+| ![Dragon Initial](./images/dragon1.png) | ![Dragon Open Wings](./images/dragon2.png) |
+|:--:|:--:|
+| *Figure 1: Initial State* | *Figure 2: Open Wings* |
+
+| ![Dragon Closed Wings](./images/dragon3.png) | ![Dragon Big Open Wings](./images/dragon4.png) |
+|:--:|:--:|
+| *Figure 3: Closed Wings* | *Figure 4: Big Open Wings* |
+
+| ![Dragon Very Big Open Wings](./images/dragon5.png) | ![Dragon Stable State at Gen 132](./images/dragon6.png) |
+|:--:|:--:|
+| *Figure 5: Very Big Open Wings* | *Figure 6: Stable State at Gen 132* |
+
+### Hi
+
+<p align = "center">
+    <img src="./images/hi_shape_160gen.gif" width="600"/>
+    <br>
+    <i>Hi Shape first 160 generations</i>
+</p>
+
+The `hi` shape demonstrates a long evolution period of more than 230 generations and more than ten times bigger than the initial shape.
+
+![Hi Shape Evolution](images/hi.png)
+*Figure 7: Hi Shape Evolution*
+
+You can see the population that led to those individuals under the [populations](populations) directory and explore their variations.
+
+### Insights
+
+The algorithm produced some interesting results. Here are more insights:
+
+1. **Short simulation tends to produce better individuals**: This can be explained by the fact that mutations are most likely to turn cells alive than dead. This observation is based on the fact that the initial shapes are usually small, and the algorithm prefers to keep them small.
+
+2. **Low `mutationRate` tends to produce better individuals**: This can be explained by the fact that the best individuals are usually consist of the same basic shapes - like the `T_shape` and the `Dragon` shape.
+
+3. **The algorithm prefers symmetric shapes**: This can be explained by the fact that the evaluation function gives a bonus for bigger shapes. The bigger the shape is, the more likely it is to be symmetric.
+
+4. **The algorithm parameters are affected by the size of the board**: This insight connects some parameters that at first sight might not seem related. For example, the number of simulations should align with the board size.
+
+5. **Cycles Tracking**: To address undesired individuals surviving for a long time, a hash table that keeps track of visited boards during the simulation was added. To enhance performance, the boards are encoded into occurrences string, and the hash table is implemented as a `std::unordered_set<std::string>`.
 
 ---
 
@@ -209,9 +515,12 @@ After thorough testing of various crossover methods, I opted to forgo the `point
     }
 ```
 
-Example to crossover (`aliveProbability` is 100% for this example):
-
-![Alt text](images/crossover.png?raw=true "Crossover")
+<p align = "center">
+    <img src="./images/crossover.png"
+    width="200"/>
+    <br>
+    <i>Another example to crossover (`aliveProbability` is 100% for this example) </i>
+</p>
 
 Note that the `crossoverPointX` ctor is also implemented, and you can use it by calling the following constructor:
 
@@ -224,7 +533,7 @@ Chromosome(int crossoverPoint, std::shared_ptr<Chromosome> parent1,
 
 The mutation process is uniquely orchestrated outside the `Chromosome` class, specifically within the `Population` class through a `mutation` method. This method requires a `mutationRate` parameter and applies mutations across the population with a probability determined by this rate. The mutation operation involves randomly selecting a cell (or Gene) within a chromosome and toggling its state.
 
-This design choice, to situate the mutation functionality outside of the `Chromosome` class, is strategic. It allows for a comprehensive application of mutations across all chromosomes within the population, rather than restricting mutation to individual chromosomes. This approach ensures that the mutation process can consider the entire population's genetic diversity when applying changes.
+Strategically situating the mutation functionality outside of the `Chromosome` class. It allows for a comprehensive application of mutations across all chromosomes within the population, rather than restricting mutation to individual chromosomes. This approach ensures that the mutation process can consider the entire population's genetic diversity when applying changes.
 
 The mutation methodology employed here aligns with the `uniform` mutation strategy as discussed on page 95 of the book (Biological Computation). By applying mutations uniformly across the population, this method enhances the likelihood of generating viable and diverse genetic configurations.
 
@@ -328,7 +637,7 @@ The method updates the fitness of each chromosome based on the score and the tot
 
 ---
 
-### GeneticAlgorithm Implementation
+### Genetic Algorithm Implementation
 
 The `GeneticAlgorithm` is imlemented based on the psudo-code describe in p. 131 of the book (Biological Computation). The class is implemented in [ga.cpp](ga.cpp). The class is responsible for running the genetic algorithm on the population of chromosomes.
 
@@ -390,140 +699,6 @@ I encourage you to experience the evolution process in real-time. For a demonstr
 #### Save
 
 The `save` method facilitates the preservation of algorithm outcomes. Each member of the final population is saved into a `.txt` file, prioritized by performance with the file names reflecting the score of the individual. Additionally, a comprehensive `report.txt` file compiles the algorithm's parameters, the concluding population, and a summary of the process. The report delineates each individual with detailed descriptions and includes command line instructions for replicating the experiment with specific individuals. An example can be found in attachment B.
-
----
-
-### GUI
-
-Implemented in `gui.cpp`, the graphical user interface (GUI) leverages the `gtk` library to offer an intuitive user experience. It features real-time game display, showcasing metrics such as the current generation, initial and current alive cells, and the top score. A graphical representation of the population size is also included, with options for manual or automatic algorithm execution.
-
-![Alt text](images/gui_interface.png)
-
-Users have the flexibility to initiate runs from the GUI or via command line arguments. Post-execution, a new window presents the final generation, with navigation through different individuals enabled by the `load from file` button.
-
-**Note**: The GUI prompts for a directory and memorizes the last accessed location, streamlining subsequent runs within the same directory without the need for reselection. Command line executions automatically recall and open the last used directory.
-
-## Getting Started
-
-The program can be executed from the command line or via the GUI. The following instructions detail both approaches.
-
-### Using the GUI
-
-Ensure the `gtk` library is installed on your system. If absent, it can be installed with the following command:
-
-```bash
-sudo apt-get install libgtk-3-dev
-```
-
-or on mac:
-
-```bash
-brew install gtk+3
-```
-
-The program can be compiled with the included `makefile` by running the following command:
-
-```bash
-make
-```
-
-#### Running the Algorithm
-
-Post-activation of the `Run Genetic Algorithm` button and subsequent algorithm completion, the user is presented with the following interface sequence:
-
-| ![Alt text](./images/gui_finished_algo.png) | ![Alt text](images/open_file_pop_window.png) |
-|:--:|:--:|
-| ![Alt text](images/gui_init_config.png) | ![Alt text](images/gui_evolvong_config.png) |
-| ![Alt text](images/gui_stable_config.png) | ![Alt text](images/save.png) |
-
-Additionally, a `save` function is integrated, allowing current configurations to be archived as `.txt` files within the `saves` directory for future access. This feature is complemented by a `Load` button for convenient retrieval of these saved configurations.
-
-### Using the Command Line
-
-Note that the program can also be run without the GUI. In such cases, output is directed to the console, and results are saved as `.txt` files within the `populations` directory. This approach was chosen to ensure program accessibility on any machine, regardless of the presence of the `gtk` library, and to maintain output configuration flexibility.
-
-A notable drawback of this method is the storage inefficiency for `sparse matrices` in the `populations` directory. In different scenarios, encoding these matrices would be a practical solution to conserve space. However, for this specific application, the sparse matrices represent the desired output, making their direct storage justifiable.
-
----
-
-## Examples
-
-### Selected Individuals Showcase and Insights
-
-The evaluation of two distinct individuals, namely the `T_shape` and the `Dragon` shape, provides insightful observations into the algorithm's performance. The `T_shape` emerges as an intriguing pattern, while the `Dragon` shape captivates with its evolutionary complexity. These shapes frequently recur across various individuals, highlighting their significance within the genetic algorithm's exploration space.
-
-To explore these examples firsthand, utilize the GUI's `Load` button to access the `saves` directory or execute the following commands:
-
-```bash
-./met saves/dragon.txt
-```
-
-```bash
-./met saves/t_shape.txt
-```
-
-### T_shape
-
-<p align = "center">
-    <img src="./images/t_shape/t_shape.gif" width="600"/>
-</p>
-
-`T_shape` is called after the mighty T-rex, and its `T` shape. The initial state starts with 6 alive cells. It is a very small shape, and it is very likely to be selected as a parent for the next generation. It evolves into a heart (see figure 2), and continues as a musk (see figure 3). It continues to evolve into a goat face (see figure 4), and then into a skull face (see figure 5). It continues to grow and become stable at generation 225 (see figure 6). At its peak, it has about 100 alive cells.
-
-| ![T_shape Initial](./images/t_shape1.png) | ![T_shape Heart Evolution](./images/t_shape2.png) |
-|:--:|:--:|
-| _Figure 1: Initial State_ | _Figure 2: Heart Evolution_ |
-
-| ![T_shape Musk Evolution](./images/t_shape3.png) | ![T_shape Goat Face Evolution](./images/t_shape4.png) |
-|:--:|:--:|
-| _Figure 3: Musk Evolution_ | _Figure 4: Goat Face Evolution_ |
-
-| ![T_shape Skull Face Evolution](./images/t_shape5.png) | ![T_shape Stable State at Gen 225](./images/t_shape6.png) |
-|:--:|:--:|
-| _Figure 5: Skull Face Evolution_ | _Figure 6: Stable State at Gen 225_ |
-
-### Dragon
-
-<p align = "center">
-    <img src="./images/dragon/dragon.gif" width="600"/>
-</p>
-
-Dragon's initial state starts with 6 alive cells. It is a very small shape, and it is very likely to be selected as a parent for the next generation. It evolves into a dragon with open wings (see figure 2), and continues as a dragon with closed wings (see figure 3). It continues to evolve into a dragon with big open wings (see figure 4), and then into a dragon with very big open wings (see figure 5). It continues to grow and become stable at generation 132 (see figure 6). At its peak, it has about 10 times more alive cells than the initial shape.
-
-| ![Dragon Initial](./images/dragon1.png) | ![Dragon Open Wings](./images/dragon2.png) |
-|:--:|:--:|
-| _Figure 1: Initial State_ | _Figure 2: Open Wings_ |
-
-| ![Dragon Closed Wings](./images/dragon3.png) | ![Dragon Big Open Wings](./images/dragon4.png) |
-|:--:|:--:|
-| _Figure 3: Closed Wings_ | _Figure 4: Big Open Wings_ |
-
-| ![Dragon Very Big Open Wings](./images/dragon5.png) | ![Dragon Stable State at Gen 132](./images/dragon6.png) |
-|:--:|:--:|
-| _Figure 5: Very Big Open Wings_ | _Figure 6: Stable State at Gen 132_ |
-
-### Other Examples
-
-The `hi` shape demonstrates a long evolution period of more than 230 generations and more than ten times bigger than the initial shape.
-
-![Hi Shape Evolution](images/hi.png)
-*Figure 7: Hi Shape Evolution*
-
-You can see the population that led to those individuals under the [populations](populations) directory and explore their variations.
-
-### Insights
-
-The algorithm produced some interesting results. Here are more insights:
-
-1. **Short simulation tends to produce better individuals**: This can be explained by the fact that mutations are most likely to turn cells alive than dead. This observation is based on the fact that the initial shapes are usually small, and the algorithm prefers to keep them small.
-
-2. **Low `mutationRate` tends to produce better individuals**: This can be explained by the fact that the best individuals are usually consist of the same basic shapes - like the `T_shape` and the `Dragon` shape.
-
-3. **The algorithm prefers symmetric shapes**: This can be explained by the fact that the evaluation function gives a bonus for bigger shapes. The bigger the shape is, the more likely it is to be symmetric.
-
-4. **The algorithm parameters are affected by the size of the board**: This insight connects some parameters that at first sight might not seem related. For example, the number of simulations should align with the board size.
-
-5. **Cycles Tracking**: To address undesired individuals surviving for a long time, a hash table that keeps track of visited boards during the simulation was added. To enhance performance, the boards are encoded into occurrences string, and the hash table is implemented as a `std::unordered_set<std::string>`.
 
 ## Contributions and Feedback
 

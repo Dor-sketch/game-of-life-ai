@@ -5,7 +5,7 @@
 #include <vector>
 #include <algorithm>
 #include <iostream>
-
+#include "gui.hpp"
 int howManyAlive(int board[BOARD_SIZE][BOARD_SIZE]) {
 	// count how many cells are alive in a given board
 	int alive = 0;
@@ -70,4 +70,18 @@ void testSelection() {
 	for (int i = 0; i < 5; i++) {
 		std::cout << chromosomes[i]->score << std::endl;
 	}
+}
+
+void testCrossoverOnGUI() {
+	std::shared_ptr<Chromosome> parent1 = std::make_shared<Chromosome>();
+	std::shared_ptr<Chromosome> parent2 = std::make_shared<Chromosome>();
+	std::shared_ptr<Chromosome> offspring =
+		std::make_shared<Chromosome>(parent1, parent2);
+        GUI::setBoard(parent1->board);
+		GUI::next();
+        GUI::setBoard(parent2->board);
+        GUI::next();
+
+        GUI::setBoard(offspring->board);
+        GUI::next();
 }
