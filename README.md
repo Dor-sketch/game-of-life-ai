@@ -4,7 +4,7 @@ This project implements a genetic algorithm to discover configurations in Conway
 
 <p align = "center">
     <img src="./images/individual_purple_long.gif"
-    width="600"/>
+    width="800"/>
     <br>
     <i>Algorithm Evolution of a Fitted Individual</i>
 </p>
@@ -101,7 +101,7 @@ The concept of an `Evolutionary algorithm` encompasses a group of algorithms ins
 
 <p align = "center">
     <img src="./images/cross_over.gif"
-    width="600"/>
+    width="800"/>
     <br>
     <i>Uniform Crossover
     <br>Two parents (up) are combined to create a new child (down).
@@ -115,7 +115,11 @@ A `Genetic algorithm` represents a specific instance within the evolutionary alg
 
 To summerize, the flow of the genetic algorithm is as follows:
 
-$p_0 \rightarrow \text{Evaluation} \rightarrow \text{Selection} \rightarrow \text{Crossover} \rightarrow \text{Mutation} \rightarrow p_1 \rightarrow \text{Evaluation} \rightarrow \text{Selection} \rightarrow \text{Crossover} \rightarrow \text{Mutation} \rightarrow p_2 \rightarrow \text{Evaluation} \rightarrow \text{Selection} \rightarrow \text{Crossover} \rightarrow \text{Mutation} \rightarrow \ldots$
+$$ p_0 \rightarrow \text{Evaluation} \rightarrow \text{Selection} \rightarrow \text{Crossover} \rightarrow \text{Mutation} \rightarrow $$
+
+$$ p_1 \rightarrow \text{Evaluation} \rightarrow \text{Selection} \rightarrow \text{Crossover} \rightarrow \text{Mutation} \rightarrow $$
+
+$$ p_2 \rightarrow \text{Evaluation} \rightarrow \text{Selection} \rightarrow \text{Crossover} \rightarrow \text{Mutation} \rightarrow \ldots $$
 
 where $p_0$ is the initial population, and $p_1, p_2, \ldots$ are the next generations. The algorithm continues until a stopping criterion is met, such as a maximum number of generations or a satisfactory solution.
 
@@ -134,7 +138,7 @@ The program utilising a genetic algorithm in order to discover configurations in
 This kind of patterns are known as `Methuselahs` in the Game of Life terminology. The project aims to explore the potential of genetic algorithms in discovering such configurations, showcasing the power of AI in software development. For more about `Methuselahs`, you can visit the [Wikipedia page](https://en.wikipedia.org/wiki/Methuselah_(cellular_automaton)).
 
 <p align = "center">
-  <img src="./images/hot.gif" width="600"/>
+  <img src="./images/hot.gif" width="800"/>
   <br>
   <i>Start of the evolution of a fitted individual in the GUI.
   <br>
@@ -168,7 +172,7 @@ The program is designed to be user-friendly, offering both a graphical user inte
 
 <p align = "center">
     <img src="./images/GUI.gif"
-    width="600"/>
+    width="800"/>
     <br>
     <i>Graphical User Interface (GUI) for the Genetic Algorithm</i>
 </p>
@@ -206,7 +210,7 @@ After compilation, the GUI can be launched by executing the following command:
 The GUI window will appear, providing a comprehensive interface for executing the genetic algorithm. Users can interact with the GUI to tye the game of life, initiate the algorithm, monitor its progress, and explore the evolving configurations within the Game of Life.
 
 <p align = "center">
-    <img src="./images/game.gif" width="600"/>
+    <img src="./images/game.gif" width="800"/>
     <br>
     <i>Game of Life Interactive Board in the GUI
     <br>
@@ -263,7 +267,7 @@ The GUI window is compartmentalized into three primary sections:
 When the user is ready to run the genetic algorithm, they can press the `Run GA` button. The algorithm will continue until the maximum number of generations is reached, at which point the final generation will be displayed.
 
 <p align = "center">
-    <img src="./images/run_ga.gif" width="600"/>
+    <img src="./images/run_ga.gif" width="800"/>
     <br>
     <i>GA is running on the background,<br>GUI displays the best  individual from each iterations</i>
 </p>
@@ -271,7 +275,7 @@ When the user is ready to run the genetic algorithm, they can press the `Run GA`
 After execution, a new window displays the final generation, with the `load from file button` enabling navigation through different individuals.
 
 <p align = "center">
-    <img src="./images/gui_finished_algo.png" width="600"/>
+    <img src="./images/gui_finished_algo.png" width="800"/>
     <br>
     <i>Window diaglog after final generation of the GA in the GUI</i>
 </p>
@@ -290,7 +294,7 @@ Additionally, a `save` function is integrated, allowing current configurations t
 ---
 
 <p align = "center">
-    <img src="./images/themes.gif" width="600"/>
+    <img src="./images/themes.gif" width="800"/>
     <br>
     <i>Changing themes in the GUI</i>
 </p>
@@ -298,13 +302,13 @@ Additionally, a `save` function is integrated, allowing current configurations t
 At any time users can personalize the interface's appearance. To apply a custom theme, simply load the desired `css` file via the `Load CSS` button. The GUI will automatically update to reflect the new theme, enhancing the user experience. The deafult `theme.css` file is included for reference, as well as 2 additional themes: `theme2.css` and `theme3.css`. Note that too many visual effect, such as `box-shadow` and `border-radius` can slow down the GUI. It is recommended to use simple `css` files.
 
 <p align = "center">
-    <img src="./images/t_new2.gif" width="600"/>
+    <img src="./images/t_new2.gif" width="800"/>
     <br>
     <i>Evolution of the 'T' shape in the new white theme</i>
 </p>
 
 <p align = "center">
-    <img src="./images/t_black.gif" width="600"/>
+    <img src="./images/t_black.gif" width="800"/>
     <br>
     <i>Same evolution of the 'T' shape in the black theme</i>
 </p>
@@ -334,7 +338,7 @@ To explore these examples firsthand, utilize the GUI's `Load` button to access t
 ### T_shape
 
 <p align = "center">
-    <img src="./images/inception_full.gif" width="600"/>
+    <img src="./images/inception_full.gif" width="800"/>
     <br>
     <i>T_shape Evolution in Inception theme</i>
 </p>
@@ -356,7 +360,7 @@ To explore these examples firsthand, utilize the GUI's `Load` button to access t
 ### Dragon
 
 <p align = "center">
-    <img src="./images/dragon_inc.gif" width="600"/>
+    <img src="./images/dragon_inc.gif" width="800"/>
     <br>
     <i>Dragon Evolution in red Inception theme</i>
 </p>
@@ -378,7 +382,7 @@ Dragon's initial state starts with 6 alive cells. It is a very small shape, and 
 ### Hi
 
 <p align = "center">
-    <img src="./images/hi_shape_160gen.gif" width="600"/>
+    <img src="./images/hi_shape_160gen.gif" width="800"/>
     <br>
     <i>Hi Shape first 160 generations</i>
 </p>
