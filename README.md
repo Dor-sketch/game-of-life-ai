@@ -10,7 +10,7 @@ Before diving into the project, let's take a look at some patterns discovered by
     <img src="./images/new_metal_blue_reduced.gif" width="320"/>
     <img src="./images/new_metal_red_reduced.gif" width="320"/>
     <br>
-    <i>Evolution animation of a fitted individuals, displayed in the GUI with a metal blue theme (left) and a metal red theme (right)</i>
+    <i>Evolution animation of a fitted individuals, displayed in the GUI with a metal blue theme (left) and a metal red theme (right). Full versions can be found in the `images` directory.</i>
     </i>
     <br>
     <img src="./images/gui_graphics_zoom1.png" width="320"/>
@@ -99,7 +99,7 @@ The `Game of Life` is a [cellular automaton](https://en.wikipedia.org/wiki/Cellu
 
 <p align = "center">
     <img src="./images/rule3_and_4.gif"
-    width="320"/>
+    width="500"/>
     <br>
     <i>Blinker Shape
     <br>
@@ -107,7 +107,7 @@ The `Game of Life` is a [cellular automaton](https://en.wikipedia.org/wiki/Cellu
 </p>
 <p align = "center">
     <img src="./images/gliders.gif"
-    width="320"/>
+    width="500"/>
     <br>
     <i>Glider Shape
     <br>
@@ -157,7 +157,7 @@ The program utilising a genetic algorithm in order to discover configurations in
 This kind of patterns are known as `Methuselahs` in the Game of Life terminology. The project aims to explore the potential of genetic algorithms in discovering such configurations, showcasing the power of AI in software development. For more about `Methuselahs`, you can visit the [Wikipedia page](https://en.wikipedia.org/wiki/Methuselah_(cellular_automaton)).
 
 <p align = "center">
-  <img src="./images/hot.gif" width="320"/>
+  <img src="./images/hot.gif" width="500"/>
   <br>
   <i>Start of the evolution of a fitted individual in the GUI.
   <br>
@@ -191,7 +191,7 @@ The program is designed to be user-friendly, offering both a graphical user inte
 
 <p align = "center">
     <img src="./images/GUI.gif"
-    width="320"/>
+    width="600"/>
     <br>
     <i>Graphical User Interface (GUI) for the Genetic Algorithm</i>
 </p>
@@ -229,11 +229,11 @@ After compilation, the GUI can be launched by executing the following command:
 The GUI window will appear, providing a comprehensive interface for executing the genetic algorithm. Users can interact with the GUI to tye the game of life, initiate the algorithm, monitor its progress, and explore the evolving configurations within the Game of Life.
 
 <p align = "center">
-    <img src="./images/game.gif" width="500"/>
+    <img src="./images/game_reduced.gif" width="600"/>
     <br>
     <i>Game of Life Interactive Board in the GUI
     <br>
-    Click on the cells to toggle their state (alive or dead)</i>
+    Click on the cells to toggle their state (alive or dead). For the full version, please see `./images/game.gif`.
     </i>
 </p>
 
@@ -277,13 +277,7 @@ The GUI window is compartmentalized into three primary sections:
 
       - `Initial Alive Cells`: Indicates the count of alive cells in the initial generation  of the current board configuration, enabling users to track the algorithm's progress and observe the development of configurations over time.
 
-When the user is ready to run the genetic algorithm, they can press the `Run GA` button. The algorithm will continue until the maximum number of generations is reached, at which point the final generation will be displayed.
-
-<p align = "center">
-    <img src="./images/run_ga.gif" width="320"/>
-    <br>
-    <i>GA is running on the background,<br>GUI displays the best  individual from each iterations</i>
-</p>
+When the user is ready to run the genetic algorithm, they can press the `Run GA` button. The algorithm will continue until the maximum number of generations is reached, at which point the final generation will be displayed. See [./images/run_ga.gif](./images/run_ga.gif) for a demonstration of the algorithm's execution.
 
 After execution of the `Run GA` , a new window displays the final generation, with the `load from file button` enabling navigation through different individuals.
 
@@ -300,13 +294,7 @@ Additionally, a `save` function is integrated, allowing current configurations t
 
 ---
 
-<p align = "center">
-    <img src="./images/themes.gif" width="500"/>
-    <br>
-    <i>Changing themes in the GUI</i>
-</p>
-
-At any time users can personalize the interface's appearance. To apply a custom theme, simply load the desired `css` file via the `Load CSS` button. The GUI will automatically update to reflect the new theme, enhancing the user experience. The deafult `theme.css` file is included for reference, as well as 2 additional themes: `theme2.css` and `theme3.css`. Note that too many visual effect, such as `box-shadow` and `border-radius` can slow down the GUI. It is recommended to use simple `css` files.
+At any time users can personalize the interface's appearance. To apply a custom theme, simply load the desired `css` file via the `Load CSS` button. The GUI will automatically update to reflect the new theme, enhancing the user experience. The deafult `theme.css` file is included for reference, as well as 2 additional themes: `theme2.css` and `theme3.css`. Note that too many visual effect, such as `box-shadow` and `border-radius` can slow down the GUI. It is recommended to use simple `css` files. For a demonstration of the theme change, refer to [./images/themes.gif](./images/themes.gif).
 
 ### Using the Command Line
 
@@ -403,9 +391,9 @@ You can see the population that led to those individuals under the [populations]
 </p>
 
 <p align = "center">
-    <img src="./images/metal_blue.gif"
+    <img src="./images/metal_blue_reduced.gif"
     width="400"/>
-    <img src="./images/metal_red.gif" width="400"/>
+    <img src="./images/metal_red_reduced.gif" width="400"/>
     <br>
     <i>270 Generations of the Genetic Algorithm in the GUI, metal blue theme (left) and metal red theme (right)</i>
 </p>
