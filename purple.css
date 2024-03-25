@@ -1,0 +1,85 @@
+.window,
+button,
+label,
+grid,
+drawingarea {
+    background-color: #FFFFFF; /* Bright white */
+    color: #333333; /* Lighter gray for softer contrast */
+    font-family: 'Courier New', monospace;
+    border-radius: 0px;
+    font-size: large;
+    font-weight: bold;
+}
+
+button {
+    background: #6a0dad; /* Purple */
+    color: #FFFFFF; /* White */
+    border-color: #6a0dad;
+    border-radius: 0;
+    transition: 0.3s;
+}
+
+button:hover {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19), 0 8px 10px 0 rgba(0, 0, 0, 0.2), 0 0 10px #555555;
+    background: #9b59b6; /* Lighter purple */
+    color: #FFFFFF; /* White */
+    border-color: #555555;
+    /* add pulse animation */
+}
+.alive {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19), 0 8px 10px 0 rgba(0, 0, 0, 0.2);
+    background-color: #7d6ad1; /* Lighter purple for 'alive' */
+    border-color: #6a0dad; /* Purple */
+    animation: pulse 5s ease-in-out infinite;
+}
+
+.young {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19), 0 8px 10px 0 rgba(0, 0, 0, 0.2);
+    background-color: #9b59b6; /* Medium purple for 'young' */
+    border-color: #8e44ad; /* Darker purple */
+    animation: pulse 5s ease-in-out infinite;
+}
+
+.old {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19), 0 8px 10px 0 rgba(0, 0, 0, 0.2);
+    background-color: #8e44ad; /* Darker purple for 'old' */
+    border-color: #6a0dad; /* Purple */
+    animation: pulse 5s ease-in-out infinite;
+}
+
+.veteran {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19), 0 8px 10px 0 rgba(0, 0, 0, 0.2);
+    background-color: #6a0dad; /* Purple for 'veteran' */
+    border-color: #4b0082; /* Darker purple */
+    animation: pulse 5s ease-in-out infinite;
+}
+
+.window {
+    background: #FFFFFF; /* White */
+    border: 2px solid #555555; /* Lighter gray */
+    border-radius: 0;
+    border-color: #555555; /* Lighter gray */
+}
+
+drawingarea {
+    background: #FFFFFF; /* White */
+    border: 2px solid #555555; /* Lighter gray */
+    border-radius: 0;
+    border-color: #555555; /* Lighter gray */
+}
+
+@keyframes pulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(255, 173, 173, 0.7);
+    }
+    50% {
+        box-shadow: 0 0 0 10px rgba(255, 173, 173, 0.3);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(255, 173, 173, 0);
+    }
+}
+
+.transform {
+    animation: pulse 5s ease-in-out infinite;
+}

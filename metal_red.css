@@ -1,0 +1,93 @@
+window,
+button,
+label,
+grid,
+drawingarea {
+    background-color: #FFDAB9; /* PeachPuff */
+    color: #8B4513; /* SaddleBrown */
+    font-family: 'Courier New', monospace;
+    border-radius: 0px;
+    font-size: large;
+    font-weight: bold;
+}
+
+button {
+    background: linear-gradient(to right, #a33521, #641b00); /* Tomato to OrangeRed */
+    color: #FFFFFF; /* White */
+    border-color: #FF6347; /* Tomato */
+    border-radius: 0;
+    transition: 0.3s;
+}
+
+button:hover {
+    background: linear-gradient(to right, #FF4500, #FF6347); /* OrangeRed to Tomato */
+    color: #FFFFFF; /* White */
+    border-color: #FF6347; /* Tomato */
+}
+
+.alive {
+    background: #FFDAB9; /* PeachPuff */
+    color : #a7a3a0; /* SaddleBrown */
+    box-shadow: 0 0 10px 5px rgba(203, 174, 168, 0.5); /* Tomato */
+    background-color: #FFD700; /* Gold */
+    border-color: #FF8C00; /* DarkOrange */
+    animation: pulse 5s ease-in-out infinite;
+}
+
+.young {
+    background: linear-gradient(to right, #a33521, #641b00); /* Tomato to OrangeRed */
+    box-shadow: 0 4px 8px 0 rgba(255, 99, 71, 0.2), 0 6px 20px 0 rgba(255, 99, 71, 0.19), 0 8px 10px 0 rgba(255, 99, 71, 0.2);
+    background-color: #6c5551; /* Tomato */
+    border-color: #FF4500; /* OrangeRed */
+    animation: pulse 5s ease-in-out infinite;
+    color : #a7a3a0; /* SaddleBrown */
+
+}
+
+.old {
+    background: linear-gradient(to right, #FF4500, #895046); /* OrangeRed to Tomato */
+    box-shadow: 0 4px 8px 0 rgba(161, 94, 82, 0.2), 0 6px 20px 0 rgba(255, 99, 71, 0.19), 0 8px 10px 0 rgba(255, 99, 71, 0.2);
+    background-color: #40332e; /* OrangeRed */
+    border-color: #FF6347; /* Tomato */
+    animation: pulse 5s ease-in-out infinite;
+}
+
+.veteran {
+    background : linear-gradient(to right, #231d1b, #181414); /* OrangeRed to Tomato */
+    box-shadow: 0 4px 8px 0 rgba(255, 99, 71, 0.2), 0 6px 20px 0 rgba(255, 99, 71, 0.19), 0 8px 10px 0 rgba(255, 99, 71, 0.2);
+    background-color: #2a2626; /* Tomato */
+    border-color: #FF4500; /* OrangeRed */
+    animation: pulse 5s ease-in-out infinite;
+}
+
+.window {
+    background: #FFDAB9; /* PeachPuff */
+    border: 2px solid #FF6347; /* Tomato */
+    border-radius: 0;
+    border-color: #FF6347; /* Tomato */
+}
+
+drawingarea {
+    background: #FFDAB9; /* PeachPuff */
+    border: 2px solid #FF6347; /* Tomato */
+    border-radius: 0;
+    border-color: #FF6347; /* Tomato */
+}
+
+@keyframes pulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(255, 99, 71, 0.7); /* Tomato */
+    }
+
+    50% {
+        box-shadow: 0 0 0 10px rgba(255, 99, 71, 0.3); /* Tomato */
+    }
+
+    100% {
+        box-shadow: 0 0 0 0 rgba(255, 99, 71, 0); /* Tomato */
+    }
+}
+
+.transform {
+    animation: pulse 5s ease-in-out infinite;
+}

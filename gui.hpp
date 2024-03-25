@@ -23,9 +23,11 @@ public:
   static void buttonClicked(GtkWidget *widget, gpointer data);
   static void setTheme(const char *themeName);
   static void changeTheme();
+  static void showResults();
 private:
-
-  static int updateBoard(int board[BOARD_SIZE][BOARD_SIZE]);
+  static void changeRecordingFlag();
+   static int updateBoard(
+      int board[BOARD_SIZE][BOARD_SIZE]);
   static void saveScreenshot();
   static void createButtons();
   static void connectSignals();

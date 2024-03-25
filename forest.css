@@ -1,0 +1,90 @@
+window,
+button,
+label,
+grid,
+drawingarea {
+    background-color: #F5FFFA; /* MintCream */
+    color: #228B22; /* ForestGreen */
+    font-family: 'Courier New', monospace;
+    border-radius: 0px;
+    font-size: large;
+    font-weight: bold;
+}
+
+button {
+    background: linear-gradient(to right, #006400, #008000); /* DarkGreen to Green */
+    color: #FFFFFF; /* White */
+    border-color: #006400; /* DarkGreen */
+    border-radius: 0;
+    transition: 0.3s;
+}
+
+button:hover {
+    background: linear-gradient(to right, #008000, #006400); /* Green to DarkGreen */
+    color: #FFFFFF; /* White */
+    border-color: #006400; /* DarkGreen */
+}
+
+.alive {
+    background: #F5FFFA; /* MintCream */
+    box-shadow: 0 0 10px 5px rgba(34, 139, 34, 0.5); /* ForestGreen */
+    background-color: #ADFF2F; /* GreenYellow */
+    border-color: #008000; /* Green */
+    animation: pulse 5s ease-in-out infinite;
+}
+
+.young {
+    background: linear-gradient(to right, #006400, #008000); /* DarkGreen to Green */
+    box-shadow: 0 4px 8px 0 rgba(34, 139, 34, 0.2), 0 6px 20px 0 rgba(34, 139, 34, 0.19), 0 8px 10px 0 rgba(34, 139, 34, 0.2);
+    background-color: #006400; /* DarkGreen */
+    border-color: #008000; /* Green */
+    animation: pulse 5s ease-in-out infinite;
+}
+
+.old {
+    background: linear-gradient(to right, #008000, #006400); /* Green to DarkGreen */
+    box-shadow: 0 4px 8px 0 rgba(34, 139, 34, 0.2), 0 6px 20px 0 rgba(34, 139, 34, 0.19), 0 8px 10px 0 rgba(34, 139, 34, 0.2);
+    background-color: #008000; /* Green */
+    border-color: #006400; /* DarkGreen */
+    animation: pulse 5s ease-in-out infinite;
+}
+
+.veteran {
+    background: linear-gradient(to right, #074607, #122b12); /* DarkGreen to Green */
+    box-shadow: 0 4px 8px 0 rgba(34, 139, 34, 0.2), 0 6px 20px 0 rgba(34, 139, 34, 0.19), 0 8px 10px 0 rgba(34, 139, 34, 0.2);
+    background-color: #006400; /* DarkGreen */
+    border-color: #008000; /* Green */
+    animation: pulse 5s ease-in-out infinite;
+}
+
+.window {
+    background: #F5FFFA; /* MintCream */
+    border: 2px solid #006400; /* DarkGreen */
+    border-radius: 0;
+    border-color: #006400; /* DarkGreen */
+}
+
+drawingarea {
+    background: #F5FFFA; /* MintCream */
+    border: 2px solid #006400; /* DarkGreen */
+    border-radius: 0;
+    border-color: #006400; /* DarkGreen */
+}
+
+@keyframes pulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(34, 139, 34, 0.7); /* ForestGreen */
+    }
+
+    50% {
+        box-shadow: 0 0 0 10px rgba(34, 139, 34, 0.3); /* ForestGreen */
+    }
+
+    100% {
+        box-shadow: 0 0 0 0 rgba(34, 139, 34, 0); /* ForestGreen */
+    }
+}
+
+.transform {
+    animation: pulse 5s ease-in-out infinite;
+}

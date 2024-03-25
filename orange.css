@@ -1,0 +1,110 @@
+window,
+button,
+label,
+grid,
+drawingarea {
+    background-color: #FFFFFF;
+    /* Bright white */
+    color: #333333;
+    /* Lighter gray for softer contrast */
+    font-family: 'Courier New', monospace;
+    border-radius: 0px;
+    font-size: large;
+    font-weight: bold;
+}
+
+button {
+    background: #FF6347;
+    /* Tomato */
+    color: #FFFFFF;
+    /* White */
+    border-color: #FF6347;
+    border-radius: 0;
+    transition: 0.3s;
+}
+
+button:hover {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19), 0 8px 10px 0 rgba(0, 0, 0, 0.2), 0 0 10px #FF6347;
+    background: #FF4500;
+    /* OrangeRed */
+    color: #FFFFFF;
+    /* White */
+    border-color: #FF6347;
+}
+
+.alive {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19), 0 8px 10px 0 rgba(0, 0, 0, 0.2);
+    background-color: #FFA500;
+    /* Orange */
+    border-color: #FF8C00;
+    /* DarkOrange */
+    animation: pulse 5s ease-in-out infinite;
+}
+
+.young {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19), 0 8px 10px 0 rgba(0, 0, 0, 0.2);
+    background-color: #FF6347;
+    /* Tomato */
+    border-color: #FF4500;
+    /* OrangeRed */
+    animation: pulse 5s ease-in-out infinite;
+}
+
+.old {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19), 0 8px 10px 0 rgba(0, 0, 0, 0.2);
+    background-color: #FF4500;
+    /* OrangeRed */
+    border-color: #FF0000;
+    /* Red */
+    animation: pulse 5s ease-in-out infinite;
+}
+
+.veteran {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19), 0 8px 10px 0 rgba(0, 0, 0, 0.2);
+    background-color: #FF0000;
+    /* Red */
+    border-color: #B22222;
+    /* FireBrick */
+    animation: pulse 5s ease-in-out infinite;
+}
+
+.window {
+    background: #FFFFFF;
+    /* White */
+    border: 2px solid #FF6347;
+    /* Tomato */
+    border-radius: 0;
+    border-color: #FF6347;
+    /* Tomato */
+}
+
+drawingarea {
+    background: #FFFFFF;
+    /* White */
+    border: 2px solid #FF6347;
+    /* Tomato */
+    border-radius: 0;
+    border-color: #FF6347;
+    /* Tomato */
+}
+
+@keyframes pulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(255, 99, 71, 0.7);
+        /* Tomato */
+    }
+
+    50% {
+        box-shadow: 0 0 0 10px rgba(255, 99, 71, 0.3);
+        /* Tomato */
+    }
+
+    100% {
+        box-shadow: 0 0 0 0 rgba(255, 99, 71, 0);
+        /* Tomato */
+    }
+}
+
+.transform {
+    animation: pulse 5s ease-in-out infinite;
+}

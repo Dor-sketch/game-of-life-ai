@@ -2,12 +2,41 @@
 
 This project implements a genetic algorithm to discover configurations in Conway's Game of Life that meet specific criteria, showcasing the power of AI in software development. This project was developed for the **Biological Computation (20581)** Advanced Course at the *Open University of Israel* in 2024 and earned a perfect score of `100`.
 
+Before diving into the project, let's take a look at some patterns discovered by the algorithm. Keep in mind that the algorithm generates different results each time it's run. The examples below represent just a handful of the many patterns that have been identified.
+
+<p align = "center">
+    <img src="./images/ligh_green.gif" width="800"/>
+    <br>
+    <i>Evolution of a fitted individual in the GUI, light green theme</i>
+</p>
+
+<p align = "center">
+    <img src="./images/metal_blue.gif"
+    width="800"/>
+    <br>
+    <i>270 Generations of the Genetic Algorithm in the GUI, metal blue theme</i>
+</p>
+
+<p align = "center">
+    <img src="./images/forest.gif"
+    width="800"/>
+    <br>
+    <i>Evolution of a fitted individual in the GUI, forest theme</i>
+
 <p align = "center">
     <img src="./images/individual_purple_long.gif"
     width="800"/>
     <br>
-    <i>Algorithm Evolution of a Fitted Individual</i>
+    <i>Fittest individual in the GUI in a run with 1000 generations, purple theme</i>
 </p>
+
+<p align = "center">
+    <img src="./images/metal_red.gif" width="800"/>
+    <br>
+    <i>267 Generations of the Genetic Algorithm in the GUI, metal red theme</i>
+</p>
+
+For more examples, please refer to the [Examples](#examples) section.
 
 ---
 

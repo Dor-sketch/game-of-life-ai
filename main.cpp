@@ -13,10 +13,27 @@ std::mutex mtx;
 std::condition_variable cv;
 bool ready = false;
 GUI* gui = nullptr;
+#include <future>
+
+extern std::future<void> gaDoneFuture;
+extern void testSelection();
+
+gboolean checkGADone(gpointer data) {
+  if (gaDoneFuture.wait_for(std::chrono::seconds(0)) ==
+      std::future_status::ready) {
+    std::cout << "GA is done!" << std::endl;
+    // The GA is done, so show the results
+    GUI::showResults();
+    return FALSE; // Returning FALSE removes this function from the timeout
+                  // handlers.
+  }
+  return TRUE; // Returning TRUE keeps the timeout handler active.
+}
 
 void guiThread() {
 	std::unique_lock<std::mutex> lock(mtx);
-	while (!ready) { // if not ready, wait until main() sends data
+        // In your main loop, check if the GA is done
+        while (!ready) { // if not ready, wait until main() sends data
 		cv.wait(lock); // release lock and wait
 	}
 	// after the wait, we own the lock again
@@ -51,7 +68,10 @@ int main(int argc, char *argv[]) {
 	}
 	cv.notify_one(); // notify the waiting thread
 
-	gtk_main(); // start the main GTK loop
+        g_timeout_add(100, checkGADone,
+                      NULL); // Check if GA is done every 100ms
+
+        gtk_main(); // start the main GTK loop
 
 	t1.join();
 

@@ -15,7 +15,7 @@ extern void gameOfLife(int board[BOARD_SIZE][BOARD_SIZE], int boardColSize);
 static int ageBoard[BOARD_SIZE][BOARD_SIZE] = {{0}};
 int GUI::board[BOARD_SIZE][BOARD_SIZE] = {{0}}; // double braces to silence
                                                 // warning
-
+static bool recording = false;
 static bool shouldDrawGraph = false;
 static int saveScreenshotCounter = 0;
 int GUI::generationCount = 0;
@@ -76,6 +76,25 @@ void GUI::createWindow() {
   int new_height = new_width;
   gtk_window_resize(GTK_WINDOW(window), new_width, new_height);
   gtk_container_set_border_width(GTK_CONTAINER(window), 10);
+}
+
+void GUI::showResults() {
+  // Now that we're back on the main thread, we can interact with GUI elements
+  GtkWidget *dialog;
+
+  dialog = gtk_message_dialog_new(
+      GTK_WINDOW(window), GTK_DIALOG_DESTROY_WITH_PARENT, GTK_MESSAGE_INFO,
+      GTK_BUTTONS_OK,
+      "Finished running genetic algorithm\n"
+      "The algorithm results are saved in the populations folder"
+      "Choose a configuration to load from the populations folder"
+      "You can reload different configurations from the populations folder"
+      "by clicking the Load from file button\n");
+
+  gtk_window_set_title(GTK_WINDOW(dialog), "Genetic Algorithm");
+  gtk_dialog_run(GTK_DIALOG(dialog));
+  gtk_widget_destroy(dialog);
+  open_folder(lastSavePath);
 }
 
 void GUI::changeTheme() {
@@ -264,15 +283,20 @@ void GUI::createButtonsAndLabels() {
                   1);
 
   // create save screenshot button
-  GtkWidget *saveScreenshotButton =
-      gtk_button_new_with_label("Save Screenshot");
-  gtk_grid_attach(GTK_GRID(grid), saveScreenshotButton, (BOARD_SIZE + 1), 18, 1,
+  screenshotsButton = gtk_button_new_with_label("Record On");
+  gtk_grid_attach(GTK_GRID(grid), screenshotsButton, (BOARD_SIZE + 1), 18, 1,
                   1);
-  // save screenshot
-  g_signal_connect(saveScreenshotButton, "clicked", G_CALLBACK(saveScreenshot),
-                   NULL);
 }
-
+// Define a new function that changes the recording flag
+void GUI::changeRecordingFlag() {
+  recording = !recording; // This toggles the value of the recording flag
+  // update label
+  if (recording) {
+    gtk_button_set_label(GTK_BUTTON(screenshotsButton), "Record Off");
+  } else {
+    gtk_button_set_label(GTK_BUTTON(screenshotsButton), "Record On");
+  }
+}
 void GUI::connectSignals() {
 
   // connect signals
@@ -291,9 +315,9 @@ void GUI::connectSignals() {
   g_signal_connect(runGeneticAlgorithmButton, "clicked",
                    G_CALLBACK(runGeneticAlgorithm), NULL);
   g_signal_connect(changeThemeButton, "clicked", G_CALLBACK(changeTheme), NULL);
+  g_signal_connect(screenshotsButton, "clicked",
+                   G_CALLBACK(changeRecordingFlag), NULL);
 
-  g_signal_connect(graphDrawingArea, "Screenshot", G_CALLBACK(saveScreenshot),
-                   NULL);
   // connect buttons to board
   for (int i = 0; i < BOARD_SIZE; i++) {
     for (int j = 0; j < BOARD_SIZE; j++) {
@@ -303,19 +327,31 @@ void GUI::connectSignals() {
   }
 }
 
+
+// Connect the "Screenshot" signal to the new function
 void GUI::showWindow() { gtk_widget_show_all(window); }
 
 GUI::~GUI() { gtk_widget_destroy(window); }
+#include <future>
+
+std::promise<void> gaDonePromise;
+std::future<void> gaDoneFuture = gaDonePromise.get_future();
 
 void GUI::runGeneticAlgorithm() {
   // Run the genetic algorithm in a new thread
-  std::thread gaThread([]() {
+  std::thread gaThread([&]() {
     GeneticAlgorithm ga(POPULATION_SIZE, GENERATIONS, MUTATION_RATE,
                         CROSSOVER_RATE);
     ga.run();
+    lastSavePath = ga.resultsPath;
+
+    // Signal that the GA is done
+    gaDonePromise.set_value();
   });
+
   gaThread.detach(); // Detach the thread to let it run independently
 }
+
 gboolean GUI::start(gpointer /*data*/) {
   if (!isPaused) {
     gameOfLife(board, BOARD_SIZE);
@@ -623,34 +659,9 @@ void GUI::update() {
   shouldDrawGraph = true;
   gtk_widget_show_all(window);
   gtk_widget_queue_draw(graphArea);
+  if (recording) saveScreenshot();
 }
-// This version captures the entire window
-// void GUI::saveScreenshot() {
-//   // Get the parent of a cell, which is the window
-//   GtkWidget *parent = gtk_widget_get_parent(buttons[0][0]);
-//   GdkWindow *window = gtk_widget_get_window(parent);
 
-//   if (window != nullptr) {
-//     // Get the width and height of the window
-//     int windowWidth = gdk_window_get_width(window);
-//     int windowHeight = gdk_window_get_height(window);
-
-//     // Capture screenshot of the entire window
-//     GdkPixbuf *screenshot =
-//         gdk_pixbuf_get_from_window(window, 0, 0, windowWidth, windowHeight);
-
-//     // Get unique filename with monotonic increasing counter
-//     std::ostringstream paddedCounter;
-//     paddedCounter << std::setw(7) << std::setfill('0')
-//                   << saveScreenshotCounter++;
-//     std::string filename = "screenshot" + paddedCounter.str() + ".png";
-
-//     if (screenshot != nullptr) {
-//       gdk_pixbuf_save(screenshot, filename.c_str(), "png", nullptr, nullptr);
-//       g_object_unref(screenshot);
-//     }
-//   }
-// }
 
 void GUI::saveScreenshot() {
   int cellWidth = gtk_widget_get_allocated_width(buttons[0][0]);

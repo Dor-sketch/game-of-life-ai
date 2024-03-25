@@ -1,0 +1,85 @@
+window,
+button,
+label,
+grid,
+drawingarea {
+    background-color: #F0F8FF; /* AliceBlue */
+    color: #333333; /* Lighter gray for softer contrast */
+    font-family: 'Courier New', monospace;
+    border-radius: 0px;
+    font-size: large;
+    font-weight: bold;
+}
+
+button {
+    background: linear-gradient(to right, #275a8e, #050559); /* DodgerBlue to DarkBlue */
+    color: #FFFFFF; /* White */
+    border-color: #4fa7ff; /* DodgerBlue */
+    border-radius: 0;
+    transition: 0.3s;
+}
+
+button:hover {
+    background: linear-gradient(to right, #000039, #083765); /* DarkBlue to DodgerBlue */
+    color: #FFFFFF; /* White */
+    border-color: #1E90FF; /* DodgerBlue */
+}
+.alive {
+    box-shadow: 0 0 10px 5px rgba(255, 255, 255, 0.5); /* Increased shadow and changed color to white */
+    background-color: #00FF00; /* Bright Green */
+    border-color: #0000FF; /* Blue */
+    animation: pulse 5s ease-in-out infinite;
+}
+
+.young {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19), 0 8px 10px 0 rgba(0, 0, 0, 0.2);
+    background-color: #1E90FF; /* DodgerBlue */
+    border-color: #00008B; /* DarkBlue */
+    animation: pulse 5s ease-in-out infinite;
+}
+
+.old {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19), 0 8px 10px 0 rgba(0, 0, 0, 0.2);
+    background-color: #00008B; /* DarkBlue */
+    border-color: #000080; /* Navy */
+    animation: pulse 5s ease-in-out infinite;
+}
+
+.veteran {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19), 0 8px 10px 0 rgba(0, 0, 0, 0.2);
+    background-color: #000080; /* Navy */
+    border-color: #191970; /* MidnightBlue */
+    animation: pulse 5s ease-in-out infinite;
+}
+
+.window {
+    background: #F0F8FF; /* AliceBlue */
+    border: 2px solid #1E90FF; /* DodgerBlue */
+    border-radius: 0;
+    border-color: #1E90FF; /* DodgerBlue */
+}
+
+drawingarea {
+    background: #F0F8FF; /* AliceBlue */
+    border: 2px solid #1E90FF; /* DodgerBlue */
+    border-radius: 0;
+    border-color: #1E90FF; /* DodgerBlue */
+}
+
+@keyframes pulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(30, 144, 255, 0.7); /* DodgerBlue */
+    }
+
+    50% {
+        box-shadow: 0 0 0 10px rgba(30, 144, 255, 0.3); /* DodgerBlue */
+    }
+
+    100% {
+        box-shadow: 0 0 0 0 rgba(30, 144, 255, 0); /* DodgerBlue */
+    }
+}
+
+.transform {
+    animation: pulse 5s ease-in-out infinite;
+}

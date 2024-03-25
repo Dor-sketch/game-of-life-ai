@@ -25,7 +25,7 @@ GeneticAlgorithm::GeneticAlgorithm(int populationSize, int maxGenerations,
 }
 
 void GeneticAlgorithm::run() {
-	while (population->generation < 1000) {
+	while (population->generation < 2) {
 		population->calculateTotalScore();
 		report();
 		population->selection(selectionPressure,
