@@ -4,26 +4,29 @@ This project implements a genetic algorithm to discover configurations in Conway
 
 Before diving into the project, let's take a look at some patterns discovered by the algorithm. Keep in mind that the algorithm generates different results each time it's run. The examples in this file represent just a handful of the many patterns that have been identified.
 
+**The animations might take some time to load. It is recommended to wait for the page to fully load before scrolling down, and use a desktop browser for the best experience.**
+
 <p align = "center">
-    <img src="./images/new_metal_blue.gif" width="800"/>
+    <img src="./images/new_metal_blue.gif" width="500"/>
     <br>
-    <i>Evolution of a fitted individual in the GUI, metal blue theme</i>
+    <i>Evolution animation of a fitted individual, displayed in the GUI with a metal blue theme.
+    </i>
     <br>
-    <img src="./images/gui_graphics_zoom2.png" width="800"/>
+    <img src="./images/gui_graphics_zoom2.png" width="500"/>
     <br>
     <i>Zoomed in view of the GUI</i>
     <br>
     <img src="./images/gui_graphics_zoom1.png"
-    width="800"/>
+    width="500"/>
     <br>
-    <i>Zoomed in - continued, 3D effect is created by the box-shadow property and the gradient background (see the CSS file for more details)</i>
+    <i>Continuing with the zoomed-in view, the 3D effect is created using the box-shadow property and gradient background (see the CSS file for more details).</i>
     <br>
     <img src="./images/gui_graphics_zoom3.png"
-    width="800"/>
+    width="500"/>
     <br>
-    <img src="./images/new_metal_red.gif" width="800"/>
+    <img src="./images/new_metal_red.gif" width="500"/>
     <br>
-    <i>Evolution of the `hi` pattern (see below) in the GUI, metal red theme</i>
+    <i>Evolution animations of the `hi` pattern (see below), displayed in the GUI with a metal red theme.</i>
 </p>
 
 For more examples, please refer to the [Examples](#examples) section.
@@ -121,11 +124,11 @@ The concept of an `Evolutionary algorithm` encompasses a group of algorithms ins
 
 <p align = "center">
     <img src="./images/cross_over.gif"
-    width="800"/>
+    width="500"/>
     <br>
     <i>Uniform Crossover
     <br>Two parents (up) are combined to create a new child (down).
-    Child have a 50% chance to inherit each cell from one of the parents. <br>
+    Child have a 50% chance to inherit each cell from one of the parents.
     In this case the child fitness seems to be better than the its left parent, but worse than the right parent.</i>
 </p>
 
@@ -158,7 +161,7 @@ The program utilising a genetic algorithm in order to discover configurations in
 This kind of patterns are known as `Methuselahs` in the Game of Life terminology. The project aims to explore the potential of genetic algorithms in discovering such configurations, showcasing the power of AI in software development. For more about `Methuselahs`, you can visit the [Wikipedia page](https://en.wikipedia.org/wiki/Methuselah_(cellular_automaton)).
 
 <p align = "center">
-  <img src="./images/hot.gif" width="800"/>
+  <img src="./images/hot.gif" width="500"/>
   <br>
   <i>Start of the evolution of a fitted individual in the GUI.
   <br>
@@ -295,7 +298,7 @@ When the user is ready to run the genetic algorithm, they can press the `Run GA`
 After execution, a new window displays the final generation, with the `load from file button` enabling navigation through different individuals.
 
 <p align = "center">
-    <img src="./images/gui_finished_algo.png" width="800"/>
+    <img src="./images/gui_finished_algo.png" width="500"/>
     <br>
     <i>Window diaglog after final generation of the GA in the GUI</i>
 </p>
@@ -322,13 +325,13 @@ Additionally, a `save` function is integrated, allowing current configurations t
 At any time users can personalize the interface's appearance. To apply a custom theme, simply load the desired `css` file via the `Load CSS` button. The GUI will automatically update to reflect the new theme, enhancing the user experience. The deafult `theme.css` file is included for reference, as well as 2 additional themes: `theme2.css` and `theme3.css`. Note that too many visual effect, such as `box-shadow` and `border-radius` can slow down the GUI. It is recommended to use simple `css` files.
 
 <p align = "center">
-    <img src="./images/t_new2.gif" width="800"/>
+    <img src="./images/t_new2.gif" width="500"/>
     <br>
     <i>Evolution of the 'T' shape in the new white theme</i>
 </p>
 
 <p align = "center">
-    <img src="./images/t_black.gif" width="800"/>
+    <img src="./images/t_black.gif" width="500"/>
     <br>
     <i>Same evolution of the 'T' shape in the black theme</i>
 </p>
@@ -417,33 +420,33 @@ You can see the population that led to those individuals under the [populations]
 ## More Examples
 
 <p align = "center">
-    <img src="./images/ligh_green.gif" width="800"/>
+    <img src="./images/ligh_green.gif" width="500"/>
     <br>
     <i>Evolution of a fitted individual in the GUI, light green theme</i>
 </p>
 
 <p align = "center">
     <img src="./images/metal_blue.gif"
-    width="800"/>
+    width="500"/>
     <br>
     <i>270 Generations of the Genetic Algorithm in the GUI, metal blue theme</i>
 </p>
 
 <p align = "center">
     <img src="./images/forest.gif"
-    width="800"/>
+    width="500"/>
     <br>
     <i>Evolution of a fitted individual in the GUI, forest theme</i>
 
 <p align = "center">
     <img src="./images/individual_purple_long.gif"
-    width="800"/>
+    width="500"/>
     <br>
     <i>Fittest individual in the GUI in a run with 1000 generations, purple theme</i>
 </p>
 
 <p align = "center">
-    <img src="./images/metal_red.gif" width="800"/>
+    <img src="./images/metal_red.gif" width="500"/>
     <br>
     <i>267 Generations of the Genetic Algorithm in the GUI, metal red theme</i>
 </p>
