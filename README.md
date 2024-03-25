@@ -7,14 +7,14 @@ Before diving into the project, let's take a look at some patterns discovered by
 **The animations might take some time to load. It is recommended to wait for the page to fully load before scrolling down, and use a desktop browser for the best experience.**
 
 <p align = "center">
-    <img src="./images/new_metal_blue_reduced.gif" width="320"/>
-    <img src="./images/new_metal_red_reduced.gif" width="320"/>
+    <img src="./images/new_metal_blue_reduced.gif" width="400"/>
+    <img src="./images/new_metal_red_reduced.gif" width="400"/>
     <br>
     <i>Evolution animation of a fitted individuals, displayed in the GUI with a metal blue theme (left) and a metal red theme (right). Full versions can be found in the `images` directory.</i>
     </i>
     <br>
-    <img src="./images/gui_graphics_zoom1.png" width="320"/>
-    <img src="./images/gui_graphics_zoom3.png" width="300"/>
+    <img src="./images/gui_graphics_zoom1.png" width="400"/>
+    <img src="./images/gui_graphics_zoom3.png" width="400"/>
     <br>
     <i>Zoomed in view of the GUI<br>
     The 3D effect is created using the box-shadow property and gradient background
@@ -67,51 +67,26 @@ The `Game of Life` is a [cellular automaton](https://en.wikipedia.org/wiki/Cellu
 
 1. **Underpopulation:** Any live cell with fewer than two live neighbors dies, as if by underpopulation.
 
-<p align = "center">
-    <img src="./images/rule1.gif"
-    width="320"/>
-    <br>
-    <i>Example of Rule 1: Underpopulation</i>
-</p>
-
 2. **Survival:** Any live cell with two or three live neighbors lives on to the next generation.
 
-<p align = "center">
-    <img src="./images/rule2.gif"
-    width="320"/>
-    <br>
-    <i>Examle of Rule 2: Survival</i>
-</p>
-
 3. **Overpopulation:** Any live cell with more than three live neighbors dies, as if by overpopulation.
-
-<p align = "center">
-    <img src="./images/over.gif"
-    width="320"/>
-    <br>
-    <i>Example of rule 3: Overpopulation
-    <br>
-    Note the blue cell to the right dies when it has more than three live neighbors.
-    </i>
-</p>
 
 4. **Reproduction:** Any dead cell with exactly three live neighbors becomes a live cell, as if by reproduction.
 
 <p align = "center">
-    <img src="./images/rule3_and_4.gif"
-    width="500"/>
+    <img src="./images/rule1.gif" width="400"/>
+    <img src="./images/rule2.gif" width="400"/>
     <br>
-    <i>Blinker Shape
-    <br>
-    Rule 3 and 4 (Overpopulation and Reproduction) apply on the cross edges (brighter cells), leading to each pair of cells dying and the other pair being born every other generation</i>
+    <i>Example of Rule 1: Underpopulation (left) and Rule 2: Survival (right)</i>
 </p>
+
 <p align = "center">
-    <img src="./images/gliders.gif"
-    width="500"/>
+    <img src="./images/rule3_and_4.gif" width="400"/>
+    <img src="./images/gliders.gif" width="400"/>
     <br>
-    <i>Glider Shape
+    <i>Blinker Shape (left) and Glider Shape (right)
     <br>
-    Rule 4 (Reproduction) enables the glider to move diagonally</i>
+    Rule 3 and 4 (Overpopulation and Reproduction) create interesting patterns in the Game of Life</i>
 </p>
 
 The project is focused on evolutionary algorithms for optimizations problem, and Conway's Game of Life serves as the world or the search space for the genetic algorithm. The algorithm is designed with a level of abstraction that allows it to be applicable to any problem that can be modeled as a search space. For a deeper understanding of the Game of Life, refer to its [Wikipedia page](https://en.wikipedia.org/wiki/Conway's_Game_of_Life).
@@ -120,7 +95,7 @@ The concept of an `Evolutionary algorithm` encompasses a group of algorithms ins
 
 <p align = "center">
     <img src="./images/cross_over.gif"
-    width="320"/>
+    width="500"/>
     <br>
     <i>Uniform Crossover
     <br>Two parents (up) are combined to create a new child (down).
