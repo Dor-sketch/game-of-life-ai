@@ -7,24 +7,20 @@ Before diving into the project, let's take a look at some patterns discovered by
 **The animations might take some time to load. It is recommended to wait for the page to fully load before scrolling down, and use a desktop browser for the best experience.**
 
 <p align = "center">
-    <img src="./images/new_metal_blue.gif" width="500"/>
+    <img src="./images/new_metal_blue.gif" width="320"/>
+    <img src="./images/new_metal_red.gif" width="320"/>
     <br>
-    <i>Evolution animation of a fitted individual, displayed in the GUI with a metal blue theme.
+    <i>Evolution animation of a fitted individuals, displayed in the GUI with a metal blue theme (left) and a metal red theme (right)</i>
     </i>
     <br>
-    <img src="./images/gui_graphics_zoom2.png" width="500"/>
+    <img src="./images/gui_graphics_zoom1.png" width="320"/>
+    <img src="./images/gui_graphics_zoom3.png" width="300"/>
     <br>
-    <i>Zoomed in view of the GUI</i>
+    <i>Zoomed in view of the GUI<br>
+    The 3D effect is created using the box-shadow property and gradient background
+    <br>(see the CSS file for more details).</i>
     <br>
-    <img src="./images/gui_graphics_zoom1.png"
-    width="500"/>
     <br>
-    <i>Continuing with the zoomed-in view, the 3D effect is created using the box-shadow property and gradient background (see the CSS file for more details).</i>
-    <br>
-    <img src="./images/gui_graphics_zoom3.png"
-    width="500"/>
-    <br>
-    <img src="./images/new_metal_red.gif" width="500"/>
     <br>
     <i>Evolution animations of the `hi` pattern (see below), displayed in the GUI with a metal red theme.</i>
 </p>
@@ -73,7 +69,7 @@ The `Game of Life` is a [cellular automaton](https://en.wikipedia.org/wiki/Cellu
 
 <p align = "center">
     <img src="./images/rule1.gif"
-    width="500"/>
+    width="320"/>
     <br>
     <i>Example of Rule 1: Underpopulation</i>
 </p>
@@ -82,7 +78,7 @@ The `Game of Life` is a [cellular automaton](https://en.wikipedia.org/wiki/Cellu
 
 <p align = "center">
     <img src="./images/rule2.gif"
-    width="500"/>
+    width="320"/>
     <br>
     <i>Examle of Rule 2: Survival</i>
 </p>
@@ -91,7 +87,7 @@ The `Game of Life` is a [cellular automaton](https://en.wikipedia.org/wiki/Cellu
 
 <p align = "center">
     <img src="./images/over.gif"
-    width="500"/>
+    width="320"/>
     <br>
     <i>Example of rule 3: Overpopulation
     <br>
@@ -103,7 +99,7 @@ The `Game of Life` is a [cellular automaton](https://en.wikipedia.org/wiki/Cellu
 
 <p align = "center">
     <img src="./images/rule3_and_4.gif"
-    width="500"/>
+    width="320"/>
     <br>
     <i>Blinker Shape
     <br>
@@ -111,7 +107,7 @@ The `Game of Life` is a [cellular automaton](https://en.wikipedia.org/wiki/Cellu
 </p>
 <p align = "center">
     <img src="./images/gliders.gif"
-    width="500"/>
+    width="320"/>
     <br>
     <i>Glider Shape
     <br>
@@ -124,7 +120,7 @@ The concept of an `Evolutionary algorithm` encompasses a group of algorithms ins
 
 <p align = "center">
     <img src="./images/cross_over.gif"
-    width="500"/>
+    width="320"/>
     <br>
     <i>Uniform Crossover
     <br>Two parents (up) are combined to create a new child (down).
@@ -161,7 +157,7 @@ The program utilising a genetic algorithm in order to discover configurations in
 This kind of patterns are known as `Methuselahs` in the Game of Life terminology. The project aims to explore the potential of genetic algorithms in discovering such configurations, showcasing the power of AI in software development. For more about `Methuselahs`, you can visit the [Wikipedia page](https://en.wikipedia.org/wiki/Methuselah_(cellular_automaton)).
 
 <p align = "center">
-  <img src="./images/hot.gif" width="500"/>
+  <img src="./images/hot.gif" width="320"/>
   <br>
   <i>Start of the evolution of a fitted individual in the GUI.
   <br>
@@ -195,7 +191,7 @@ The program is designed to be user-friendly, offering both a graphical user inte
 
 <p align = "center">
     <img src="./images/GUI.gif"
-    width="800"/>
+    width="320"/>
     <br>
     <i>Graphical User Interface (GUI) for the Genetic Algorithm</i>
 </p>
@@ -233,7 +229,7 @@ After compilation, the GUI can be launched by executing the following command:
 The GUI window will appear, providing a comprehensive interface for executing the genetic algorithm. Users can interact with the GUI to tye the game of life, initiate the algorithm, monitor its progress, and explore the evolving configurations within the Game of Life.
 
 <p align = "center">
-    <img src="./images/game.gif" width="800"/>
+    <img src="./images/game.gif" width="320"/>
     <br>
     <i>Game of Life Interactive Board in the GUI
     <br>
@@ -248,12 +244,6 @@ The GUI window is compartmentalized into three primary sections:
       - A distinctive feature of the board is its ability to track the age of each cell, in addition to the overall configuration. This capability enables users to color-code cells according to their age, thereby enriching the visualization of the algorithm's progression and offering insights into the evolution of configurations.
 
       - The board also offers the flexibility to toggle the grid display. Users can choose to view or hide the grid as per their preference, which enhances the clarity of the board's structure and improves the overall user experience.
-
-    <p align = "center">
-        <img src="./images/cool.gif" width="400"/>
-        <br>
-        <i>Darker cells are older than lighter cells.<br>The 'heart' shape is evolving in the white theme. Grid is hidden.</i>
-    </p>
 
 2. Control Panel: This section provides users with a range of interactive controls to manage the genetic algorithm's execution. Key functionalities include:
 
@@ -290,34 +280,28 @@ The GUI window is compartmentalized into three primary sections:
 When the user is ready to run the genetic algorithm, they can press the `Run GA` button. The algorithm will continue until the maximum number of generations is reached, at which point the final generation will be displayed.
 
 <p align = "center">
-    <img src="./images/run_ga.gif" width="800"/>
+    <img src="./images/run_ga.gif" width="320"/>
     <br>
     <i>GA is running on the background,<br>GUI displays the best  individual from each iterations</i>
 </p>
 
-After execution, a new window displays the final generation, with the `load from file button` enabling navigation through different individuals.
+After execution of the `Run GA` , a new window displays the final generation, with the `load from file button` enabling navigation through different individuals.
 
 <p align = "center">
-    <img src="./images/gui_finished_algo.png" width="500"/>
+    <img src="./images/gui_finished_algo.png" width="320"/>
+    <img src="./images/open_file_pop_window.png" width="320"/>
     <br>
     <i>Window diaglog after final generation of the GA in the GUI</i>
 </p>
 
 Note: The GUI prompts for a directory and remembers the last accessed location, simplifying subsequent runs within the same directory by eliminating the need for reselection. Command line executions automatically retrieve and open the last used directory.
 
-Post-activation of the `Run GA` button and subsequent algorithm completion, the user is presented with the following interface sequence:
-
-| ![Alt text](./images/gui_finished_algo.png) | ![Alt text](images/open_file_pop_window.png) |
-|:--:|:--:|
-| ![Alt text](images/gui_init_config.png) | ![Alt text](images/gui_evolvong_config.png) |
-| ![Alt text](images/gui_stable_config.png) | ![Alt text](images/save.png) |
-
 Additionally, a `save` function is integrated, allowing current configurations to be archived as `.txt` files within the `saves` directory for future access. This feature is complemented by a `Load` button for convenient retrieval of these saved configurations.
 
 ---
 
 <p align = "center">
-    <img src="./images/themes.gif" width="800"/>
+    <img src="./images/themes.gif" width="320"/>
     <br>
     <i>Changing themes in the GUI</i>
 </p>
@@ -325,13 +309,13 @@ Additionally, a `save` function is integrated, allowing current configurations t
 At any time users can personalize the interface's appearance. To apply a custom theme, simply load the desired `css` file via the `Load CSS` button. The GUI will automatically update to reflect the new theme, enhancing the user experience. The deafult `theme.css` file is included for reference, as well as 2 additional themes: `theme2.css` and `theme3.css`. Note that too many visual effect, such as `box-shadow` and `border-radius` can slow down the GUI. It is recommended to use simple `css` files.
 
 <p align = "center">
-    <img src="./images/t_new2.gif" width="500"/>
+    <img src="./images/t_new2.gif" width="320"/>
+    <img src="./images/t_black.gif" width="320"/>
     <br>
-    <i>Evolution of the 'T' shape in the new white theme</i>
+    <i>Evolution of the 'T' shape in black and white theme</i>
 </p>
 
 <p align = "center">
-    <img src="./images/t_black.gif" width="500"/>
     <br>
     <i>Same evolution of the 'T' shape in the black theme</i>
 </p>
@@ -361,51 +345,51 @@ To explore these examples firsthand, utilize the GUI's `Load` button to access t
 ### T_shape
 
 <p align = "center">
-    <img src="./images/inception_full.gif" width="800"/>
+    <img src="./images/inception_full.gif" width="500"/>
     <br>
     <i>T_shape Evolution in Inception theme</i>
 </p>
 
 `T_shape` is called after the mighty T-rex, and its `T` shape. The initial state starts with 6 alive cells. It is a very small shape, and it is very likely to be selected as a parent for the next generation. It evolves into a heart (see figure 2), and continues as a musk (see figure 3). It continues to evolve into a goat face (see figure 4), and then into a skull face (see figure 5). It continues to grow and become stable at generation 225 (see figure 6). At its peak, it has about 100 alive cells.
 
-| ![T_shape Initial](./images/t_shape1.png) | ![T_shape Heart Evolution](./images/t_shape2.png) |
+| <img src="./images/t_shape1.png" width="320"/> | <img src="./images/t_shape2.png" width="320"/> |
 |:--:|:--:|
 | *Figure 1: Initial State* | *Figure 2: Heart Evolution* |
 
-| ![T_shape Musk Evolution](./images/t_shape3.png) | ![T_shape Goat Face Evolution](./images/t_shape4.png) |
+| <img src="./images/t_shape3.png" width="320"/> | <img src="./images/t_shape4.png" width="320"/> |
 |:--:|:--:|
 | *Figure 3: Musk Evolution* | *Figure 4: Goat Face Evolution* |
 
-| ![T_shape Skull Face Evolution](./images/t_shape5.png) | ![T_shape Stable State at Gen 225](./images/t_shape6.png) |
+| <img src="./images/t_shape5.png" width="320"/> | <img src="./images/t_shape6.png" width="320"/> |
 |:--:|:--:|
 | *Figure 5: Skull Face Evolution* | *Figure 6: Stable State at Gen 225* |
 
 ### Dragon
 
 <p align = "center">
-    <img src="./images/dragon_inc.gif" width="800"/>
+    <img src="./images/dragon_inc.gif" width="500"/>
     <br>
     <i>Dragon Evolution in red Inception theme</i>
 </p>
 
 Dragon's initial state starts with 6 alive cells. It is a very small shape, and it is very likely to be selected as a parent for the next generation. It evolves into a dragon with open wings (see figure 2), and continues as a dragon with closed wings (see figure 3). It continues to evolve into a dragon with big open wings (see figure 4), and then into a dragon with very big open wings (see figure 5). It continues to grow and become stable at generation 132 (see figure 6). At its peak, it has about 10 times more alive cells than the initial shape.
 
-| ![Dragon Initial](./images/dragon1.png) | ![Dragon Open Wings](./images/dragon2.png) |
+| <img src="./images/dragon1.png" width="320"/> | <img src="./images/dragon2.png" width="320"/> |
 |:--:|:--:|
 | *Figure 1: Initial State* | *Figure 2: Open Wings* |
 
-| ![Dragon Closed Wings](./images/dragon3.png) | ![Dragon Big Open Wings](./images/dragon4.png) |
+| <img src="./images/dragon3.png" width="320"/> | <img src="./images/dragon4.png" width="320"/> |
 |:--:|:--:|
 | *Figure 3: Closed Wings* | *Figure 4: Big Open Wings* |
 
-| ![Dragon Very Big Open Wings](./images/dragon5.png) | ![Dragon Stable State at Gen 132](./images/dragon6.png) |
+| <img src="./images/dragon5.png" width="320"/> | <img src="./images/dragon6.png" width="320"/> |
 |:--:|:--:|
 | *Figure 5: Very Big Open Wings* | *Figure 6: Stable State at Gen 132* |
 
 ### Hi
 
 <p align = "center">
-    <img src="./images/hi_shape_160gen.gif" width="800"/>
+    <img src="./images/hi_shape_160gen.gif" width="500"/>
     <br>
     <i>Hi Shape first 160 generations</i>
 </p>
