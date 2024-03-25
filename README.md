@@ -4,7 +4,7 @@ This project implements a genetic algorithm to discover configurations in Conway
 
 Before diving into the project, let's take a look at some patterns discovered by the algorithm. Keep in mind that the algorithm generates different results each time it's run. The examples in this file represent just a handful of the many patterns that have been identified.
 
-**The animations might take some time to load. It is recommended to wait for the page to fully load before scrolling down, and use a desktop browser for the best experience.**
+**⏳ Please Wait: the animations might take some time to load. It is recommended to wait for the page to fully load before scrolling down, and use a desktop browser for the best experience.**
 
 <p align = "center">
     <img src="./images/new_metal_blue_reduced.gif" width="400"/>
@@ -41,16 +41,27 @@ For more examples, please refer to the [Examples](#examples) section.
   - [Using the GUI](#using-the-gui)
   - [Using the Command Line](#using-the-command-line)
 - [Examples](#examples)
-  - [T_shape](#t_shape)
+  - [T\_shape](#t_shape)
   - [Dragon](#dragon)
   - [Hi](#hi)
 - [More Examples](#more-examples)
   - [Insights](#insights)
 - [Technical Details](#technical-details)
   - [Game of Life Implementation](#game-of-life-implementation)
+    - [Static Board Padding](#static-board-padding)
+    - [Efficient Update Process](#efficient-update-process)
   - [Chromosome Representation](#chromosome-representation)
+    - [Initial State](#initial-state)
+    - [Crossover (The Binary Genetic Operator)](#crossover-the-binary-genetic-operator)
+    - [Mutation](#mutation)
+    - [Evaluation Function](#evaluation-function)
+    - [Fitness vs Score](#fitness-vs-score)
   - [Population Implementation](#population-implementation)
+    - [Crossover (Reproduction Part)](#crossover-reproduction-part)
   - [Genetic Algorithm Implementation](#genetic-algorithm-implementation)
+    - [Roulette Wheel Selection](#roulette-wheel-selection)
+    - [Report](#report)
+    - [Save](#save)
 - [Contributions and Feedback](#contributions-and-feedback)
 - [Acknowledgements](#acknowledgements)
 - [License](#license)
@@ -302,6 +313,7 @@ To explore these examples firsthand, utilize the GUI's `Load` button to access t
 </p>
 
 `T_shape` is called after the mighty T-rex, and its `T` shape. The initial state starts with 6 alive cells. It is a very small shape, and it is very likely to be selected as a parent for the next generation. It evolves into a heart (see figure 2), and continues as a musk (see figure 3). It continues to evolve into a goat face (see figure 4), and then into a skull face (see figure 5). It continues to grow and become stable at generation 225 (see figure 6). At its peak, it has about 100 alive cells.
+
 <div align="center">
 
 | <img src="./images/t_shape1.png" width="250"/> | <img src="./images/t_shape2.png" width="250"/> |
