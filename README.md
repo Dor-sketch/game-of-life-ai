@@ -7,8 +7,8 @@ Before diving into the project, let's take a look at some patterns discovered by
 **The animations might take some time to load. It is recommended to wait for the page to fully load before scrolling down, and use a desktop browser for the best experience.**
 
 <p align = "center">
-    <img src="./images/new_metal_blue.gif" width="320"/>
-    <img src="./images/new_metal_red.gif" width="320"/>
+    <img src="./images/new_metal_blue_reduced.gif" width="320"/>
+    <img src="./images/new_metal_red_reduced.gif" width="320"/>
     <br>
     <i>Evolution animation of a fitted individuals, displayed in the GUI with a metal blue theme (left) and a metal red theme (right)</i>
     </i>
@@ -229,7 +229,7 @@ After compilation, the GUI can be launched by executing the following command:
 The GUI window will appear, providing a comprehensive interface for executing the genetic algorithm. Users can interact with the GUI to tye the game of life, initiate the algorithm, monitor its progress, and explore the evolving configurations within the Game of Life.
 
 <p align = "center">
-    <img src="./images/game.gif" width="320"/>
+    <img src="./images/game.gif" width="500"/>
     <br>
     <i>Game of Life Interactive Board in the GUI
     <br>
@@ -301,24 +301,12 @@ Additionally, a `save` function is integrated, allowing current configurations t
 ---
 
 <p align = "center">
-    <img src="./images/themes.gif" width="320"/>
+    <img src="./images/themes.gif" width="500"/>
     <br>
     <i>Changing themes in the GUI</i>
 </p>
 
 At any time users can personalize the interface's appearance. To apply a custom theme, simply load the desired `css` file via the `Load CSS` button. The GUI will automatically update to reflect the new theme, enhancing the user experience. The deafult `theme.css` file is included for reference, as well as 2 additional themes: `theme2.css` and `theme3.css`. Note that too many visual effect, such as `box-shadow` and `border-radius` can slow down the GUI. It is recommended to use simple `css` files.
-
-<p align = "center">
-    <img src="./images/t_new2.gif" width="320"/>
-    <img src="./images/t_black.gif" width="320"/>
-    <br>
-    <i>Evolution of the 'T' shape in black and white theme</i>
-</p>
-
-<p align = "center">
-    <br>
-    <i>Same evolution of the 'T' shape in the black theme</i>
-</p>
 
 ### Using the Command Line
 
@@ -351,18 +339,21 @@ To explore these examples firsthand, utilize the GUI's `Load` button to access t
 </p>
 
 `T_shape` is called after the mighty T-rex, and its `T` shape. The initial state starts with 6 alive cells. It is a very small shape, and it is very likely to be selected as a parent for the next generation. It evolves into a heart (see figure 2), and continues as a musk (see figure 3). It continues to evolve into a goat face (see figure 4), and then into a skull face (see figure 5). It continues to grow and become stable at generation 225 (see figure 6). At its peak, it has about 100 alive cells.
+<div align="center">
 
-| <img src="./images/t_shape1.png" width="320"/> | <img src="./images/t_shape2.png" width="320"/> |
+| <img src="./images/t_shape1.png" width="250"/> | <img src="./images/t_shape2.png" width="250"/> |
 |:--:|:--:|
 | *Figure 1: Initial State* | *Figure 2: Heart Evolution* |
 
-| <img src="./images/t_shape3.png" width="320"/> | <img src="./images/t_shape4.png" width="320"/> |
+| <img src="./images/t_shape3.png" width="250"/> | <img src="./images/t_shape4.png" width="250"/> |
 |:--:|:--:|
 | *Figure 3: Musk Evolution* | *Figure 4: Goat Face Evolution* |
 
-| <img src="./images/t_shape5.png" width="320"/> | <img src="./images/t_shape6.png" width="320"/> |
+| <img src="./images/t_shape5.png" width="250"/> | <img src="./images/t_shape6.png" width="250"/> |
 |:--:|:--:|
 | *Figure 5: Skull Face Evolution* | *Figure 6: Stable State at Gen 225* |
+
+</div>
 
 ### Dragon
 
@@ -374,17 +365,21 @@ To explore these examples firsthand, utilize the GUI's `Load` button to access t
 
 Dragon's initial state starts with 6 alive cells. It is a very small shape, and it is very likely to be selected as a parent for the next generation. It evolves into a dragon with open wings (see figure 2), and continues as a dragon with closed wings (see figure 3). It continues to evolve into a dragon with big open wings (see figure 4), and then into a dragon with very big open wings (see figure 5). It continues to grow and become stable at generation 132 (see figure 6). At its peak, it has about 10 times more alive cells than the initial shape.
 
-| <img src="./images/dragon1.png" width="320"/> | <img src="./images/dragon2.png" width="320"/> |
+<div align="center">
+
+| <img src="./images/dragon1.png" width="250"/> | <img src="./images/dragon2.png" width="250"/> |
 |:--:|:--:|
 | *Figure 1: Initial State* | *Figure 2: Open Wings* |
 
-| <img src="./images/dragon3.png" width="320"/> | <img src="./images/dragon4.png" width="320"/> |
+| <img src="./images/dragon3.png" width="250"/> | <img src="./images/dragon4.png" width="250"/> |
 |:--:|:--:|
 | *Figure 3: Closed Wings* | *Figure 4: Big Open Wings* |
 
-| <img src="./images/dragon5.png" width="320"/> | <img src="./images/dragon6.png" width="320"/> |
+| <img src="./images/dragon5.png" width="250"/> | <img src="./images/dragon6.png" width="250"/> |
 |:--:|:--:|
 | *Figure 5: Very Big Open Wings* | *Figure 6: Stable State at Gen 132* |
+
+</div>
 
 ### Hi
 
@@ -396,24 +391,23 @@ Dragon's initial state starts with 6 alive cells. It is a very small shape, and 
 
 The `hi` shape demonstrates a long evolution period of more than 230 generations and more than ten times bigger than the initial shape.
 
-![Hi Shape Evolution](images/hi.png)
-*Figure 7: Hi Shape Evolution*
-
 You can see the population that led to those individuals under the [populations](populations) directory and explore their variations.
 
 ## More Examples
 
 <p align = "center">
-    <img src="./images/ligh_green.gif" width="500"/>
+    <img src="./images/ligh_green.gif" width="400"/>
+    <img src="./images/individual_purple_long.gif" width="400"/>
     <br>
-    <i>Evolution of a fitted individual in the GUI, light green theme</i>
+    <i>Evolution of a fitted individuals in the GUI, light green theme (left) and purple theme (right)</i>
 </p>
 
 <p align = "center">
     <img src="./images/metal_blue.gif"
-    width="500"/>
+    width="400"/>
+    <img src="./images/metal_red.gif" width="400"/>
     <br>
-    <i>270 Generations of the Genetic Algorithm in the GUI, metal blue theme</i>
+    <i>270 Generations of the Genetic Algorithm in the GUI, metal blue theme (left) and metal red theme (right)</i>
 </p>
 
 <p align = "center">
@@ -423,14 +417,10 @@ You can see the population that led to those individuals under the [populations]
     <i>Evolution of a fitted individual in the GUI, forest theme</i>
 
 <p align = "center">
-    <img src="./images/individual_purple_long.gif"
-    width="500"/>
-    <br>
-    <i>Fittest individual in the GUI in a run with 1000 generations, purple theme</i>
+
 </p>
 
 <p align = "center">
-    <img src="./images/metal_red.gif" width="500"/>
     <br>
     <i>267 Generations of the Genetic Algorithm in the GUI, metal red theme</i>
 </p>
