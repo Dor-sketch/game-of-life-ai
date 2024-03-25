@@ -10,19 +10,14 @@ Before diving into the project, let's take a look at some patterns discovered by
     <img src="./images/new_metal_blue_reduced.gif" width="400"/>
     <img src="./images/new_metal_red_reduced.gif" width="400"/>
     <br>
-    <i>Evolution animation of a fitted individuals, displayed in the GUI with a metal blue theme (left) and a metal red theme (right). Full versions can be found in the `images` directory.</i>
-    </i>
+    <i>Evolution animation of a fitted individual, displayed in the GUI with a metal blue theme (left) and a metal red theme (right).<br>
+    Full GIF versions of all evaluations can be found in the `images` directory.</i>
     <br>
     <img src="./images/gui_graphics_zoom1.png" width="400"/>
     <img src="./images/gui_graphics_zoom3.png" width="400"/>
     <br>
     <i>Zoomed in view of the GUI<br>
-    The 3D effect is created using the box-shadow property and gradient background
-    <br>(see the CSS file for more details).</i>
-    <br>
-    <br>
-    <br>
-    <i>Evolution animations of the `hi` pattern (see below), displayed in the GUI with a metal red theme.</i>
+    The 3D effect is created using the box-shadow property and gradient background (see the CSS file for more details).</i>
 </p>
 
 For more examples, please refer to the [Examples](#examples) section.
@@ -41,27 +36,16 @@ For more examples, please refer to the [Examples](#examples) section.
   - [Using the GUI](#using-the-gui)
   - [Using the Command Line](#using-the-command-line)
 - [Examples](#examples)
-  - [T\_shape](#t_shape)
+  - [T_shape](#t_shape)
   - [Dragon](#dragon)
   - [Hi](#hi)
 - [More Examples](#more-examples)
   - [Insights](#insights)
 - [Technical Details](#technical-details)
   - [Game of Life Implementation](#game-of-life-implementation)
-    - [Static Board Padding](#static-board-padding)
-    - [Efficient Update Process](#efficient-update-process)
   - [Chromosome Representation](#chromosome-representation)
-    - [Initial State](#initial-state)
-    - [Crossover (The Binary Genetic Operator)](#crossover-the-binary-genetic-operator)
-    - [Mutation](#mutation)
-    - [Evaluation Function](#evaluation-function)
-    - [Fitness vs Score](#fitness-vs-score)
   - [Population Implementation](#population-implementation)
-    - [Crossover (Reproduction Part)](#crossover-reproduction-part)
   - [Genetic Algorithm Implementation](#genetic-algorithm-implementation)
-    - [Roulette Wheel Selection](#roulette-wheel-selection)
-    - [Report](#report)
-    - [Save](#save)
 - [Contributions and Feedback](#contributions-and-feedback)
 - [Acknowledgements](#acknowledgements)
 - [License](#license)
