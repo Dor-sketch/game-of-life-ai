@@ -2,38 +2,28 @@
 
 This project implements a genetic algorithm to discover configurations in Conway's Game of Life that meet specific criteria, showcasing the power of AI in software development. This project was developed for the **Biological Computation (20581)** Advanced Course at the *Open University of Israel* in 2024 and earned a perfect score of `100`.
 
-Before diving into the project, let's take a look at some patterns discovered by the algorithm. Keep in mind that the algorithm generates different results each time it's run. The examples below represent just a handful of the many patterns that have been identified.
+Before diving into the project, let's take a look at some patterns discovered by the algorithm. Keep in mind that the algorithm generates different results each time it's run. The examples in this file represent just a handful of the many patterns that have been identified.
 
 <p align = "center">
-    <img src="./images/ligh_green.gif" width="800"/>
+    <img src="./images/new_metal_blue.gif" width="800"/>
     <br>
-    <i>Evolution of a fitted individual in the GUI, light green theme</i>
-</p>
-
-<p align = "center">
-    <img src="./images/metal_blue.gif"
+    <i>Evolution of a fitted individual in the GUI, metal blue theme</i>
+    <br>
+    <img src="./images/gui_graphics_zoom2.png" width="800"/>
+    <br>
+    <i>Zoomed in view of the GUI</i>
+    <br>
+    <img src="./images/gui_graphics_zoom1.png"
     width="800"/>
     <br>
-    <i>270 Generations of the Genetic Algorithm in the GUI, metal blue theme</i>
-</p>
-
-<p align = "center">
-    <img src="./images/forest.gif"
+    <i>Zoomed in - continued, 3D effect is created by the box-shadow property and the gradient background (see the CSS file for more details)</i>
+    <br>
+    <img src="./images/gui_graphics_zoom3.png"
     width="800"/>
     <br>
-    <i>Evolution of a fitted individual in the GUI, forest theme</i>
-
-<p align = "center">
-    <img src="./images/individual_purple_long.gif"
-    width="800"/>
+    <img src="./images/new_metal_red.gif" width="800"/>
     <br>
-    <i>Fittest individual in the GUI in a run with 1000 generations, purple theme</i>
-</p>
-
-<p align = "center">
-    <img src="./images/metal_red.gif" width="800"/>
-    <br>
-    <i>267 Generations of the Genetic Algorithm in the GUI, metal red theme</i>
+    <i>Evolution of the `hi` pattern (see below) in the GUI, metal red theme</i>
 </p>
 
 For more examples, please refer to the [Examples](#examples) section.
@@ -55,6 +45,7 @@ For more examples, please refer to the [Examples](#examples) section.
   - [T_shape](#t_shape)
   - [Dragon](#dragon)
   - [Hi](#hi)
+- [More Examples](#more-examples)
   - [Insights](#insights)
 - [Technical Details](#technical-details)
   - [Game of Life Implementation](#game-of-life-implementation)
@@ -261,7 +252,7 @@ The GUI window is compartmentalized into three primary sections:
         <i>Darker cells are older than lighter cells.<br>The 'heart' shape is evolving in the white theme. Grid is hidden.</i>
     </p>
 
-1. Control Panel: This section provides users with a range of interactive controls to manage the genetic algorithm's execution. Key functionalities include:
+2. Control Panel: This section provides users with a range of interactive controls to manage the genetic algorithm's execution. Key functionalities include:
 
       - `Start \ Pause`: Enables users to initiate or pause the Game of Life simulation, providing control over the algorithm's execution and facilitating real-time monitoring of the evolving configurations.
 
@@ -281,7 +272,7 @@ The GUI window is compartmentalized into three primary sections:
 
       - `Change Theme`: Allows users to personalize the GUI's appearance by loading custom `css` files. This feature enhances user customization options, enabling users to tailor the GUI's visual style to their preferences and create a personalized user experience.
 
-2. Information Panel: This section offers users a comprehensive overview of the algorithm's progress, displaying key metrics and insights to enhance user understanding and facilitate informed decision-making. The information panel includes:
+3. Information Panel: This section offers users a comprehensive overview of the algorithm's progress, displaying key metrics and insights to enhance user understanding and facilitate informed decision-making. The information panel includes:
 
       - `Generation`: Displays the current generation number, enabling users to track the algorithm's progress and monitor the evolution of configurations over successive generations.
 
@@ -422,6 +413,40 @@ The `hi` shape demonstrates a long evolution period of more than 230 generations
 *Figure 7: Hi Shape Evolution*
 
 You can see the population that led to those individuals under the [populations](populations) directory and explore their variations.
+
+## More Examples
+
+<p align = "center">
+    <img src="./images/ligh_green.gif" width="800"/>
+    <br>
+    <i>Evolution of a fitted individual in the GUI, light green theme</i>
+</p>
+
+<p align = "center">
+    <img src="./images/metal_blue.gif"
+    width="800"/>
+    <br>
+    <i>270 Generations of the Genetic Algorithm in the GUI, metal blue theme</i>
+</p>
+
+<p align = "center">
+    <img src="./images/forest.gif"
+    width="800"/>
+    <br>
+    <i>Evolution of a fitted individual in the GUI, forest theme</i>
+
+<p align = "center">
+    <img src="./images/individual_purple_long.gif"
+    width="800"/>
+    <br>
+    <i>Fittest individual in the GUI in a run with 1000 generations, purple theme</i>
+</p>
+
+<p align = "center">
+    <img src="./images/metal_red.gif" width="800"/>
+    <br>
+    <i>267 Generations of the Genetic Algorithm in the GUI, metal red theme</i>
+</p>
 
 ### Insights
 

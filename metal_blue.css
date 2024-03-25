@@ -10,74 +10,73 @@ drawingarea {
     font-size: large;
     font-weight: bold;
 }
-
 button {
-    background: linear-gradient(to right, #275a8e, #050559); /* DodgerBlue to DarkBlue */
+    background: linear-gradient(to right, #1E90FF, #00008B); /* Lighter DodgerBlue to DarkBlue */
     color: #FFFFFF; /* White */
-    border-color: #4fa7ff; /* DodgerBlue */
+    border-color: #1E90FF; /* Lighter DodgerBlue */
     border-radius: 0;
     transition: 0.3s;
 }
 
 button:hover {
-    background: linear-gradient(to right, #000039, #083765); /* DarkBlue to DodgerBlue */
+    background: linear-gradient(to right, #00008B, #1E90FF); /* DarkBlue to Lighter DodgerBlue */
     color: #FFFFFF; /* White */
-    border-color: #1E90FF; /* DodgerBlue */
+    border-color: #1E90FF; /* Lighter DodgerBlue */
 }
 .alive {
-    box-shadow: 0 0 10px 5px rgba(255, 255, 255, 0.5); /* Increased shadow and changed color to white */
-    background-color: #00FF00; /* Bright Green */
-    border-color: #0000FF; /* Blue */
+    background: #00FF7F; /* SpringGreen */
+    box-shadow: 0 0 5px 2px rgba(0, 0, 0, 0.5), 0 0 10px 5px rgba(0, 0, 127, 0.5), 0 0 20px 10px rgba(0, 0, 127, 0.5); /* SpringGreen */
+    border-color: #008000; /* Green */
     animation: pulse 5s ease-in-out infinite;
 }
 
 .young {
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19), 0 8px 10px 0 rgba(0, 0, 0, 0.2);
-    background-color: #1E90FF; /* DodgerBlue */
-    border-color: #00008B; /* DarkBlue */
+    background: #32CD32; /* LimeGreen */
+    box-shadow: 0 0 5px 2px rgba(50, 205, 50, 0.5), 0 0 10px 5px rgba(50, 205, 50, 0.5), 0 0 20px 10px rgba(50, 205, 50, 0.5); /* LimeGreen */
+    border-color: #006400; /* DarkGreen */
     animation: pulse 5s ease-in-out infinite;
 }
 
 .old {
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19), 0 8px 10px 0 rgba(0, 0, 0, 0.2);
-    background-color: #00008B; /* DarkBlue */
-    border-color: #000080; /* Navy */
+    background: #20B2AA; /* LightSeaGreen */
+    box-shadow: 0 0 4px 2px rgba(32, 178, 170, 0.5), 0 0 8px 4px rgba(32, 178, 170, 0.5), 0 0 16px 8px rgba(32, 178, 170, 0.5); /* LightSeaGreen */
+    border-color: #008080; /* Teal */
     animation: pulse 5s ease-in-out infinite;
 }
 
 .veteran {
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19), 0 8px 10px 0 rgba(0, 0, 0, 0.2);
-    background-color: #000080; /* Navy */
-    border-color: #191970; /* MidnightBlue */
+    background: linear-gradient(to right, #00008B, #00008B); /* DarkBlue */
+    box-shadow: 0 0 4px 2px rgba(0, 0, 0, 0.5), 0 0 8px 4px rgba(0, 0, 0, 0.5), 0 0 16px 8px rgba(0, 0, 0, 0.5); /* DodgerBlue */
+    border-color: #00008B; /* DarkBlue */
     animation: pulse 5s ease-in-out infinite;
-}
-
-.window {
-    background: #F0F8FF; /* AliceBlue */
-    border: 2px solid #1E90FF; /* DodgerBlue */
-    border-radius: 0;
-    border-color: #1E90FF; /* DodgerBlue */
-}
-
-drawingarea {
-    background: #F0F8FF; /* AliceBlue */
-    border: 2px solid #1E90FF; /* DodgerBlue */
-    border-radius: 0;
-    border-color: #1E90FF; /* DodgerBlue */
 }
 
 @keyframes pulse {
     0% {
-        box-shadow: 0 0 0 0 rgba(30, 144, 255, 0.7); /* DodgerBlue */
+        box-shadow: 0 0 0 0 rgba(30, 144, 255, 0.7); /* Lighter DodgerBlue */
     }
 
     50% {
-        box-shadow: 0 0 0 10px rgba(30, 144, 255, 0.3); /* DodgerBlue */
+        box-shadow: 0 0 0 20px rgba(30, 144, 255, 0.3); /* Lighter DodgerBlue */
     }
 
     100% {
-        box-shadow: 0 0 0 0 rgba(30, 144, 255, 0); /* DodgerBlue */
+        box-shadow: 0 0 0 0 rgba(30, 144, 255, 0); /* Lighter DodgerBlue */
     }
+}
+
+.window {
+    background: #F0F8FF; /* AliceBlue */
+    border: 2px solid #1E90FF; /* Lighter DodgerBlue */
+    border-radius: 0;
+    border-color: #1E90FF; /* Lighter DodgerBlue */
+}
+
+drawingarea {
+    background: #F0F8FF; /* AliceBlue */
+    border: 2px solid #1E90FF; /* Lighter DodgerBlue */
+    border-radius: 0;
+    border-color: #1E90FF; /* Lighter DodgerBlue */
 }
 
 .transform {
