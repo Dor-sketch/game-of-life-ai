@@ -3,7 +3,7 @@
 This project implements a genetic algorithm to discover configurations in Conway's Game of Life that meet specific criteria, showcasing the power of AI in software development. This project was developed for the **Biological Computation (20581)** Advanced Course at the *Open University of Israel* in 2024 and earned a perfect score of `100/100`.
 
 <p align="center">
-    <img src="./images/sky_reduced.gif  " width="400"/>
+    <img src="./images/sky_reduced.gif  " width="600"/>
     <br>
     <i>Evolution of a fitted individual in the GUI, blue theme</i>
 </p>
