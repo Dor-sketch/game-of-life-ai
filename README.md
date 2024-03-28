@@ -1,26 +1,12 @@
 # Genetic Algorithm for Conway's Game of Life 🧬
 
-This project implements a genetic algorithm to discover configurations in Conway's Game of Life that meet specific criteria, showcasing the power of AI in software development. This project was developed for the **Biological Computation (20581)** Advanced Course at the *Open University of Israel* in 2024 and earned a perfect score of `100`.
+This project implements a genetic algorithm to discover configurations in Conway's Game of Life that meet specific criteria, showcasing the power of AI in software development. This project was developed for the **Biological Computation (20581)** Advanced Course at the *Open University of Israel* in 2024 and earned a perfect score of `100/100`.
 
-Before diving into the project, let's take a look at some patterns discovered by the algorithm. Keep in mind that the algorithm generates different results each time it's run. The examples in this file represent just a handful of the many patterns that have been identified.
-
-**⏳ Please Wait: the animations might take some time to load. It is recommended to wait for the page to fully load before scrolling down, and use a desktop browser for the best experience.**
-
-<p align = "center">
-    <img src="./images/new_metal_blue_reduced.gif" width="400"/>
-    <img src="./images/new_metal_red_reduced.gif" width="400"/>
+<p align="center">
+    <img src="./images/sky_reduced.gif  " width="400"/>
     <br>
-    <i>Evolution animation of a fitted individual, displayed in the GUI with a metal blue theme (left) and a metal red theme (right).<br>
-    Full GIF versions of all evaluations can be found in the `images` directory.</i>
-    <br>
-    <img src="./images/gui_graphics_zoom1.png" width="400"/>
-    <img src="./images/gui_graphics_zoom3.png" width="400"/>
-    <br>
-    <i>Zoomed in view of the GUI<br>
-    The 3D effect is created using the box-shadow property and gradient background (see the CSS file for more details).</i>
+    <i>Evolution of a fitted individual in the GUI, blue theme</i>
 </p>
-
-For more examples, please refer to the [Examples](#examples) section.
 
 ---
 
@@ -55,6 +41,26 @@ For more examples, please refer to the [Examples](#examples) section.
 ---
 
 ## Overview
+
+Before diving into the project, let's take a look at some patterns discovered by the algorithm. Keep in mind that the algorithm generates different results each time it's run. The examples in this file represent just a handful of the many patterns that have been identified.
+
+**⏳ Please Wait: the animations might take some time to load. It is recommended to wait for the page to fully load before scrolling down, and use a desktop browser for the best experience.**
+
+<p align = "center">
+    <img src="./images/new_metal_blue_reduced.gif" width="400"/>
+    <img src="./images/new_metal_red_reduced.gif" width="400"/>
+    <br>
+    <i>Evolution animation of a fitted individual, displayed in the GUI with a metal blue theme (left) and a metal red theme (right).<br>
+    Full GIF versions of all evaluations can be found in the `images` directory.</i>
+    <br>
+    <img src="./images/gui_graphics_zoom1.png" width="400"/>
+    <img src="./images/gui_graphics_zoom3.png" width="400"/>
+    <br>
+    <i>Zoomed in view of the GUI<br>
+    The 3D effect is created using the box-shadow property and gradient background (see the CSS file for more details).</i>
+</p>
+
+For more examples, please refer to the [Examples](#examples) section.
 
 ### Background
 

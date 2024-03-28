@@ -1,0 +1,65 @@
+window,
+button,
+label,
+grid,
+drawingarea {
+    background-color: #E6E6FA; /* Lavender */
+    color: #333333; /* DarkGrey */
+    font-family: 'Courier New', monospace;
+    border-radius: 0px;
+    font-size: large;
+    font-weight: bold;
+}
+
+button {
+    background: #D8BFD8; /* Thistle */
+    color: #FFFFFF; /* White */
+    border-color: transparent;
+    border-radius: 0;
+    transition: 0.3s;
+}
+
+button:hover {
+    background: linear-gradient(to right, #DB7093, #FF69B4); /* PaleVioletRed to HotPink */
+    color: #FFFFFF; /* White */
+    border-color: #a7a3a0;
+    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+}
+.alive {
+    background: linear-gradient(to right, #E6E6FA, #D8BFD8); /* Lavender to Thistle */
+    color: #333333; /* DarkGrey */
+    box-shadow: 0 0 10px 5px rgba(230, 230, 250, 0.08), 0 0 10px 5px rgba(216, 191, 216, 0.146), 0 0 10px 5px rgba(216, 191, 216, 0), 0 0 10px 5px rgba(0, 0, 0, 0.5);
+}
+
+.young {
+    background: linear-gradient(to right, #D8BFD8, #DB7093); /* Thistle to PaleVioletRed */
+    color: #333333; /* DarkGrey */
+    box-shadow: 0 0 10px 5px rgba(216, 191, 216, 0.08), 0 0 10px 5px rgba(219, 112, 147, 0.146), 0 0 10px 5px rgba(219, 112, 147, 0), 0 0 10px 5px rgba(0, 0, 0, 0.5);
+}
+
+.old {
+    background: linear-gradient(to right, #DB7093, #FF69B4); /* PaleVioletRed to HotPink */
+    box-shadow: 0 4px 8px 0 rgba(219, 112, 147, 0.2), 0 6px 20px 0 rgba(255, 105, 180, 0.19), 0 8px 10px 0 rgba(255, 105, 180, 0.2);
+    color: #FFFFFF; /* White */
+}
+
+.veteran {
+    background: linear-gradient(to right, #FF69B4, #EE82EE); /* HotPink to Violet */
+    box-shadow: 0 4px 8px 0 rgba(255, 105, 180, 0.2), 0 6px 20px 0 rgba(238, 130, 238, 0.19), 0 8px 10px 0 rgba(238, 130, 238, 0.2);
+    color: #FFFFFF; /* White */
+}
+.window {
+    background: rgba(90, 90, 110, 0.5);
+    border: 2px solid #DB7093; /* PaleVioletRed */
+    border-radius: 0;
+    color: #FFFFFF; /* White */
+}
+
+drawingarea {
+    background: #E6E6FA; /* Lavender */
+    border: 2px solid #DB7093; /* PaleVioletRed */
+    border-radius: 0;
+    color: #333333; /* DarkGrey */
+}
+
+@keyframes pulse {}

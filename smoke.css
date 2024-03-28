@@ -1,0 +1,69 @@
+window,
+button,
+label,
+grid,
+drawingarea {
+    background-color: #F5F5F5; /* WhiteSmoke */
+    color: #333333; /* DarkGrey */
+    font-family: 'Courier New', monospace;
+    border-radius: 0px;
+    font-size: large;
+    font-weight: bold;
+}
+
+button {
+
+    /* #4d8582 teal */
+    background: #bec9be;
+            /* WhiteSmoke */
+    color: #FFFFFF; /* White */
+    border-color: transparent;
+    border-radius: 0;
+    transition: 0.3s;
+}
+
+button:hover {
+    background: linear-gradient(to right, #FF6347, #FF4500); /* Tomato to OrangeRed */
+    color: #FFFFFF; /* White */
+    border-color: #a7a3a0;
+    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+}
+.alive {
+    background: linear-gradient(to right, #98FB98, #3CB371); /* PaleGreen to MediumSeaGreen */
+    color: #333333; /* DarkGrey */
+    box-shadow: 0 0 10px 5px rgba(152, 251, 152, 0.08), 0 0 10px 5px rgba(152, 251, 152, 0.146), 0 0 10px 5px rgba(152, 251, 152, 0), 0 0 10px 5px rgba(0, 0, 0, 0.5);
+}
+
+.young {
+    background: linear-gradient(to right, #3CB371, #2E8B57); /* MediumSeaGreen to SeaGreen */
+    color: #333333; /* DarkGrey */
+    box-shadow: 0 0 10px 5px rgba(60, 179, 113, 0.08), 0 0 10px 5px rgba(60, 179, 113, 0.146), 0 0 10px 5px rgba(60, 179, 113, 0), 0 0 10px 5px rgba(0, 0, 0, 0.5);
+}
+
+.old {
+    background: linear-gradient(to right, #2E8B57, #006400); /* SeaGreen to DarkGreen */
+    box-shadow: 0 4px 8px 0 rgba(46, 139, 87, 0.2), 0 6px 20px 0 rgba(0, 100, 0, 0.19), 0 8px 10px 0 rgba(0, 100, 0, 0.2);
+    color: #FFFFFF; /* White */
+}
+
+.veteran {
+    background: linear-gradient(to right, #006400, #000000); /* DarkGreen to Black */
+    box-shadow: 0 4px 8px 0 rgba(0, 100, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19), 0 8px 10px 0 rgba(0, 0, 0, 0.2);
+    color: #FFFFFF; /* White */
+}
+
+.window {
+    background: rgba(90, 90, 110, 0.5);
+    border: 2px solid #FF6347; /* Tomato */
+    border-radius: 0;
+    color: #FFFFFF; /* White */
+}
+
+drawingarea {
+    background: #F5F5F5; /* WhiteSmoke */
+    border: 2px solid #FF6347; /* Tomato */
+    border-radius: 0;
+    color: #333333; /* DarkGrey */
+}
+
+@keyframes pulse {}
