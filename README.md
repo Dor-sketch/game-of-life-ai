@@ -304,17 +304,38 @@ To explore these examples firsthand, utilize the GUI's `Load` button to access t
 
 `T_shape` is called after the mighty T-rex, and its `T` shape. The initial state starts with 6 alive cells. It is a very small shape, and it is very likely to be selected as a parent for the next generation. It evolves into a heart (see figure 2), and continues as a musk (see figure 3). It continues to evolve into a goat face (see figure 4), and then into a skull face (see figure 5). It continues to grow and become stable at generation 225 (see figure 6). At its peak, it has about 100 alive cells.
 
-| <img src="./images/t_shape1.png" width="250"/> | <img src="./images/t_shape2.png" width="250"/> |
-|:--:|:--:|
-| *Figure 1: Initial State* | *Figure 2: Heart Evolution* |
+<div style="text-align: center;">
+  <figure style="display: inline-block;">
+    <img src="./images/t_shape1.png" width="250" alt="Initial State"/>
+    <figcaption>Figure 1: Initial State</figcaption>
+  </figure>
+  <figure style="display: inline-block;">
+    <img src="./images/t_shape2.png" width="250" alt="Heart Evolution"/>
+    <figcaption>Figure 2: Heart Evolution</figcaption>
+  </figure>
+</div>
 
-| <img src="./images/t_shape3.png" width="250"/> | <img src="./images/t_shape4.png" width="250"/> |
-|:--:|:--:|
-| *Figure 3: Musk Evolution* | *Figure 4: Goat Face Evolution* |
+<div style="text-align: center;">
+  <figure style="display: inline-block;">
+    <img src="./images/t_shape3.png" width="250" alt="Musk Evolution"/>
+    <figcaption>Figure 3: Musk Evolution</figcaption>
+  </figure>
+  <figure style="display: inline-block;">
+    <img src="./images/t_shape4.png" width="250" alt="Goat Face Evolution"/>
+    <figcaption>Figure 4: Goat Face Evolution</figcaption>
+  </figure>
+</div>
 
-| <img src="./images/t_shape5.png" width="250"/> | <img src="./images/t_shape6.png" width="250"/> |
-|:--:|:--:|
-| *Figure 5: Skull Face Evolution* | *Figure 6: Stable State at Gen 225* |
+<div style="text-align: center;">
+  <figure style="display: inline-block;">
+    <img src="./images/t_shape5.png" width="250" alt="Skull Face Evolution"/>
+    <figcaption>Figure 5: Skull Face Evolution</figcaption>
+  </figure>
+  <figure style="display: inline-block;">
+    <img src="./images/t_shape6.png" width="250" alt="Stable State at Gen 225"/>
+    <figcaption>Figure 6: Stable State at Gen 225</figcaption>
+  </figure>
+</div>
 
 ### Dragon
 
@@ -326,17 +347,38 @@ To explore these examples firsthand, utilize the GUI's `Load` button to access t
 
 Dragon's initial state starts with 6 alive cells. It is a very small shape, and it is very likely to be selected as a parent for the next generation. It evolves into a dragon with open wings (see figure 2), and continues as a dragon with closed wings (see figure 3). It continues to evolve into a dragon with big open wings (see figure 4), and then into a dragon with very big open wings (see figure 5). It continues to grow and become stable at generation 132 (see figure 6). At its peak, it has about 10 times more alive cells than the initial shape.
 
-| <img src="./images/dragon1.png" width="250"/> | <img src="./images/dragon2.png" width="250"/> |
-|:--:|:--:|
-| *Figure 1: Initial State* | *Figure 2: Open Wings* |
+<div style="text-align: center;">
+  <figure style="display: inline-block;">
+    <img src="./images/dragon1.png" width="250" alt="Initial State"/>
+    <figcaption>Figure 1: Initial State</figcaption>
+  </figure>
+  <figure style="display: inline-block;">
+    <img src="./images/dragon2.png" width="250" alt="Open Wings"/>
+    <figcaption>Figure 2: Open Wings</figcaption>
+  </figure>
+</div>
 
-| <img src="./images/dragon3.png" width="250"/> | <img src="./images/dragon4.png" width="250"/> |
-|:--:|:--:|
-| *Figure 3: Closed Wings* | *Figure 4: Big Open Wings* |
+<div style="text-align: center;">
+  <figure style="display: inline-block;">
+    <img src="./images/dragon3.png" width="250" alt="Closed Wings"/>
+    <figcaption>Figure 3: Closed Wings</figcaption>
+  </figure>
+  <figure style="display: inline-block;">
+    <img src="./images/dragon4.png" width="250" alt="Big Open Wings"/>
+    <figcaption>Figure 4: Big Open Wings</figcaption>
+  </figure>
+</div>
 
-| <img src="./images/dragon5.png" width="250"/> | <img src="./images/dragon6.png" width="250"/> |
-|:--:|:--:|
-| *Figure 5: Very Big Open Wings* | *Figure 6: Stable State at Gen 132* |
+<div style="text-align: center;">
+  <figure style="display: inline-block;">
+    <img src="./images/dragon5.png" width="250" alt="Very Big Open Wings"/>
+    <figcaption>Figure 5: Very Big Open Wings</figcaption>
+  </figure>
+  <figure style="display: inline-block;">
+    <img src="./images/dragon6.png" width="250" alt="Stable State at Gen 132"/>
+    <figcaption>Figure 6: Stable State at Gen 132</figcaption>
+  </figure>
+</div>
 
 ### Hi
 
@@ -352,35 +394,30 @@ You can see the population that led to those individuals under the [populations]
 
 ## More Examples
 
-<p align = "center">
-    <img src="./images/ligh_green.gif" width="400"/>
-    <img src="./images/individual_purple_long.gif" width="400"/>
+<div style="text-align: center;">
+    <img src="./images/light_green.gif" alt="Light Green Theme" width="400"/>
+    <img src="./images/individual_purple_long.gif" alt="Purple Theme" width="400"/>
     <br>
-    <i>Evolution of a fitted individuals in the GUI, light green theme (left) and purple theme (right)</i>
-</p>
+    <i>Evolution of fitted individuals in the GUI, light green theme (left) and purple theme (right)</i>
+</div>
 
-<p align = "center">
-    <img src="./images/metal_blue_reduced.gif"
-    width="400"/>
-    <img src="./images/metal_red_reduced.gif" width="400"/>
+<div style="text-align: center;">
+    <img src="./images/metal_blue_reduced.gif" alt="Metal Blue Theme" width="400"/>
+    <img src="./images/metal_red_reduced.gif" alt="Metal Red Theme" width="400"/>
     <br>
     <i>270 Generations of the Genetic Algorithm in the GUI, metal blue theme (left) and metal red theme (right)</i>
-</p>
+</div>
 
-<p align = "center">
-    <img src="./images/forest.gif"
-    width="500"/>
+<div style="text-align: center;">
+    <img src="./images/forest.gif" alt="Forest Theme" width="500"/>
     <br>
     <i>Evolution of a fitted individual in the GUI, forest theme</i>
+</div>
 
-<p align = "center">
-
-</p>
-
-<p align = "center">
+<div style="text-align: center;">
     <br>
     <i>267 Generations of the Genetic Algorithm in the GUI, metal red theme</i>
-</p>
+</div>
 
 ### Insights
 
