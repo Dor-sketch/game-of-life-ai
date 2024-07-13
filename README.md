@@ -304,8 +304,6 @@ To explore these examples firsthand, utilize the GUI's `Load` button to access t
 
 `T_shape` is called after the mighty T-rex, and its `T` shape. The initial state starts with 6 alive cells. It is a very small shape, and it is very likely to be selected as a parent for the next generation. It evolves into a heart (see figure 2), and continues as a musk (see figure 3). It continues to evolve into a goat face (see figure 4), and then into a skull face (see figure 5). It continues to grow and become stable at generation 225 (see figure 6). At its peak, it has about 100 alive cells.
 
-<div align="center">
-
 | <img src="./images/t_shape1.png" width="250"/> | <img src="./images/t_shape2.png" width="250"/> |
 |:--:|:--:|
 | *Figure 1: Initial State* | *Figure 2: Heart Evolution* |
@@ -318,8 +316,6 @@ To explore these examples firsthand, utilize the GUI's `Load` button to access t
 |:--:|:--:|
 | *Figure 5: Skull Face Evolution* | *Figure 6: Stable State at Gen 225* |
 
-</div>
-
 ### Dragon
 
 <p align = "center">
@@ -329,8 +325,6 @@ To explore these examples firsthand, utilize the GUI's `Load` button to access t
 </p>
 
 Dragon's initial state starts with 6 alive cells. It is a very small shape, and it is very likely to be selected as a parent for the next generation. It evolves into a dragon with open wings (see figure 2), and continues as a dragon with closed wings (see figure 3). It continues to evolve into a dragon with big open wings (see figure 4), and then into a dragon with very big open wings (see figure 5). It continues to grow and become stable at generation 132 (see figure 6). At its peak, it has about 10 times more alive cells than the initial shape.
-
-<div align="center">
 
 | <img src="./images/dragon1.png" width="250"/> | <img src="./images/dragon2.png" width="250"/> |
 |:--:|:--:|
@@ -343,8 +337,6 @@ Dragon's initial state starts with 6 alive cells. It is a very small shape, and 
 | <img src="./images/dragon5.png" width="250"/> | <img src="./images/dragon6.png" width="250"/> |
 |:--:|:--:|
 | *Figure 5: Very Big Open Wings* | *Figure 6: Stable State at Gen 132* |
-
-</div>
 
 ### Hi
 
