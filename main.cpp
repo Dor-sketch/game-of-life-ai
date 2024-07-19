@@ -5,7 +5,6 @@
 #include <gtk/gtk.h>
 #include <string>
 #include "gui.hpp"
-#include "ga.hpp"
 #include "chromosome.hpp"
 #include "population.hpp"
 #include "utils.hpp"

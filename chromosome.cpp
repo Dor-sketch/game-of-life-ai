@@ -163,8 +163,80 @@ bool compareBoard(int board1[BOARD_SIZE][BOARD_SIZE],
 	}
 	return true;
 }
+#include <fftw3.h>
 
-double getScore(int maxAlive, int startAlive, int stablePeriod) {
+#define THRESHOLD 1e-6
+
+bool isShieldOfDavid(int board[BOARD_SIZE][BOARD_SIZE], int scale) {
+	// Define the Shield of David pattern
+	scale = 1;
+	std::vector<std::vector<int>> shieldOfDavid = {
+		{0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0},
+		{0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0},
+		{0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0},
+		{0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0},
+		{0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0},
+		{0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0},
+		{0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0},
+		{0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0},
+		{0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0},
+		{0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0},
+		{0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 1, 0, 0, 0, 0},
+		{0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0},
+		{0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0},
+		{0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0},
+		{0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0},
+		{0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0},
+		{0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0},
+		{0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0},
+		{0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0},
+		{0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0}
+	};
+
+	// Scale the pattern
+	std::vector<std::vector<int>> scaledShieldOfDavid(scale * 3, std::vector<int>(scale * 3, 0));
+	for (int i = 0; i < scale * 3; ++i) {
+		for (int j = 0; j < scale * 3; ++j) {
+			scaledShieldOfDavid[i][j] = shieldOfDavid[i / scale][j / scale];
+		}
+	}
+
+	// Convert the board and the scaled pattern to the frequency domain using FFT
+	fftw_complex* boardFreq = fftw_alloc_complex(BOARD_SIZE * BOARD_SIZE);
+	fftw_complex* patternFreq = fftw_alloc_complex(scale * 3 * scale * 3);
+	fftw_plan boardPlan = fftw_plan_dft_2d(BOARD_SIZE, BOARD_SIZE, boardFreq, boardFreq, FFTW_FORWARD, FFTW_ESTIMATE);
+	fftw_plan patternPlan = fftw_plan_dft_2d(scale * 3, scale * 3, patternFreq, patternFreq, FFTW_FORWARD, FFTW_ESTIMATE);
+	fftw_execute(boardPlan);
+	fftw_execute(patternPlan);
+
+	// Multiply the frequency-domain representations of the board and the scaled pattern
+	for (int i = 0; i < BOARD_SIZE * BOARD_SIZE; ++i) {
+		double temp = boardFreq[i][0];
+		boardFreq[i][0] = boardFreq[i][0] * patternFreq[i][0] - boardFreq[i][1] * patternFreq[i][1];
+		boardFreq[i][1] = temp * patternFreq[i][1] + boardFreq[i][1] * patternFreq[i][0];
+	}
+
+	// Convert the result back to the spatial domain using inverse FFT
+	fftw_plan inversePlan = fftw_plan_dft_2d(BOARD_SIZE, BOARD_SIZE, boardFreq, boardFreq, FFTW_BACKWARD, FFTW_ESTIMATE);
+	fftw_execute(inversePlan);
+
+	// Check if the maximum value in the result is greater than a threshold
+	double maxVal = 0;
+	for (int i = 0; i < BOARD_SIZE * BOARD_SIZE; ++i) {
+		maxVal = std::max(maxVal, std::sqrt(boardFreq[i][0] * boardFreq[i][0] + boardFreq[i][1] * boardFreq[i][1]));
+	}
+
+	// Clean up
+	fftw_destroy_plan(boardPlan);
+	fftw_destroy_plan(patternPlan);
+	fftw_destroy_plan(inversePlan);
+	fftw_free(boardFreq);
+	fftw_free(patternFreq);
+
+	// Return true if the maximum value is greater than the threshold
+	return maxVal > THRESHOLD;
+}
+double getScore(int maxAlive, int startAlive, int stablePeriod, bool shieldOfDavid) {
 	// calculate the score for a given board
 	if (startAlive == 0) {
 		return 0;
@@ -172,10 +244,17 @@ double getScore(int maxAlive, int startAlive, int stablePeriod) {
 	// give more weight to the difference between the start alive and max alive
 	// than the number of generations since for all the boards that reach the
 	// max alive the number of generations will be the same
-	return std::max(
+	double score = std::max(
 		1, maxAlive -
 			   static_cast<int>(startAlive * static_cast<int> (BOARD_SIZE / 7)) +
 			   stablePeriod);
+
+	// If the Shield of David pattern is found, multiply the score by a factor
+	if (shieldOfDavid) {
+		score *= 2; // or any other factor you want
+	}
+
+	return score;
 }
 
 #pragma GCC diagnostic ignored "-Wunused-but-set-variable"
@@ -199,6 +278,15 @@ void Chromosome::calculateScore() {
 
 	// Hash table to store past states
 	std::unordered_set<std::string> pastStates;
+
+	// Check for the Shield of David pattern at different scales
+	bool shieldOfDavid = false;
+	for (int scale = 1; scale <= BOARD_SIZE / 3; ++scale) {
+		if (isShieldOfDavid(tempBoard, scale)) {
+			shieldOfDavid = true;
+			break;
+		}
+	}
 
 	while (numGenerations > 0 &&
 		   curAlive > 2) { // while the board is changing
@@ -237,7 +325,7 @@ void Chromosome::calculateScore() {
 		}
 	}
 
-	this->score = getScore(maxAlive, startAlive, temp_score);
+	this->score = getScore(maxAlive, startAlive, temp_score, shieldOfDavid);
 }
 
 void Chromosome::calculateFitness(double totalFitnessScore) {

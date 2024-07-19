@@ -24,6 +24,8 @@ public:
   static void setTheme(const char *themeName);
   static void changeTheme();
   static void showResults();
+  static GtkWidget *buttons[BOARD_SIZE][BOARD_SIZE];
+
 private:
   static void changeRecordingFlag();
    static int updateBoard(
@@ -56,7 +58,6 @@ private:
   static GtkLabel *startAliveCellsLabel;
   static GtkWidget *window;
   static GtkWidget *grid;
-  static GtkWidget *buttons[BOARD_SIZE][BOARD_SIZE];
   static GtkWidget *stopButton;
   static GtkWidget *clearButton;
   static GtkWidget *randomButton;

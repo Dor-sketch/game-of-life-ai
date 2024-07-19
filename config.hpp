@@ -1,6 +1,6 @@
 #pragma once
 
-constexpr int BOARD_SIZE = 20;
+constexpr int BOARD_SIZE = 32;
 constexpr char square[] = "\u25A0"; // Unicode character for a filled square
 #define GENERATIONS 100
 #define POPULATION_SIZE 100

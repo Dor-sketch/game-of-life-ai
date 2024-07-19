@@ -1,0 +1,67 @@
+window,
+button,
+label,
+grid,
+drawingarea {
+    background-color: #2f2b0b; /* DarkGrey */
+    color: #FFFF00; /* Yellow */
+    font-family: 'Courier New', monospace;
+    border-radius: 0px;
+    font-size: large;
+    font-weight: bold;
+}
+
+button {
+    background: #343124; /* Gold */
+    color: #333333; /* DarkGrey */
+    border-color: transparent;
+    border-radius: 0;
+    transition: 0.3s;
+}
+
+button:hover {
+    background: linear-gradient(to right, #FFD700, #FFFF00); /* Gold to Yellow */
+    color: #333333; /* DarkGrey */
+    border-color: #a7a3a0;
+    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+}
+
+.alive {
+    background: linear-gradient(to right, #FFFF00, #FFD700); /* Yellow to Gold */
+    color: #333333; /* DarkGrey */
+    box-shadow: 0 0 10px 5px rgba(255, 255, 0, 0.08), 0 0 10px 5px rgba(255, 215, 0, 0.146), 0 0 10px 5px rgba(255, 215, 0, 0), 0 0 10px 5px rgba(0, 0, 0, 0.5);
+}
+
+.young {
+    background: linear-gradient(to right, #FFD700, #FFFF00); /* Gold to Yellow */
+    color: #333333; /* DarkGrey */
+    box-shadow: 0 0 10px 5px rgba(255, 215, 0, 0.08), 0 0 10px 5px rgba(255, 255, 0, 0.146), 0 0 10px 5px rgba(255, 255, 0, 0), 0 0 10px 5px rgba(0, 0, 0, 0.5);
+}
+
+.old {
+    background: linear-gradient(to right, #FFFF00, #FFD700); /* Yellow to Gold */
+    box-shadow: 0 4px 8px 0 rgba(255, 255, 0, 0.2), 0 6px 20px 0 rgba(255, 215, 0, 0.19), 0 8px 10px 0 rgba(255, 215, 0, 0.2);
+    color: #333333; /* DarkGrey */
+}
+
+.veteran {
+    background: linear-gradient(to right, #FFD700, #FFFF00); /* Gold to Yellow */
+    box-shadow: 0 4px 8px 0 rgba(255, 215, 0, 0.2), 0 6px 20px 0 rgba(255, 255, 0, 0.19), 0 8px 10px 0 rgba(255, 255, 0, 0.2);
+    color: #333333; /* DarkGrey */
+}
+
+.window {
+    background: rgba(70, 130, 180, 0.5); /* SteelBlue */
+    border: 2px solid #FFFF00; /* Yellow */
+    border-radius: 0;
+    color: #FFFF00; /* Yellow */
+}
+
+drawingarea {
+    background: #333333; /* DarkGrey */
+    border: 2px solid #FFFF00; /* Yellow */
+    border-radius: 0;
+    color: #FFFF00; /* Yellow */
+}
+
+@keyframes pulse {}

@@ -184,23 +184,24 @@ void GUI::createLayoutContainers() {
 
   gtk_container_add(GTK_CONTAINER(window), grid);
 }
-void GUI::createButtons() {
-  // calculate button size based on window size and board size
-  int windowWidth, windowHeight;
-  gtk_window_get_size(GTK_WINDOW(window), &windowWidth, &windowHeight);
-  int buttonWidth = std::min(windowWidth, windowHeight) / BOARD_SIZE;
-  int buttonHeight = std::min(windowWidth, windowHeight) / BOARD_SIZE;
+gboolean resizeButtons(GtkWidget *widget, GdkEventConfigure *event, gpointer data) {
+  int new_size = std::min(event->width, event->height) / BOARD_SIZE;
+  for (int i = 0; i < BOARD_SIZE; i++) {
+    for (int j = 0; j < BOARD_SIZE; j++) {
+      gtk_widget_set_size_request(GUI::buttons[i][j], new_size, new_size);
+    }
+  }
+  return FALSE; // Continue with the default handler
+}void GUI::createButtons() {
+  GtkWidget *buttonContainer = gtk_grid_new();
+  gtk_grid_set_row_spacing(GTK_GRID(buttonContainer), 0);
+  gtk_grid_set_column_spacing(GTK_GRID(buttonContainer), 0);
+  gtk_grid_attach(GTK_GRID(grid), buttonContainer, 0, 0, BOARD_SIZE, BOARD_SIZE);
 
-  GtkWidget *buttonContainer =
-      gtk_fixed_new(); // Create a fixed container for buttons
-  gtk_grid_attach(GTK_GRID(grid), buttonContainer, 0, 0, BOARD_SIZE,
-                  BOARD_SIZE); // Attach the container to the grid
   for (int i = 0; i < BOARD_SIZE; i++) {
     for (int j = 0; j < BOARD_SIZE; j++) {
       buttons[i][j] = gtk_button_new();
-      gtk_widget_set_size_request(buttons[i][j], buttonWidth, buttonHeight);
-      gtk_fixed_put(GTK_FIXED(buttonContainer), buttons[i][j], i * buttonWidth,
-                    j * buttonHeight);
+      gtk_grid_attach(GTK_GRID(buttonContainer), buttons[i][j], i, j, 1, 1);
 
       // Store the button's grid coordinates as object data
       g_object_set_data(G_OBJECT(buttons[i][j]), "x", GINT_TO_POINTER(i));
@@ -208,12 +209,8 @@ void GUI::createButtons() {
     }
   }
 
-  // make all buttons flat
-  for (int i = 0; i < BOARD_SIZE; i++) {
-    for (int j = 0; j < BOARD_SIZE; j++) {
-      gtk_button_set_relief(GTK_BUTTON(buttons[i][j]), GTK_RELIEF_NONE);
-    }
-  }
+  // Connect the callback function to the configure-event signal
+  g_signal_connect(window, "configure-event", G_CALLBACK(resizeButtons), NULL);
 }
 void GUI::createButtonsAndLabels() {
   // create buttons

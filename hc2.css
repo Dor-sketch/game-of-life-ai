@@ -1,0 +1,52 @@
+window,
+button,
+label,
+grid,
+drawingarea {
+    background-color: #000000; /* Black */
+    color: #6f6f1a; /* Yellow */
+    font-family: 'Courier New', monospace;
+    border-radius: 0px;
+    font-size: large;
+    font-weight: bold;
+}
+
+button {
+    background: #3d3737; /* grey */
+    color: #000000; /* Black */
+    border-color: transparent;
+    border-radius: 0;
+    transition: 0.3s;
+}
+
+button:hover {
+    background: linear-gradient(to right, #FFD700, #FFFF00); /* Gold to Yellow */
+    color: #000000; /* Black */
+    border-color: #a7a3a0;
+    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+}
+
+.alive,
+.young,
+.old,
+.veteran {
+    background: linear-gradient(to right, #3a3a23, #423c1c); /* Yellow to Gold */
+    color: #000000; /* Black */
+    box-shadow: 0 0 10px 5px rgba(255, 255, 0, 0.08), 0 0 10px 5px rgba(255, 215, 0, 0.146), 0 0 10px 5px rgba(255, 215, 0, 0), 0 0 10px 5px rgba(0, 0, 0, 0.5);
+}
+
+.window {
+    background: rgba(70, 130, 180, 0.5); /* SteelBlue */
+    border: 2px solid #aeae2b; /* Yellow */
+    border-radius: 0;
+    color: #616122; /* Yellow */
+}
+
+drawingarea {
+    background: #000000; /* Black */
+    border: 2px solid #FFFF00; /* Yellow */
+    border-radius: 0;
+    color: #FFFF00; /* Yellow */
+}
+
+@keyframes pulse {}

@@ -1,0 +1,75 @@
+window,
+button,
+label,
+grid,
+drawingarea {
+    background-color: #000000; /* Black */
+    color: #ffff0098; /* Yellow */
+    font-family: 'Courier New', monospace;
+    border-radius: 0px;
+    font-size: large;
+    font-weight: bold;
+}
+
+button {
+    border-left: 1 solid transparent;
+    border-right: 1 solid transparent;
+    border-bottom: 2 solid #FFFF00; /* Yellow */
+    background: #3d3737; /* grey */
+}
+
+button:hover {
+    background: linear-gradient(to right, #FFD700, #FFFF00); /* Gold to Yellow */
+    color: #988229; /* Black */
+    border-color: #a7a3a0;
+    box-shadow: 0 1.4px 2.8px rgba(0, 0, 0, 0.25), 0 1.0px 1.0px rgba(0, 0, 0, 0.22);
+}
+
+.alive {
+    border-left: 1.0px solid transparent;
+    border-right: 1.0px solid transparent;
+    border-top: 1px solid #ffff00c5; /* Yellow */
+}
+.young {
+    border-left: 2.0px solid transparent;
+    border-right: 2.0px solid transparent;
+    border-top: 1.0px solid #FFFF00; /* Yellow */
+}
+.old {
+    border-left: 1.0px solid transparent;
+    border-right: 1.0px solid transparent;
+    border-top: 1.0px solid #FFFF00; /* Yellow */
+}
+.veteran {
+    background: linear-gradient(to right, #FFFF00, #FFD700); /* Yellow to Gold */
+    color: #000000; /* Black */
+    box-shadow: 0 0 1.0px 1px rgba(255, 255, 0, 0.08), 0 0 10px 5px rgba(255, 215, 0, 0.146), 0 0 1px 5px rgba(255, 215, 0, 0), 0 0 1px 5px rgba(0, 0, 0, 0.5);
+}
+
+.even {
+    background: linear-gradient(to right, #FFFF00, #FFD700); /* Yellow to Gold */
+    color: #000000; /* Black */
+    box-shadow: 0 0 1px 1px rgba(255, 255, 0, 0.08), 0 0 10px 5px rgba(255, 215, 0, 0.146), 0 0 1.0px 5px rgba(255, 215, 0, 0), 0 0 1px 5px rgba(0, 0, 0, 0.5);
+}
+
+.odd {
+    background: linear-gradient(to right, #FFFF00, #FFD700); /* Yellow to Gold */
+    color: #000000; /* Black */
+    box-shadow: 0 0 1px 0.5px rgba(255, 255, 0, 0.08), 0 0 1.0px 0.5px rgba(255, 215, 0, 0.146), 0 0 1px 0.5px rgba(255, 215, 0, 0), 0 0 1px 5px rgba(0, 0, 0, 0.5);
+}
+
+.window {
+    background: rgba(70, 130, 180, 0.5); /* SteelBlue */
+    border: 2px solid #FFFF00; /* Yellow */
+    border-radius: 0;
+    color: #FFFF00; /* Yellow */
+}
+
+drawingarea {
+    background: #000000; /* Black */
+    border: 2px solid #FFFF00; /* Yellow */
+    border-radius: 0;
+    color: #FFFF00; /* Yellow */
+}
+
+@keyframes pulse {}

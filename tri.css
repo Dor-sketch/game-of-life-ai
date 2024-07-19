@@ -1,0 +1,60 @@
+window,
+button,
+label,
+grid,
+drawingarea {
+    background-color: #000000; /* Black */
+    color: #FFFF00; /* Yellow */
+    font-family: 'Courier New', monospace;
+    border-radius: 0px;
+    font-size: large;
+    font-weight: bold;
+}
+
+button {
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-bottom: 20px solid #FFFF00; /* Yellow */
+    background: #3d3737; /* grey */
+}
+
+button:hover {
+    background: linear-gradient(to right, #FFD700, #FFFF00); /* Gold to Yellow */
+    color: #000000; /* Black */
+    border-color: #a7a3a0;
+    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+}
+
+.even {
+    border-left: 50px solid transparent;
+    border-right: 50px solid transparent;
+    border-bottom: 100px solid #FFFF00; /* Yellow */
+    background: linear-gradient(to right, #FFFF00, #FFD700); /* Yellow to Gold */
+    color: #000000; /* Black */
+    box-shadow: 0 0 10px 5px rgba(255, 255, 0, 0.08), 0 0 10px 5px rgba(255, 215, 0, 0.146), 0 0 10px 5px rgba(255, 215, 0, 0), 0 0 10px 5px rgba(0, 0, 0, 0.5);
+}
+
+.odd {
+    border-left: 50px solid transparent;
+    border-right: 50px solid transparent;
+    border-top: 100px solid #FFFF00; /* Yellow */
+    background: linear-gradient(to right, #FFFF00, #FFD700); /* Yellow to Gold */
+    color: #000000; /* Black */
+    box-shadow: 0 0 10px 5px rgba(255, 255, 0, 0.08), 0 0 10px 5px rgba(255, 215, 0, 0.146), 0 0 10px 5px rgba(255, 215, 0, 0), 0 0 10px 5px rgba(0, 0, 0, 0.5);
+}
+
+.window {
+    background: rgba(70, 130, 180, 0.5); /* SteelBlue */
+    border: 2px solid #FFFF00; /* Yellow */
+    border-radius: 0;
+    color: #FFFF00; /* Yellow */
+}
+
+drawingarea {
+    background: #000000; /* Black */
+    border: 2px solid #FFFF00; /* Yellow */
+    border-radius: 0;
+    color: #FFFF00; /* Yellow */
+}
+
+@keyframes pulse {}
