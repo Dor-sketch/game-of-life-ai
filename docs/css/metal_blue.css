@@ -82,3 +82,12 @@ drawingarea {
 .transform {
     animation: pulse 5s ease-in-out infinite;
 }
+
+body {
+    background: #F0F8FF; /* AliceBlue */
+    color: #333333; /* Lighter gray for softer contrast */
+    font-family: 'Courier New', monospace;
+    border-radius: 0px;
+    font-size: large;
+    font-weight: bold;
+}

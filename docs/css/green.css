@@ -85,3 +85,11 @@ drawingarea {
 .transform {
     animation: pulse 5s ease-in-out infinite;
 }
+
+button {
+    background: #32CD32; /* LimeGreen */
+    color: #FFFFFF; /* White */
+    border-color: #32CD32;
+    border-radius: 0;
+    transition: 0.3s;
+}

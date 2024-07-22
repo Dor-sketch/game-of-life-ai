@@ -82,3 +82,12 @@ drawingarea {
 .transform {
     animation: pulse 5s ease-in-out infinite;
 }
+
+body {
+    background-color: #2B2B2B; /* Dark gray */
+    color: #FFFFFF; /* White */
+    font-family: 'Courier New', monospace;
+    border-radius: 0px;
+    font-size: large;
+    font-weight: bold;
+}

@@ -65,3 +65,8 @@ drawingarea {
 }
 
 @keyframes pulse {}
+
+body {
+    background-color: #ADD8E6; /* LightBlue */
+    color: #333333; /* DarkGrey */
+}

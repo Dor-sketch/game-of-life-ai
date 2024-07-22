@@ -88,3 +88,24 @@ drawingarea {
 .transform {
     animation: pulse 5s ease-in-out infinite;
 }
+
+button {
+    background: #006400; /* DarkGreen */
+    color: #FFFFFF; /* White */
+    border-color: #006400;
+}
+
+button:hover {
+    background: #008000; /* Green */
+    color: #FFFFFF; /* White */
+    border-color: #006400; /* DarkGreen */
+}
+
+body {
+    background-color: #F5FFFA; /* MintCream */
+    color: #228B22; /* ForestGreen */
+    font-family: 'Courier New', monospace;
+    border-radius: 0px;
+    font-size: large;
+    font-weight: bold;
+}

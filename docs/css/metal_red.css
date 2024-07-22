@@ -114,3 +114,10 @@ drawingarea {
     transform: rotate(180deg);
     transition: 0.3s;
 }
+
+body {
+    background-color: #FFDAB9;
+    /* PeachPuff */
+    color: #8B4513;
+    /* SaddleBrown */
+}

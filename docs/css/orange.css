@@ -108,3 +108,10 @@ drawingarea {
 .transform {
     animation: pulse 5s ease-in-out infinite;
 }
+
+body {
+    background-color: #FFFFFF;
+    /* White */
+    color: #333333;
+    /* DarkGrey */
+}

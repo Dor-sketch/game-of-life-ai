@@ -63,3 +63,12 @@ drawingarea {
 }
 
 @keyframes pulse {}
+
+body {
+    background-color: #E6E6FA; /* Lavender */
+    color: #333333; /* DarkGrey */
+    font-family: 'Courier New', monospace;
+    border-radius: 0px;
+    font-size: large;
+    font-weight: bold;
+}
