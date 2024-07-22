@@ -45,6 +45,15 @@
         .alive {
             background-color: #80e5ff;
         }
+        .young {
+            background-color: #33b5e5;
+        }
+        .old {
+            background-color: #0099cc;
+        }
+        .veteran {
+            background-color: #0077b3;
+        }
     </style>
 </head>
 <body>
@@ -54,14 +63,25 @@
         <button onclick="clearBoard()">Clear</button>
         <button onclick="randomizeBoard()">Random</button>
         <button onclick="performNextGeneration()">Next</button>
+        <select id="themeSelector" onchange="changeTheme()">
+            <!-- Options will be populated by JavaScript -->
+        </select>
     </div>
     <div id="gameBoard" class="drawingarea"></div>
+    <link id="themeStylesheet" rel="stylesheet" type="text/css" href="">
     <script>
         const BOARD_SIZE = 30;
         let board = createBoard(BOARD_SIZE);
-        let nextBoard = createBoard(BOARD_SIZE);
+        let ageBoard = createBoard(BOARD_SIZE); // Separate board to track the age of cells
         let interval;
         let isRunning = false;
+        const themeFiles = ['blue.css', 'forest.css', 'green.css',
+        'lavender.css','metal_blue.css','metal_red.css','orange.css','pink.css','purple.css','red.css', 'smoke.css'];
+
+        document.addEventListener('DOMContentLoaded', () => {
+            populateThemeSelector();
+            drawBoard();
+        });
 
         function createBoard(size) {
             return Array.from({ length: size }, () => Array(size).fill(0));
@@ -77,7 +97,7 @@
                 for (let j = 0; j < BOARD_SIZE; j++) {
                     const cell = document.createElement('div');
                     cell.classList.add('cell');
-                    if (board[i][j]) cell.classList.add('alive');
+                    updateCellClass(cell, i, j);
                     cell.addEventListener('click', () => toggleCellState(i, j, cell));
                     gameBoard.appendChild(cell);
                 }
@@ -86,7 +106,27 @@
 
         function toggleCellState(i, j, cell) {
             board[i][j] = board[i][j] ? 0 : 1;
-            cell.classList.toggle('alive');
+            if (board[i][j]) {
+                ageBoard[i][j] = 1; // Reset age to 1 when cell becomes alive
+            } else {
+                ageBoard[i][j] = 0; // Reset age to 0 when cell dies
+            }
+            updateCellClass(cell, i, j);
+        }
+
+        function updateCellClass(cell, i, j) {
+            cell.className = 'cell'; // Reset class
+            if (board[i][j]) {
+                cell.classList.add('alive');
+                const age = ageBoard[i][j];
+                if (age > 2 && age < 5) {
+                    cell.classList.add('young');
+                } else if (age >= 5 && age < 10) {
+                    cell.classList.add('old');
+                } else if (age >= 10) {
+                    cell.classList.add('veteran');
+                }
+            }
         }
 
         function toggleGame() {
@@ -105,26 +145,35 @@
 
         function clearBoard() {
             board = createBoard(BOARD_SIZE);
+            ageBoard = createBoard(BOARD_SIZE);
             drawBoard();
         }
 
         function randomizeBoard() {
             board = createBoard(BOARD_SIZE).map(row => row.map(() => (Math.random() > 0.7 ? 1 : 0)));
+            ageBoard = createBoard(BOARD_SIZE);
             drawBoard();
         }
 
         function performNextGeneration() {
+            const newBoard = createBoard(BOARD_SIZE);
+            const newAgeBoard = createBoard(BOARD_SIZE);
+
             for (let i = 0; i < BOARD_SIZE; i++) {
                 for (let j = 0; j < BOARD_SIZE; j++) {
                     const aliveNeighbors = countAliveNeighbors(i, j);
                     if (board[i][j]) {
-                        nextBoard[i][j] = aliveNeighbors === 2 || aliveNeighbors === 3 ? 1 : 0;
+                        newBoard[i][j] = aliveNeighbors === 2 || aliveNeighbors === 3 ? 1 : 0;
+                        newAgeBoard[i][j] = newBoard[i][j] ? ageBoard[i][j] + 1 : 0;
                     } else {
-                        nextBoard[i][j] = aliveNeighbors === 3 ? 1 : 0;
+                        newBoard[i][j] = aliveNeighbors === 3 ? 1 : 0;
+                        newAgeBoard[i][j] = newBoard[i][j] ? 1 : 0;
                     }
                 }
             }
-            board = nextBoard.map(arr => arr.slice());
+
+            board = newBoard;
+            ageBoard = newAgeBoard;
         }
 
         function updateBoard() {
@@ -132,11 +181,7 @@
             for (let i = 0; i < BOARD_SIZE; i++) {
                 for (let j = 0; j < BOARD_SIZE; j++) {
                     const cell = cells[i * BOARD_SIZE + j];
-                    if (board[i][j]) {
-                        cell.classList.add('alive');
-                    } else {
-                        cell.classList.remove('alive');
-                    }
+                    updateCellClass(cell, i, j);
                 }
             }
         }
@@ -156,7 +201,21 @@
             return count;
         }
 
-        drawBoard();
+        function populateThemeSelector() {
+            const themeSelector = document.getElementById('themeSelector');
+            themeFiles.forEach(themeFile => {
+                const option = document.createElement('option');
+                option.value = `css/${themeFile}`;
+                option.textContent = themeFile.replace('.css', '');
+                themeSelector.appendChild(option);
+            });
+        }
+
+        function changeTheme() {
+            const themeSelector = document.getElementById('themeSelector');
+            const themeStylesheet = document.getElementById('themeStylesheet');
+            themeStylesheet.href = themeSelector.value;
+        }
     </script>
 </body>
 </html>
