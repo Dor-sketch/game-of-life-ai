@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conway's Game of Life</title>
+    <style>
+        body {
+            font-family: 'Courier New', monospace;
+            background-color: #FFFFFF;
+            color: #333333;
+            text-align: center;
+        }
+        #controls {
+            margin-bottom: 20px;
+        }
+        button {
+            background: #11307d;
+            color: #FFFFFF;
+            border: 1px solid #11307d;
+            border-radius: 0;
+            font-size: large;
+            font-weight: bold;
+            margin: 5px;
+            transition: 0.3s;
+        }
+        button:hover {
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+            background: #ee6161;
+            border-color: #555555;
+        }
+        .drawingarea {
+            display: grid;
+            margin: 0 auto;
+            background: #FFFFFF;
+            border: 2px solid #555555;
+            width: fit-content;
+        }
+        .cell {
+            width: 20px;
+            height: 20px;
+            border: 1px solid #ddd;
+            cursor: pointer;
+        }
+        .alive {
+            background-color: #80e5ff;
+        }
+    </style>
+</head>
+<body>
+    <h1>Conway's Game of Life</h1>
+    <div id="controls">
+        <button onclick="toggleGame()">Start</button>
+        <button onclick="clearBoard()">Clear</button>
+        <button onclick="randomizeBoard()">Random</button>
+        <button onclick="performNextGeneration()">Next</button>
+    </div>
+    <div id="gameBoard" class="drawingarea"></div>
+    <script>
+        const BOARD_SIZE = 30;
+        let board = createBoard(BOARD_SIZE);
+        let nextBoard = createBoard(BOARD_SIZE);
+        let interval;
+        let isRunning = false;
+
+        function createBoard(size) {
+            return Array.from({ length: size }, () => Array(size).fill(0));
+        }
+
+        function drawBoard() {
+            const gameBoard = document.getElementById('gameBoard');
+            gameBoard.style.gridTemplateRows = `repeat(${BOARD_SIZE}, 20px)`;
+            gameBoard.style.gridTemplateColumns = `repeat(${BOARD_SIZE}, 20px)`;
+            gameBoard.innerHTML = '';
+
+            for (let i = 0; i < BOARD_SIZE; i++) {
+                for (let j = 0; j < BOARD_SIZE; j++) {
+                    const cell = document.createElement('div');
+                    cell.classList.add('cell');
+                    if (board[i][j]) cell.classList.add('alive');
+                    cell.addEventListener('click', () => toggleCellState(i, j, cell));
+                    gameBoard.appendChild(cell);
+                }
+            }
+        }
+
+        function toggleCellState(i, j, cell) {
+            board[i][j] = board[i][j] ? 0 : 1;
+            cell.classList.toggle('alive');
+        }
+
+        function toggleGame() {
+            isRunning = !isRunning;
+            if (isRunning) {
+                interval = setInterval(() => {
+                    performNextGeneration();
+                    updateBoard();
+                }, 100);
+                document.querySelector('#controls button').textContent = 'Pause';
+            } else {
+                clearInterval(interval);
+                document.querySelector('#controls button').textContent = 'Start';
+            }
+        }
+
+        function clearBoard() {
+            board = createBoard(BOARD_SIZE);
+            drawBoard();
+        }
+
+        function randomizeBoard() {
+            board = createBoard(BOARD_SIZE).map(row => row.map(() => (Math.random() > 0.7 ? 1 : 0)));
+            drawBoard();
+        }
+
+        function performNextGeneration() {
+            for (let i = 0; i < BOARD_SIZE; i++) {
+                for (let j = 0; j < BOARD_SIZE; j++) {
+                    const aliveNeighbors = countAliveNeighbors(i, j);
+                    if (board[i][j]) {
+                        nextBoard[i][j] = aliveNeighbors === 2 || aliveNeighbors === 3 ? 1 : 0;
+                    } else {
+                        nextBoard[i][j] = aliveNeighbors === 3 ? 1 : 0;
+                    }
+                }
+            }
+            board = nextBoard.map(arr => arr.slice());
+        }
+
+        function updateBoard() {
+            const cells = document.getElementsByClassName('cell');
+            for (let i = 0; i < BOARD_SIZE; i++) {
+                for (let j = 0; j < BOARD_SIZE; j++) {
+                    const cell = cells[i * BOARD_SIZE + j];
+                    if (board[i][j]) {
+                        cell.classList.add('alive');
+                    } else {
+                        cell.classList.remove('alive');
+                    }
+                }
+            }
+        }
+
+        function countAliveNeighbors(x, y) {
+            let count = 0;
+            for (let i = -1; i <= 1; i++) {
+                for (let j = -1; j <= 1; j++) {
+                    if (i === 0 && j === 0) continue;
+                    const nx = x + i;
+                    const ny = y + j;
+                    if (nx >= 0 && nx < BOARD_SIZE && ny >= 0 && ny < BOARD_SIZE) {
+                        count += board[nx][ny];
+                    }
+                }
+            }
+            return count;
+        }
+
+        drawBoard();
+    </script>
+</body>
+</html>
