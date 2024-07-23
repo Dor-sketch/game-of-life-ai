@@ -1,0 +1,27 @@
+<header class="header" id="header" style="direction: ltr !important;">
+        {% include nav.html %}
+        {% if page.flag %}
+        <h1>{{ page.display-title }}</h1>
+        {% endif %}
+</header>
+<script>
+        document.addEventListener("DOMContentLoaded", function () {
+                var pseudoBefore = document.createElement('div');
+                pseudoBefore.classList.add('header-bg');
+                pseudoBefore.style.content = '""';
+                pseudoBefore.style.position = 'absolute';
+                pseudoBefore.style.top = '10%';
+                pseudoBefore.style.left = '10%';
+                pseudoBefore.style.right = '10%';
+                pseudoBefore.style.bottom = '5%';
+                pseudoBefore.style.backgroundImage = "url('../images/header-bg.webp')";
+                pseudoBefore.style.backgroundSize = 'cover';
+                pseudoBefore.style.backgroundPosition = 'center';
+                pseudoBefore.style.border = '10px solid rgba(255, 255, 255, 0.5)';
+                pseudoBefore.style.boxShadow = '0 0 20px rgba(0, 0, 0, 0.3)';
+                pseudoBefore.style.zIndex = '-1';
+                var headerElement = document.getElementById('header');
+                headerElement.style.position = 'relative';
+                headerElement.insertBefore(pseudoBefore, headerElement.firstChild);
+        });
+</script>

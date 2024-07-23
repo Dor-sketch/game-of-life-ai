@@ -1,0 +1,29 @@
+{% assign sorted_pages = site.html_pages | sort: 'date' | reverse %}
+{% assign current_index = nil %}
+{% assign current_page_url = page.url %}
+
+{% for page in sorted_pages %}
+  {% if page.url == current_page_url %}
+    {% assign current_index = forloop.index0 %}
+    {% break %}
+  {% endif %}
+{% endfor %}
+
+{% if current_index != nil %}
+  {% assign next_index = current_index | plus: 1 %}
+  {% assign prev_index = current_index | minus: 1 %}
+
+  <div class="pagination-container">
+
+    {% if sorted_pages[next_index] and sorted_pages[next_index].blog == true %}
+      {% assign next_page = sorted_pages[next_index] %}
+
+      <a class="pagination-link next" href="{{ next_page.url }}" aria-label="Next: {{ next_page.title }}">הקודם: {{ next_page.title }}</a>
+    {% endif %}
+    {% if sorted_pages[prev_index] and sorted_pages[prev_index].blog == true %}
+      {% assign prev_page = sorted_pages[prev_index] %}
+
+      <a class="pagination-link prev" href="{{ prev_page.url }}" aria-label="Previous: {{ prev_page.title }}">הבא: {{ prev_page.title }}</a>
+    {% endif %}
+  </div>
+{% endif %}

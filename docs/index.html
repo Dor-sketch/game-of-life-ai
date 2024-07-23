@@ -2,6 +2,16 @@
 <html lang="en">
 
 <head>
+    <!-- Google Tag Manager -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-T7HFKFX0PR"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-T7HFKFX0PR');
+    </script>
+
+    <!-- Meta Tags -->
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -16,23 +26,37 @@
         content="Conway's Game of Life, Game of Life, Cellular Automata, Online Simulator, Genetic Algorithm, Artificial Intelligence, AI, Machine Learning, ML, Evolutionary Algorithm, Evolutionary Computation, Optimization, Pattern Recognition, Emergent Behavior, Simulation, Interactive, Controls, Start, Pause, Clear, Randomize, Next Generation, Theme, Customizable, Blue, Forest, Green, Lavender, Metal_Blue, Metal_Red, Orange, LightPink, Purple, Maroon, Smoke">
     <meta property="og:description"
         content="Conway's Game of Life Online Simulator with customizable themes. Including interactive controls to start, pause, clear, randomize, and advance to the next generation.">
-    <link rel="canonical" href="https://dorpascal.com/game-of-life-ai/">
     <meta property="og:url" content="https://dorpascal.com/game-of-life-ai/">
     <meta property="og:site_name" content="Game of Life Online">
     <meta property="og:type" content="website">
+    <meta property="og:image" content="./cover.gif">
     <meta name="twitter:card" content="summary">
-    <meta name="theme-color" content="Lavender">
     <meta property="twitter:title" content="Genetic Algorithm for Conway’s Game of Life">
+    <meta name="theme-color" content="Lavender">
+    <meta name="apple-mobile-web-app-title" content="Game of Life AI">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="application-name" content="Game of Life AI">
+    <link rel="canonical" href="https://dorpascal.com/game-of-life-ai/">
+
+    <!-- JSON-LD Structured Data -->
     <script type="application/ld+json">
         {
             "@context": "https://schema.org",
             "@type": "WebSite",
             "description": "Implementing Conway’s Game of Life with genetic algorithms to optimize patterns and explore emergent behaviors within the simulation.",
             "headline": "Genetic Algorithm for Conway’s Game of Life Online",
-            "name": "Game of Life AI",
-            "url": "https://dorpascal.com/game-of-life-ai/",
+            "name": "Game of Life AI Simulator Online",
+            "url": "https://dorpascal.com/game-of-life-ai/"
         }
     </script>
+
+    <!-- Icons and Manifest -->
+    <link rel="icon" type="image/png" sizes="32x32" href="./icons8-grid-parakeet-32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="./icons8-grid-parakeet-16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png">
+    <link rel="manifest" href="https://dorpascal.com/site.webmanifest">
+    <link rel="shortcut icon" href="https://dorpascal.com/favicon.ico">
 
     <!-- Stylesheets -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic">
@@ -43,9 +67,11 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/themes/prism.min.css">
     <link rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/plugins/line-numbers/prism-line-numbers.min.css">
-    <link rel="icon" type="image/png" href="https://dorpascal.com/favicon.ico">
 
+    <!-- Title -->
     <title>Conway's Game of Life Online Simulator</title>
+
+    <!-- Inline Styles -->
     <style>
         body {
             font-family: 'Courier New', monospace;
@@ -134,7 +160,6 @@
         }
 
         header a {
-            /* color: #ffffff; */
             color: #00FFFFFC;
             transition: color 0.3s ease-in-out;
         }
@@ -201,29 +226,21 @@
         #themeSelector {
             text-align: center;
             width: calc(min(100%, 200px));
-            /* Limit width to 200px or 100% of the screen */
             border: 2px solid lavender;
-            /* Stylish border */
             border-radius: 5px;
-            /* Rounded corners */
             background-color: #fff;
-            /* Background color */
             transition: border-color 0.25s ease-in-out, box-shadow 0.25s ease-in-out;
-            /* Smooth transition for hover */
         }
 
         #themeSelector:hover {
             cursor: pointer;
             border-color: #0056b3;
-            /* Darker border on hover */
             box-shadow: 0 0 8px #007BFF;
-            /* Subtle shadow for depth */
         }
 
         #themeSelector option {
             text-align: center;
             padding: 10px;
-            /* Add padding for options for better readability */
         }
 
         #themeStylesheet {
@@ -252,11 +269,23 @@
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
 
-
-
         header p {
             margin: 0;
             text-align: left;
+        }
+
+        #themes {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            background-color: transparent;
+        }
+
+        #themes label {
+            margin-right: 10px;
+            font-size: 1.2rem;
+            background-color: transparent;
         }
     </style>
 </head>
@@ -264,8 +293,10 @@
 <body>
     <div class="content">
         <header>
-            <p>Back to <a href="https://dorpascal.com">DorPascal.com</a></p>
-            <a href="https://github.com/Dor-sketch/game-of-life-ai">
+            <p>Back to <a href="https://dorpascal.com" target="_blank" aria-label="Dor Pascal's WebSite"
+                    title="Dor Pascal's WebSite">Dor Pascal's WebSite</a></p>
+            <a href="https://github.com/Dor-sketch/game-of-life-ai" target="_blank" aria-label="View source on GitHub"
+                title="View source on GitHub">
                 <svg height="32" class="octicon octicon-mark-github" viewBox="0 0 16 16" version="1.1" width="32"
                     aria-hidden="true">
                     <path fill-rule="evenodd"
@@ -273,9 +304,13 @@
                     </path>
                 </svg>
             </a>
-            <select id="themeSelector" onchange="changeTheme()">
-                <!-- Options will be populated by JavaScript -->
-            </select>
+            <div id="themes">
+                <label for="themeSelector">Theme:</label>
+                <select id="themeSelector" onchange="changeTheme()" aria-label="Select a theme" title="Select a theme"
+                    style="border-color: Lavender;">
+                    <!-- Options will be populated by JavaScript -->
+                </select>
+            </div>
         </header>
         <h1>Conway's Game of Life</h1>
 

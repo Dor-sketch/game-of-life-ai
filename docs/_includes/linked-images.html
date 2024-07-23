@@ -1,0 +1,11 @@
+<script>
+document.querySelectorAll('img:not([onclick])').forEach(img => {
+  // Corrected variable name from 'image' to 'img'
+  if (img.classList.contains('profile-pic')) return;
+
+  img.onclick = () => {
+    window.open(img.src, '_blank').focus();
+  };
+  img.style.cursor = 'pointer';
+});
+</script>

@@ -1,0 +1,46 @@
+<nav class="menu-bar">
+    <ul>
+        <li><a href="/" aria-label="Home">Home</a></li>
+        <li><a href="/projects" aria-label="Projects">Projects</a></li>
+        <li><a href="/mini-apps" aria-label="Apps">Apps</a></li>
+        <li><a href="/בלוג-פיתוח-תוכנה" aria-label="Blog">Blog</a></li>
+        <li><a href="/about" aria-label="About">About</a></li>
+        <li><a href="/contact" aria-label="Contact">Contact</a></li>
+    </ul>
+
+    <button id="toggleDarkMode" style="background: none; border: none; cursor: pointer;" aria-label="Toggle Dark Mode">
+        <!-- Sun Icon for Light Mode -->
+        <svg id="sunIcon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-sun" style="display: none;">
+            <circle cx="12" cy="12" r="5"></circle>
+            <line x1="12" y1="1" x2="12" y2="3"></line>
+            <line x1="12" y1="21" x2="12" y2="23"></line>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+            <line x1="1" y1="12" x2="3" y2="12"></line>
+            <line x1="21" y1="12" x2="23" y2="12"></line>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+        </svg>
+        <!-- Moon Icon for Dark Mode (Already Transparent) -->
+<!-- Moon Icon for Dark Mode -->
+<svg id="moonIcon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-moon" aria-label="Moon Icon">
+    <path d="M21 12.79A9 9 0 0111.21 3 7 7 0 0012 21a9 9 0 009-8.21z"></path>
+</svg>
+    </button>
+    <button id="toggleMenu" aria-label="Toggle Menu" class="menu-icon-button">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <polyline id="menu-top" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" points="3 6, 21 6">
+                <animate id="anim-menu-top-open" attributeName="points" keyTimes="0;0.5;1" dur="0.3s" begin="indefinite" fill="freeze" calcMode="spline" keySplines="0.42, 0, 1, 1;0, 0, 0.58, 1" values="3 6, 21 6; 3 12, 21 12; 6 18, 18 6"></animate>
+                <animate id="anim-menu-top-close" attributeName="points" keyTimes="0;0.5;1" dur="0.3s" begin="indefinite" fill="freeze" calcMode="spline" keySplines="0.42, 0, 1, 1;0, 0, 0.58, 1" values="6 18, 18 6; 3 12, 21 12; 3 6, 21 6"></animate>
+            </polyline>
+            <polyline id="menu-middle" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" points="3 12, 21 12">
+                <animate id="anim-menu-middle-open" attributeName="opacity" keyTimes="0;0.5;1" dur="0.3s" begin="indefinite" fill="freeze" calcMode="spline" keySplines="0.42, 0, 1, 1;0, 0, 0.58, 1" values="1;0;0"></animate>
+                <animate id="anim-menu-middle-close" attributeName="opacity" keyTimes="0;0.5;1" dur="0.3s" begin="indefinite" fill="freeze" calcMode="spline" keySplines="0.42, 0, 1, 1;0, 0, 0.58, 1" values="0;0;1"></animate>
+            </polyline>
+            <polyline id="menu-bottom" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" points="3 18, 21 18">
+                <animate id="anim-menu-bottom-open" attributeName="points" keyTimes="0;0.5;1" dur="0.3s" begin="indefinite" fill="freeze" calcMode="spline" keySplines="0.42, 0, 1, 1;0, 0, 0.58, 1" values="3 18, 21 18; 3 12, 21 12; 6 6, 18 18"></animate>
+                <animate id="anim-menu-bottom-close" attributeName="points" keyTimes="0;0.5;1" dur="0.3s" begin="indefinite" fill="freeze" calcMode="spline" keySplines="0.42, 0, 1, 1;0, 0, 0.58, 1" values="6 6, 18 18; 3 12, 21 12; 3 18, 21 18"></animate>
+            </polyline>
+        </svg>
+    </button>
+</nav>

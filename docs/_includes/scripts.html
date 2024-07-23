@@ -1,0 +1,99 @@
+
+
+<script>
+document.getElementById('toggleDarkMode').addEventListener('click', function() {
+    document.body.classList.toggle('dark');
+    let isDark = document.body.classList.contains('dark');
+    localStorage.setItem('dark', isDark);
+    updateThemeColorForDarkMode(isDark);
+});
+function updateThemeColorForDarkMode(isDarkMode) {
+    const themeColorMetaTag = document.querySelector('meta[name="theme-color"]');
+    if (isDarkMode) {
+        themeColorMetaTag.setAttribute("content", "#161617");
+    } else {
+        themeColorMetaTag.setAttribute("content", "#E6E6E6");
+    }
+}
+
+
+
+document.addEventListener('DOMContentLoaded', () => {
+    const isDarkMode = localStorage.getItem('dark') === 'true';
+    document.body.classList.toggle('dark', isDarkMode);
+    updateThemeColorForDarkMode(isDarkMode);
+});
+
+function toggleDarkMode() {
+    const isDark = document.body.classList.toggle('dark-mode');
+    localStorage.setItem('darkMode', isDark);
+}
+document.addEventListener('DOMContentLoaded', (event) => {
+    const toggleDarkModeButton = document.getElementById('toggleDarkMode');
+    const sunIcon = document.getElementById('sunIcon');
+    const moonIcon = document.getElementById('moonIcon');
+
+    function toggleIcons() {
+        const isDarkMode = document.body.classList.contains('dark-mode');
+        if (isDarkMode) {
+            document.body.classList.remove('dark-mode');
+            sunIcon.style.display = 'none';
+            moonIcon.style.display = 'block';
+            moonIcon.classList.remove('moon-icon-color');
+        } else {
+            document.body.classList.add('dark-mode');
+            sunIcon.style.display = 'block';
+            moonIcon.style.display = 'none';
+            moonIcon.classList.add('moon-icon-color');
+        }
+    }
+
+    toggleIcons();
+    toggleDarkModeButton.addEventListener('click', toggleIcons);
+});
+document.addEventListener('DOMContentLoaded', function() {
+    const menuToggle = document.getElementById('toggleMenu');
+    const menuNav = document.querySelector('.menu-bar ul');
+
+    if (menuToggle && menuNav) {
+        menuToggle.addEventListener('click', function() {
+            menuNav.classList.toggle('open');
+        });
+    }
+});
+
+document.addEventListener("DOMContentLoaded", function() {
+    const toggleMenuButton = document.getElementById('toggleMenu');
+    let menuOpen = false;
+
+    document.querySelector('nav').classList.add('slide-down');
+    document.querySelector('nav ul').classList.add('slide-down');
+    document.querySelector('.menu-bar').classList.add('slide-down');
+
+    toggleMenuButton.addEventListener('click', () => {
+        if (menuOpen) {
+            document.getElementById('anim-menu-top-close').beginElement();
+            document.getElementById('anim-menu-middle-close').beginElement();
+            document.getElementById('anim-menu-bottom-close').beginElement();
+
+            document.getElementById('anim-menu-top-close').addEventListener('endEvent', () => {
+                document.querySelector('.menu-bar ul').classList.remove('open');
+            });
+
+        } else {
+            document.getElementById('anim-menu-top-open').beginElement();
+            document.getElementById('anim-menu-middle-open').beginElement();
+            document.getElementById('anim-menu-bottom-open').beginElement();
+            document.querySelector('.menu-bar ul').classList.add('open');
+        }
+        menuOpen = !menuOpen;
+    });
+});
+    document.getElementById('current-year').textContent = new Date().getFullYear().toString();
+    window.onload = function () {
+        const images = document.getElementsByTagName('img');
+        for (const img of images) {
+            img.setAttribute('draggable', 'false');
+        }
+    };
+</script>

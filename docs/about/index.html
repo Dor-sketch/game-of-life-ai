@@ -1,0 +1,1475 @@
+<!DOCTYPE html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Begin Jekyll SEO tag v2.8.0 -->
+    <title>Genetic Algorithm for Conway’s Game of Life</title>
+    <meta name="generator" content="Jekyll v3.9.5">
+    <meta property="og:title" content="Genetic Algorithm for Conway’s Game of Life">
+    <meta property="og:locale" content="en_US">
+    <meta name="description"
+        content="Implementing Conway’s Game of Life with genetic algorithms to optimize patterns and explore emergent behaviors within the simulation.">
+    <meta property="og:description"
+        content="Implementing Conway’s Game of Life with genetic algorithms to optimize patterns and explore emergent behaviors within the simulation.">
+    <link rel="canonical" href="https://dorpascal.com/game-of-life-ai/about/">
+    <meta property="og:url" content="https://dorpascal.com/game-of-life-ai/about/">
+    <meta property="og:site_name" content="Game of Life AI Program">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary">
+    <meta property="twitter:title" content="Genetic Algorithm for Conway’s Game of Life">
+    <script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebSite","description":"Implementing Conway’s Game of Life with genetic algorithms to optimize patterns and explore emergent behaviors within the simulation.","headline":"Genetic Algorithm for Conway’s Game of Life 🧬","name":"game-of-life-ai","url":"https://dorpascal.com/game-of-life-ai/about//"}
+</script>
+    <!-- End Jekyll SEO tag -->
+
+    <style class="anchorjs"></style>
+    <include src="../_includes/header.html"></include>
+    <include src="../_includes/footer.html"></include>
+    <include src="../_includes/scripts.html"></include>
+    <link rel="stylesheet" href="../css/styles.css">
+    <!-- Setup Google Analytics -->
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-T7HFKFX0PR');
+    </script>
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/themes/prism.min.css" rel="stylesheet" />
+
+    <!-- You can set your favicon here -->
+    <link rel="icon" type="image/png" href="https://dorpascal.com/favicon.ico">
+    <!-- link rel="shortcut icon" type="image/x-icon" href="/meta-decorator-program/favicon.ico" -->
+
+    <!-- end custom head snippets -->
+    <style>
+        img {
+            max-width: 100%;
+        }
+    </style>
+
+    <!-- PrismJS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/themes/prism.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/plugins/line-numbers/prism-line-numbers.min.css"
+        rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/components/prism-core.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/plugins/autoloader/prism-autoloader.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/plugins/line-numbers/prism-line-numbers.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/plugins/line-highlight/prism-line-highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/plugins/line-highlight/prism-line-highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/plugins/line-numbers/prism-line-numbers.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/plugins/line-highlight/prism-line-highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/plugins/line-highlight/prism-line-highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/plugins/line-numbers/prism-line-numbers.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/plugins/line-highlight/prism-line-highlight.min.js"></script>
+</head>
+
+<body>
+
+    <main>
+        <article>
+            <div class="container-lg px-3 my-5 markdown-body">
+
+
+
+                <h1 id="genetic-algorithm-for-conways-game-of-life-"><a
+                        href="https://dorpascal.com/game-of-life-ai/">Conway’s Game of Life:<br>Genetic Algorithm for Metuselahs</a></h1>
+                </h1>
+                <p>This project implements a genetic algorithm to discover configurations in Conway’s Game of Life that
+                    meet specific criteria, showcasing the power of AI in software development. This project was
+                    developed for the <strong>Biological Computation (20581)</strong> Advanced Course at the <em>Open
+                        University of Israel</em> in 2024 and earned a perfect score of <code
+                        class="language-plaintext highlighter-rouge">100/100</code>.</p>
+
+                <p align="center">
+                    <img src="https://raw.githubusercontent.com/Dor-sketch/game-of-life-ai/main/images/sky_reduced.gif  "
+                        width="600">
+                    <br>
+                    <i>Evolution of a fitted individual in the GUI, blue theme</i>
+                </p>
+
+                <hr>
+
+                <!-- @import "[TOC]" {cmd="toc" depthFrom=2 depthTo=3 orderedList=false} -->
+
+                <!-- code_chunk_output -->
+
+                <ul>
+                    <li><a href="#overview">Overview</a>
+                        <ul>
+                            <li><a href="#background">Background</a></li>
+                            <li><a href="#project-objectives">Project Objectives</a></li>
+                            <li><a href="#project-structure">Project Structure</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#getting-started">Getting Started</a>
+                        <ul>
+                            <li><a href="#using-the-gui">Using the GUI</a></li>
+                            <li><a href="#using-the-command-line">Using the Command Line</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#examples">Examples</a>
+                        <ul>
+                            <li><a href="#t_shape">T_shape</a></li>
+                            <li><a href="#dragon">Dragon</a></li>
+                            <li><a href="#hi">Hi</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#more-examples">More Examples</a>
+                        <ul>
+                            <li><a href="#insights">Insights</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#technical-details">Technical Details</a>
+                        <ul>
+                            <li><a href="#game-of-life-implementation">Game of Life Implementation</a></li>
+                            <li><a href="#chromosome-representation">Chromosome Representation</a></li>
+                            <li><a href="#population-implementation">Population Implementation</a></li>
+                            <li><a href="#genetic-algorithm-implementation">Genetic Algorithm Implementation</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#contributions-and-feedback">Contributions and Feedback</a></li>
+                    <li><a href="#acknowledgements">Acknowledgements</a></li>
+                    <li><a href="#license">License</a></li>
+                </ul>
+
+                <!-- /code_chunk_output -->
+
+                <hr>
+
+                <h2 id="overview">Overview<a class="anchorjs-link " href="#overview" aria-label="Anchor"
+                        data-anchorjs-icon="" style="font: 1em / 1 anchorjs-icons; padding-left: 0.375em;"></a></h2>
+
+                <p>Before diving into the project, let’s take a look at some patterns discovered by the algorithm. Keep
+                    in mind that the algorithm generates different results each time it’s run. The examples in this file
+                    represent just a handful of the many patterns that have been identified.</p>
+
+                <p><strong>⏳ Please Wait: the animations might take some time to load. It is recommended to wait for the
+                        page to fully load before scrolling down, and use a desktop browser for the best
+                        experience.</strong></p>
+
+                <p align="center">
+                    <img src="https://raw.githubusercontent.com/Dor-sketch/game-of-life-ai/main/images/new_metal_blue_reduced.gif"
+                        width="400">
+                    <img src="https://raw.githubusercontent.com/Dor-sketch/game-of-life-ai/main/images/new_metal_red_reduced.gif"
+                        width="400">
+                    <br>
+                    <i>Evolution animation of a fitted individual, displayed in the GUI with a metal blue theme (left)
+                        and a metal red theme (right).<br>
+                        Full GIF versions of all evaluations can be found in the `images` directory.</i>
+                    <br>
+                    <img src="https://raw.githubusercontent.com/Dor-sketch/game-of-life-ai/main/images/gui_graphics_zoom1.png"
+                        width="400">
+                    <img src="https://raw.githubusercontent.com/Dor-sketch/game-of-life-ai/main/images/gui_graphics_zoom3.png"
+                        width="400">
+                    <br>
+                    <i>Zoomed in view of the GUI<br>
+                        The 3D effect is created using the box-shadow property and gradient background (see the CSS file
+                        for more details).</i>
+                </p>
+
+                <p>For more examples, please refer to the <a href="#examples">Examples</a> section.</p>
+
+                <h3 id="background">Background<a class="anchorjs-link " href="#background" aria-label="Anchor"
+                        data-anchorjs-icon="" style="font: 1em / 1 anchorjs-icons; padding-left: 0.375em;"></a></h3>
+
+                <p>The <code class="language-plaintext highlighter-rouge">Game of Life</code> is a <a
+                        href="https://en.wikipedia.org/wiki/Cellular_automaton">cellular automaton</a> devised by the
+                    British mathematician John Horton Conway in 1970. It is a zero-player game, meaning that its
+                    evolution is determined by its initial state, requiring no further input. The game unfolds on an
+                    infinite two-dimensional grid, with each cell in the grid being either alive or dead. The game
+                    progresses through generations, with each generation determined by the previous one according to
+                    only four rules:</p>
+
+                <ol>
+                    <li>
+                        <p><strong>Underpopulation:</strong> Any live cell with fewer than two live neighbors dies, as
+                            if by underpopulation.</p>
+                    </li>
+                    <li>
+                        <p><strong>Survival:</strong> Any live cell with two or three live neighbors lives on to the
+                            next generation.</p>
+                    </li>
+                    <li>
+                        <p><strong>Overpopulation:</strong> Any live cell with more than three live neighbors dies, as
+                            if by overpopulation.</p>
+                    </li>
+                    <li>
+                        <p><strong>Reproduction:</strong> Any dead cell with exactly three live neighbors becomes a live
+                            cell, as if by reproduction.</p>
+                    </li>
+                </ol>
+
+                <p align="center">
+                    <img src="https://raw.githubusercontent.com/Dor-sketch/game-of-life-ai/main/images/rule1.gif"
+                        width="400">
+                    <img src="https://raw.githubusercontent.com/Dor-sketch/game-of-life-ai/main/images/rule2.gif"
+                        width="400">
+                    <br>
+                    <i>Example of Rule 1: Underpopulation (left) and Rule 2: Survival (right)</i>
+                </p>
+
+                <p align="center">
+                    <img src="https://raw.githubusercontent.com/Dor-sketch/game-of-life-ai/main/images/rule3_and_4.gif"
+                        width="400">
+                    <img src="https://raw.githubusercontent.com/Dor-sketch/game-of-life-ai/main/images/gliders.gif"
+                        width="400">
+                    <br>
+                    <i>Blinker Shape (left) and Glider Shape (right)
+                        <br>
+                        Rule 3 and 4 (Overpopulation and Reproduction) create interesting patterns in the Game of
+                        Life</i>
+                </p>
+
+                <p>The project is focused on evolutionary algorithms for optimizations problem, and Conway’s Game of
+                    Life serves as the world or the search space for the genetic algorithm. The algorithm is designed
+                    with a level of abstraction that allows it to be applicable to any problem that can be modeled as a
+                    search space. For a deeper understanding of the Game of Life, refer to its <a
+                        href="https://en.wikipedia.org/wiki/Conway's_Game_of_Life">Wikipedia page</a>.</p>
+
+                <p>The concept of an <code class="language-plaintext highlighter-rouge">Evolutionary algorithm</code>
+                    encompasses a group of algorithms inspired by evolution to solve various problems, primarily
+                    optimization problems, although not limited to them. The core idea involves initializing a
+                    population of potential solutions and leveraging an evolution-inspired process to refine this
+                    population based on the principle of <code
+                        class="language-plaintext highlighter-rouge">survival of the fittest</code>. Initially, each
+                    solution in the population undergoes evaluation using a fitness function to assess its quality and
+                    likelihood for selection in subsequent generations. The next generation is then formed by selecting
+                    the best solutions from the current generation and subjecting them to <code
+                        class="language-plaintext highlighter-rouge">crossover</code> and <code
+                        class="language-plaintext highlighter-rouge">mutation</code> operations. This iterative process
+                    continues until predefined criteria are met. Key characteristics of evolutionary algorithms include
+                    <code
+                        class="language-plaintext highlighter-rouge">simultaneous evolution of a solution population</code>,
+                    incorporation of <code class="language-plaintext highlighter-rouge">crossover mechanisms</code>, and
+                    introducing <code class="language-plaintext highlighter-rouge">stochasticity</code> in the
+                    optimization process.</p>
+
+                <p align="center">
+                    <img src="https://raw.githubusercontent.com/Dor-sketch/game-of-life-ai/main/images/cross_over.gif"
+                        width="500">
+                    <br>
+                    <i>Uniform Crossover
+                        <br>Two parents (up) are combined to create a new child (down).
+                        Child have a 50% chance to inherit each cell from one of the parents.
+                        In this case the child fitness seems to be better than the its left parent, but worse than the
+                        right parent.</i>
+                </p>
+
+                <p>A <code class="language-plaintext highlighter-rouge">Genetic algorithm</code> represents a specific
+                    instance within the evolutionary algorithm family, emphasizing <code
+                        class="language-plaintext highlighter-rouge">selection</code>, <code
+                        class="language-plaintext highlighter-rouge">crossover</code> or <code
+                        class="language-plaintext highlighter-rouge">recombination</code>, and <code
+                        class="language-plaintext highlighter-rouge">mutation</code> operations to refine the solution
+                    population. As highlighted in the book, genetic algorithms typically prioritize the <code
+                        class="language-plaintext highlighter-rouge">crossover</code> phase over <code
+                        class="language-plaintext highlighter-rouge">mutation</code>. Additionally, they commonly employ
+                    <code class="language-plaintext highlighter-rouge">binary</code> representations for solutions and
+                    utilize <code class="language-plaintext highlighter-rouge">fitness function</code>s` to evaluate
+                    solution quality, although alternative representations may sometimes yield better results. Genetic
+                    algorithms leverage individuals for exploring new solution directions while preserving promising
+                    solutions. They are particularly effective in identifying promising areas within the search space
+                    rather than focusing solely on finding the optimal solution within those regions.</p>
+
+                <p><code class="language-plaintext highlighter-rouge">Genetic Programming</code> constitutes an
+                    evolutionary computation model where solutions are represented as programs, often structured as
+                    trees. The distinctive aspect lies in the genetic operations performed on these program
+                    representations. Mutation involves altering the tree structure, while crossover entails swapping
+                    subtrees. Genetic programming incorporates the concepts of <code
+                        class="language-plaintext highlighter-rouge">terminals set</code> and <code
+                        class="language-plaintext highlighter-rouge">functions set</code>, where the former encompasses
+                    all possible terminals in the tree, and the latter includes all possible functions. Another notable
+                    difference lies in the chromosome representation: genetic programming may involve trees of varying
+                    sizes, contrasting with genetic algorithms where chromosomes typically have uniform sizes.</p>
+
+                <p>To summerize, the flow of the genetic algorithm is as follows:</p>
+
+                \[p_0 \rightarrow \text{Evaluation} \rightarrow \text{Selection} \rightarrow \text{Crossover}
+                \rightarrow \text{Mutation} \rightarrow\]
+
+                \[p_1 \rightarrow \text{Evaluation} \rightarrow \text{Selection} \rightarrow \text{Crossover}
+                \rightarrow \text{Mutation} \rightarrow\]
+
+                \[p_2 \rightarrow \text{Evaluation} \rightarrow \text{Selection} \rightarrow \text{Crossover}
+                \rightarrow \text{Mutation} \rightarrow \ldots\]
+
+                <p>where $p_0$ is the initial population, and $p_1, p_2, \ldots$ are the next generations. The algorithm
+                    continues until a stopping criterion is met, such as a maximum number of generations or a
+                    satisfactory solution.</p>
+
+                <hr>
+
+                <h3 id="project-objectives">Project Objectives<a class="anchorjs-link " href="#project-objectives"
+                        aria-label="Anchor" data-anchorjs-icon=""
+                        style="font: 1em / 1 anchorjs-icons; padding-left: 0.375em;"></a></h3>
+
+                <p>The program utilising a genetic algorithm in order to discover configurations in Conway’s Game of
+                    Life that meet the following criteria:</p>
+
+                <ol>
+                    <li>
+                        <p><strong>Reach a Stable State:</strong> The configuration must end in a state that is static
+                            or oscillating, containing at least one live cell.</p>
+                    </li>
+                    <li>
+                        <p><strong>Long Evolution Time:</strong> The configuration should take a considerable amount of
+                            time to reach stability.</p>
+                    </li>
+                    <li>
+                        <p><strong>Expansion Before Stability:</strong> During evolution, the configuration must expand
+                            significantly beyond its initial size.</p>
+                    </li>
+                </ol>
+
+                <p>This kind of patterns are known as <code
+                        class="language-plaintext highlighter-rouge">Methuselahs</code> in the Game of Life terminology.
+                    The project aims to explore the potential of genetic algorithms in discovering such configurations,
+                    showcasing the power of AI in software development. For more about <code
+                        class="language-plaintext highlighter-rouge">Methuselahs</code>, you can visit the <a
+                        href="https://en.wikipedia.org/wiki/Methuselah_(cellular_automaton)">Wikipedia page</a>.</p>
+
+                <p align="center">
+                    <img src="https://raw.githubusercontent.com/Dor-sketch/game-of-life-ai/main/images/hot.gif"
+                        width="500">
+                    <br>
+                    <i>Start of the evolution of a fitted individual in the GUI.
+                        <br>
+                        Note: (a) Small initial size (b) Large population size at its peak (c) Long time to reach a
+                        stable state. Other factors could have been considered, such as symmetry, but were not
+                        implemented.
+                    </i>
+                </p>
+
+                <h3 id="project-structure">Project Structure<a class="anchorjs-link " href="#project-structure"
+                        aria-label="Anchor" data-anchorjs-icon=""
+                        style="font: 1em / 1 anchorjs-icons; padding-left: 0.375em;"></a></h3>
+
+                <p>The implementation is modular, consisting of:</p>
+
+                <ul>
+                    <li>
+                        <p><strong>Chromosome Representation</strong>: <code
+                                class="language-plaintext highlighter-rouge">chromosome.cpp</code> - Encapsulates a
+                            configuration within the game, implementing genetic operations like crossover and mutation.
+                        </p>
+                    </li>
+                    <li>
+                        <p><strong>Genetic Algorithm Core</strong>: <code
+                                class="language-plaintext highlighter-rouge">ga.cpp</code> &amp; <code
+                                class="language-plaintext highlighter-rouge">population.cpp</code> - The heart of the
+                            genetic algorithm, handling the population of configurations and their evolution over
+                            generations.</p>
+                    </li>
+                    <li>
+                        <p><strong>Game Logic</strong>: <code
+                                class="language-plaintext highlighter-rouge">game.cpp</code> - A Game of Life
+                            implementation optimized for speed, using C-style memory management for efficiency.</p>
+                    </li>
+                    <li>
+                        <p><strong>GUI</strong>: <code class="language-plaintext highlighter-rouge">gui.cpp</code> - An
+                            advanced graphical user interface for real-time visualization of the algorithm’s progress.
+                        </p>
+                    </li>
+                    <li>
+                        <p><strong>Main Application</strong>: <code
+                                class="language-plaintext highlighter-rouge">main.cpp</code> - Orchestrates the
+                            execution of all components.</p>
+                    </li>
+                </ul>
+
+                <p>The program utilizes advanced C++ features and design patterns to ensure efficiency, modularity, and
+                    scalability. For a detailes explanation of the implementation, please refer to the <a
+                        href="#technical-details">Technical Details</a> section (previous knowledge of C++ is
+                    recommended).</p>
+
+                <hr>
+
+                <h2 id="getting-started">Getting Started<a class="anchorjs-link " href="#getting-started"
+                        aria-label="Anchor" data-anchorjs-icon=""
+                        style="font: 1em / 1 anchorjs-icons; padding-left: 0.375em;"></a></h2>
+
+                <p>The program is designed to be user-friendly, offering both a graphical user interface (GUI) and
+                    command line execution. The GUI is required installion of the <code
+                        class="language-plaintext highlighter-rouge">gtk</code> library. If you are not interested in
+                    the GUI, please refer to the <a href="#using-the-command-line">Using the Command Line</a> section.
+                </p>
+
+                <h3 id="using-the-gui">Using the GUI<a class="anchorjs-link " href="#using-the-gui" aria-label="Anchor"
+                        data-anchorjs-icon="" style="font: 1em / 1 anchorjs-icons; padding-left: 0.375em;"></a></h3>
+
+                <p align="center">
+                    <img src="https://raw.githubusercontent.com/Dor-sketch/game-of-life-ai/main/images/GUI.gif"
+                        width="600">
+                    <br>
+                    <i>Graphical User Interface (GUI) for the Genetic Algorithm</i>
+                </p>
+
+                <p>The GUI, implemented in <code class="language-plaintext highlighter-rouge">gui.cpp</code>, utilizes
+                    the <code class="language-plaintext highlighter-rouge">gtk</code> library to deliver an intuitive
+                    user experience. It presents a real-time interactive game display, highlighting key metrics such as
+                    the current generation, the count of initial and currently alive cells, and the top score. It also
+                    includes a graphical representation of the population size, with the flexibility to manually or
+                    automatically execute the algorithm.</p>
+
+                <p>This GUI, designed to be user-friendly, provides a real-time visualization platform for the genetic
+                    algorithm’s progress. Its intuitive and interactive design ensures a seamless user experience,
+                    enabling users to monitor the algorithm’s execution and delve into the results.</p>
+
+                <p>To ensure thread safety and enhance responsiveness, the GUI employs a <code
+                        class="language-plaintext highlighter-rouge">Mutex</code> to synchronize access to its board.
+                    This allows all I/O calls to be made from the main thread, thereby enhancing stability and
+                    preventing potential crashes or freezes.</p>
+
+                <p>Before running the GUI, ensure the <code class="language-plaintext highlighter-rouge">gtk</code>
+                    library is installed on your system. If absent, it can be installed with the following command:</p>
+
+                <div class="language-bash highlighter-rouge">
+                    <div class="highlight">
+                        <pre class="highlight"><code><span class="nb">sudo </span>apt-get <span class="nb">install </span>libgtk-3-dev
+</code></pre>
+                    </div>
+                </div>
+
+                <p>or on mac:</p>
+
+                <div class="language-bash highlighter-rouge">
+                    <div class="highlight">
+                        <pre class="highlight"><code>brew <span class="nb">install </span>gtk+3
+</code></pre>
+                    </div>
+                </div>
+
+                <p>The program can be compiled with the included <code
+                        class="language-plaintext highlighter-rouge">makefile</code> by running the following command:
+                </p>
+
+                <div class="language-bash highlighter-rouge">
+                    <div class="highlight">
+                        <pre class="highlight"><code>make
+</code></pre>
+                    </div>
+                </div>
+
+                <p>After compilation, the GUI can be launched by executing the following command:</p>
+
+                <div class="language-bash highlighter-rouge">
+                    <div class="highlight">
+                        <pre class="highlight"><code>../met
+</code></pre>
+                    </div>
+                </div>
+
+                <p>The GUI window will appear, providing a comprehensive interface for executing the genetic algorithm.
+                    Users can interact with the GUI to tye the game of life, initiate the algorithm, monitor its
+                    progress, and explore the evolving configurations within the Game of Life.</p>
+
+                <p align="center">
+                    <img src="https://raw.githubusercontent.com/Dor-sketch/game-of-life-ai/main/images/game_reduced.gif"
+                        width="600">
+                    <br>
+                    <i>Game of Life Interactive Board in the GUI
+                        <br>
+                        Click on the cells to toggle their state (alive or dead). For the full version, please see
+                        `https://raw.githubusercontent.com/Dor-sketch/game-of-life-ai/main/images/game.gif`.
+                    </i>
+                </p>
+
+                <p>The GUI window is compartmentalized into three primary sections:</p>
+
+                <ol>
+                    <li>
+                        <p>Game of Life Board: This section visually represents the current state of the Game of Life
+                            board, dynamically illustrating the evolving configurations.</p>
+
+                        <ul>
+                            <li>
+                                <p>A distinctive feature of the board is its ability to track the age of each cell, in
+                                    addition to the overall configuration. This capability enables users to color-code
+                                    cells according to their age, thereby enriching the visualization of the algorithm’s
+                                    progression and offering insights into the evolution of configurations.</p>
+                            </li>
+                            <li>
+                                <p>The board also offers the flexibility to toggle the grid display. Users can choose to
+                                    view or hide the grid as per their preference, which enhances the clarity of the
+                                    board’s structure and improves the overall user experience.</p>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <p>Control Panel: This section provides users with a range of interactive controls to manage the
+                            genetic algorithm’s execution. Key functionalities include:</p>
+
+                        <ul>
+                            <li>
+                                <p><code class="language-plaintext highlighter-rouge">Start \ Pause</code>: Enables
+                                    users to initiate or pause the Game of Life simulation, providing control over the
+                                    algorithm’s execution and facilitating real-time monitoring of the evolving
+                                    configurations.</p>
+                            </li>
+                            <li>
+                                <p><code class="language-plaintext highlighter-rouge">Clear</code>: Allows users to
+                                    reset the board to its initial state, clearing all cells and enabling the creation
+                                    of new configurations. This feature enhances user flexibility and enables the
+                                    exploration of diverse configurations within the Game of Life.</p>
+                            </li>
+                            <li>
+                                <p><code class="language-plaintext highlighter-rouge">Random</code>: Facilitates the
+                                    generation of random configurations on the board, enabling users to explore a
+                                    variety of initial states and observe the algorithm’s evolution from different
+                                    starting points. This feature enhances user engagement and provides opportunities
+                                    for experimentation and exploration.</p>
+                            </li>
+                            <li>
+                                <p><code class="language-plaintext highlighter-rouge">Next</code>: Allows users to
+                                    advance the simulation by a single generation, enabling step-by-step progression
+                                    through the algorithm’s execution. This feature enhances user control and provides
+                                    detailed insights into the evolution of configurations.</p>
+                            </li>
+                            <li>
+                                <p><code class="language-plaintext highlighter-rouge">Save</code>: Facilitates the
+                                    archiving of current configurations as <code
+                                        class="language-plaintext highlighter-rouge">.txt</code> files within the <code
+                                        class="language-plaintext highlighter-rouge">saves</code> directory. This
+                                    feature ensures that users can preserve their current configurations for future
+                                    reference and analysis, enhancing the program’s utility and enabling users to
+                                    revisit specific configurations as needed.</p>
+                            </li>
+                            <li>
+                                <p><code class="language-plaintext highlighter-rouge">Run GA</code>: Initiates the
+                                    genetic algorithm’s execution, enabling users to observe the algorithm’s progress in
+                                    real-time. This feature offers a streamlined approach to executing the algorithm,
+                                    enhancing user convenience and facilitating efficient monitoring of the algorithm’s
+                                    evolution.</p>
+                            </li>
+                            <li>
+                                <p><code class="language-plaintext highlighter-rouge">Load</code>: Enables users to load
+                                    saved configurations from the <code
+                                        class="language-plaintext highlighter-rouge">saves</code> directory, providing
+                                    access to previously executed configurations for further analysis and exploration.
+                                    This feature enhances user flexibility and enables the retrieval of specific
+                                    configurations for detailed examination.</p>
+                            </li>
+                            <li>
+                                <p><code class="language-plaintext highlighter-rouge">Quit</code>: Provides users with a
+                                    convenient option to exit the GUI, ensuring a seamless user experience and enabling
+                                    users to conclude their interaction with the program efficiently.</p>
+                            </li>
+                            <li>
+                                <p><code class="language-plaintext highlighter-rouge">Change Theme</code>: Allows users
+                                    to personalize the GUI’s appearance by loading custom <code
+                                        class="language-plaintext highlighter-rouge">css</code> files. This feature
+                                    enhances user customization options, enabling users to tailor the GUI’s visual style
+                                    to their preferences and create a personalized user experience.</p>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <p>Information Panel: This section offers users a comprehensive overview of the algorithm’s
+                            progress, displaying key metrics and insights to enhance user understanding and facilitate
+                            informed decision-making. The information panel includes:</p>
+
+                        <ul>
+                            <li>
+                                <p><code class="language-plaintext highlighter-rouge">Generation</code>: Displays the
+                                    current generation number, enabling users to track the algorithm’s progress and
+                                    monitor the evolution of configurations over successive generations.</p>
+                            </li>
+                            <li>
+                                <p><code class="language-plaintext highlighter-rouge">Population Size</code>:
+                                    Illustrates the size of the population, offering users a visual representation of
+                                    the algorithm’s progress and enabling users to track the evolution of configurations
+                                    over successive generations.</p>
+                            </li>
+                            <li>
+                                <p><code class="language-plaintext highlighter-rouge">Currently Alive Cells</code>:
+                                    Highlights the current count of alive cells in the evolving configuration, enabling
+                                    users to monitor the algorithm’s progress and observe the development of
+                                    configurations over time.</p>
+                            </li>
+                            <li>
+                                <p><code class="language-plaintext highlighter-rouge">Max Alive</code>: Showcases the
+                                    maximum alive cells in a generation of the current board configuration, providing
+                                    users with insights into the algorithm’s performance and the evolution of
+                                    configurations over successive generations.</p>
+                            </li>
+                            <li>
+                                <p><code class="language-plaintext highlighter-rouge">Initial Alive Cells</code>:
+                                    Indicates the count of alive cells in the initial generation of the current board
+                                    configuration, enabling users to track the algorithm’s progress and observe the
+                                    development of configurations over time.</p>
+                            </li>
+                        </ul>
+                    </li>
+                </ol>
+
+                <p>When the user is ready to run the genetic algorithm, they can press the <code
+                        class="language-plaintext highlighter-rouge">Run GA</code> button. The algorithm will continue
+                    until the maximum number of generations is reached, at which point the final generation will be
+                    displayed. See <a
+                        href="/game-of-life-ai/images/run_ga.gif">https://raw.githubusercontent.com/Dor-sketch/game-of-life-ai/main/images/run_ga.gif</a>
+                    for a demonstration of the algorithm’s execution.</p>
+
+                <p>After execution of the <code class="language-plaintext highlighter-rouge">Run GA</code> , a new
+                    window displays the final generation, with the <code
+                        class="language-plaintext highlighter-rouge">load from file button</code> enabling navigation
+                    through different individuals.</p>
+
+                <p align="center">
+                    <img src="https://raw.githubusercontent.com/Dor-sketch/game-of-life-ai/main/images/gui_finished_algo.png"
+                        width="320">
+                    <img src="https://raw.githubusercontent.com/Dor-sketch/game-of-life-ai/main/images/open_file_pop_window.png"
+                        width="320">
+                    <br>
+                    <i>Window diaglog after final generation of the GA in the GUI</i>
+                </p>
+
+                <p>Note: The GUI prompts for a directory and remembers the last accessed location, simplifying
+                    subsequent runs within the same directory by eliminating the need for reselection. Command line
+                    executions automatically retrieve and open the last used directory.</p>
+
+                <p>Additionally, a <code class="language-plaintext highlighter-rouge">save</code> function is
+                    integrated, allowing current configurations to be archived as <code
+                        class="language-plaintext highlighter-rouge">.txt</code> files within the <code
+                        class="language-plaintext highlighter-rouge">saves</code> directory for future access. This
+                    feature is complemented by a <code class="language-plaintext highlighter-rouge">Load</code> button
+                    for convenient retrieval of these saved configurations.</p>
+
+                <hr>
+
+                <p>At any time users can personalize the interface’s appearance. To apply a custom theme, simply load
+                    the desired <code class="language-plaintext highlighter-rouge">css</code> file via the <code
+                        class="language-plaintext highlighter-rouge">Load CSS</code> button. The GUI will automatically
+                    update to reflect the new theme, enhancing the user experience. The deafult <code
+                        class="language-plaintext highlighter-rouge">theme.css</code> file is included for reference, as
+                    well as 2 additional themes: <code class="language-plaintext highlighter-rouge">theme2.css</code>
+                    and <code class="language-plaintext highlighter-rouge">theme3.css</code>. Note that too many visual
+                    effect, such as <code class="language-plaintext highlighter-rouge">box-shadow</code> and <code
+                        class="language-plaintext highlighter-rouge">border-radius</code> can slow down the GUI. It is
+                    recommended to use simple <code class="language-plaintext highlighter-rouge">css</code> files. For a
+                    demonstration of the theme change, refer to <a
+                        href="/game-of-life-ai/images/themes.gif">https://raw.githubusercontent.com/Dor-sketch/game-of-life-ai/main/images/themes.gif</a>.
+                </p>
+
+                <h3 id="using-the-command-line">Using the Command Line<a class="anchorjs-link "
+                        href="#using-the-command-line" aria-label="Anchor" data-anchorjs-icon=""
+                        style="font: 1em / 1 anchorjs-icons; padding-left: 0.375em;"></a></h3>
+
+                <p>Note that the program can also be run without the GUI. In such cases, output is directed to the
+                    console, and results are saved as <code class="language-plaintext highlighter-rouge">.txt</code>
+                    files within the <code class="language-plaintext highlighter-rouge">populations</code> directory.
+                    This approach was chosen to ensure program accessibility on any machine, regardless of the presence
+                    of the <code class="language-plaintext highlighter-rouge">gtk</code> library, and to maintain output
+                    configuration flexibility.</p>
+
+                <p>A notable drawback of this method is the storage inefficiency for <code
+                        class="language-plaintext highlighter-rouge">sparse matrices</code> in the <code
+                        class="language-plaintext highlighter-rouge">populations</code> directory. In different
+                    scenarios, encoding these matrices would be a practical solution to conserve space. However, for
+                    this specific application, the sparse matrices represent the desired output, making their direct
+                    storage justifiable.</p>
+
+                <hr>
+
+                <h2 id="examples">Examples<a class="anchorjs-link " href="#examples" aria-label="Anchor"
+                        data-anchorjs-icon="" style="font: 1em / 1 anchorjs-icons; padding-left: 0.375em;"></a></h2>
+
+                <p>The evaluation of two distinct individuals, namely the <code
+                        class="language-plaintext highlighter-rouge">T_shape</code> and the <code
+                        class="language-plaintext highlighter-rouge">Dragon</code> shape, provides insightful
+                    observations into the algorithm’s performance. The <code
+                        class="language-plaintext highlighter-rouge">T_shape</code> emerges as an intriguing pattern,
+                    while the <code class="language-plaintext highlighter-rouge">Dragon</code> shape captivates with its
+                    evolutionary complexity. These shapes frequently recur across various individuals, highlighting
+                    their significance within the genetic algorithm’s exploration space.</p>
+
+                <p>To explore these examples firsthand, utilize the GUI’s <code
+                        class="language-plaintext highlighter-rouge">Load</code> button to access the <code
+                        class="language-plaintext highlighter-rouge">saves</code> directory or execute the following
+                    commands:</p>
+
+                <div class="language-bash highlighter-rouge">
+                    <div class="highlight">
+                        <pre class="highlight"><code>../met saves/dragon.txt
+</code></pre>
+                    </div>
+                </div>
+
+                <div class="language-bash highlighter-rouge">
+                    <div class="highlight">
+                        <pre class="highlight"><code>../met saves/t_shape.txt
+</code></pre>
+                    </div>
+                </div>
+
+                <h3 id="t_shape">T_shape<a class="anchorjs-link " href="#t_shape" aria-label="Anchor"
+                        data-anchorjs-icon="" style="font: 1em / 1 anchorjs-icons; padding-left: 0.375em;"></a></h3>
+
+                <p align="center">
+                    <img src="https://raw.githubusercontent.com/Dor-sketch/game-of-life-ai/main/images/inception_full.gif"
+                        width="500">
+                    <br>
+                    <i>T_shape Evolution in Inception theme</i>
+                </p>
+
+                <p><code class="language-plaintext highlighter-rouge">T_shape</code> is called after the mighty T-rex,
+                    and its <code class="language-plaintext highlighter-rouge">T</code> shape. The initial state starts
+                    with 6 alive cells. It is a very small shape, and it is very likely to be selected as a parent for
+                    the next generation. It evolves into a heart (see figure 2), and continues as a musk (see figure 3).
+                    It continues to evolve into a goat face (see figure 4), and then into a skull face (see figure 5).
+                    It continues to grow and become stable at generation 225 (see figure 6). At its peak, it has about
+                    100 alive cells.</p>
+
+                <div style="text-align: center;">
+                    <figure style="display: inline-block;">
+                        <img src="https://raw.githubusercontent.com/Dor-sketch/game-of-life-ai/main/images/t_shape1.png"
+                            width="250" alt="Initial State">
+                        <figcaption>Figure 1: Initial State</figcaption>
+                    </figure>
+                    <figure style="display: inline-block;">
+                        <img src="https://raw.githubusercontent.com/Dor-sketch/game-of-life-ai/main/images/t_shape2.png"
+                            width="250" alt="Heart Evolution">
+                        <figcaption>Figure 2: Heart Evolution</figcaption>
+                    </figure>
+                </div>
+
+                <div style="text-align: center;">
+                    <figure style="display: inline-block;">
+                        <img src="https://raw.githubusercontent.com/Dor-sketch/game-of-life-ai/main/images/t_shape3.png"
+                            width="250" alt="Musk Evolution">
+                        <figcaption>Figure 3: Musk Evolution</figcaption>
+                    </figure>
+                    <figure style="display: inline-block;">
+                        <img src="https://raw.githubusercontent.com/Dor-sketch/game-of-life-ai/main/images/t_shape4.png"
+                            width="250" alt="Goat Face Evolution">
+                        <figcaption>Figure 4: Goat Face Evolution</figcaption>
+                    </figure>
+                </div>
+
+                <div style="text-align: center;">
+                    <figure style="display: inline-block;">
+                        <img src="https://raw.githubusercontent.com/Dor-sketch/game-of-life-ai/main/images/t_shape5.png"
+                            width="250" alt="Skull Face Evolution">
+                        <figcaption>Figure 5: Skull Face Evolution</figcaption>
+                    </figure>
+                    <figure style="display: inline-block;">
+                        <img src="https://raw.githubusercontent.com/Dor-sketch/game-of-life-ai/main/images/t_shape6.png"
+                            width="250" alt="Stable State at Gen 225">
+                        <figcaption>Figure 6: Stable State at Gen 225</figcaption>
+                    </figure>
+                </div>
+
+                <h3 id="dragon">Dragon<a class="anchorjs-link " href="#dragon" aria-label="Anchor"
+                        data-anchorjs-icon="" style="font: 1em / 1 anchorjs-icons; padding-left: 0.375em;"></a></h3>
+
+                <p align="center">
+                    <img src="https://raw.githubusercontent.com/Dor-sketch/game-of-life-ai/main/images/dragon_inc.gif"
+                        width="500">
+                    <br>
+                    <i>Dragon Evolution in red Inception theme</i>
+                </p>
+
+                <p>Dragon’s initial state starts with 6 alive cells. It is a very small shape, and it is very likely to
+                    be selected as a parent for the next generation. It evolves into a dragon with open wings (see
+                    figure 2), and continues as a dragon with closed wings (see figure 3). It continues to evolve into a
+                    dragon with big open wings (see figure 4), and then into a dragon with very big open wings (see
+                    figure 5). It continues to grow and become stable at generation 132 (see figure 6). At its peak, it
+                    has about 10 times more alive cells than the initial shape.</p>
+
+                <div style="text-align: center;">
+                    <figure style="display: inline-block;">
+                        <img src="https://raw.githubusercontent.com/Dor-sketch/game-of-life-ai/main/images/dragon1.png"
+                            width="250" alt="Initial State">
+                        <figcaption>Figure 1: Initial State</figcaption>
+                    </figure>
+                    <figure style="display: inline-block;">
+                        <img src="https://raw.githubusercontent.com/Dor-sketch/game-of-life-ai/main/images/dragon2.png"
+                            width="250" alt="Open Wings">
+                        <figcaption>Figure 2: Open Wings</figcaption>
+                    </figure>
+                </div>
+
+                <div style="text-align: center;">
+                    <figure style="display: inline-block;">
+                        <img src="https://raw.githubusercontent.com/Dor-sketch/game-of-life-ai/main/images/dragon3.png"
+                            width="250" alt="Closed Wings">
+                        <figcaption>Figure 3: Closed Wings</figcaption>
+                    </figure>
+                    <figure style="display: inline-block;">
+                        <img src="https://raw.githubusercontent.com/Dor-sketch/game-of-life-ai/main/images/dragon4.png"
+                            width="250" alt="Big Open Wings">
+                        <figcaption>Figure 4: Big Open Wings</figcaption>
+                    </figure>
+                </div>
+
+                <div style="text-align: center;">
+                    <figure style="display: inline-block;">
+                        <img src="https://raw.githubusercontent.com/Dor-sketch/game-of-life-ai/main/images/dragon5.png"
+                            width="250" alt="Very Big Open Wings">
+                        <figcaption>Figure 5: Very Big Open Wings</figcaption>
+                    </figure>
+                    <figure style="display: inline-block;">
+                        <img src="https://raw.githubusercontent.com/Dor-sketch/game-of-life-ai/main/images/dragon6.png"
+                            width="250" alt="Stable State at Gen 132">
+                        <figcaption>Figure 6: Stable State at Gen 132</figcaption>
+                    </figure>
+                </div>
+
+                <h3 id="hi">Hi<a class="anchorjs-link " href="#hi" aria-label="Anchor" data-anchorjs-icon=""
+                        style="font: 1em / 1 anchorjs-icons; padding-left: 0.375em;"></a></h3>
+
+                <p align="center">
+                    <img src="https://raw.githubusercontent.com/Dor-sketch/game-of-life-ai/main/images/hi_shape_160gen.gif"
+                        width="500">
+                    <br>
+                    <i>Hi Shape first 160 generations</i>
+                </p>
+
+                <p>The <code class="language-plaintext highlighter-rouge">hi</code> shape demonstrates a long evolution
+                    period of more than 230 generations and more than ten times bigger than the initial shape.</p>
+
+                <p>You can see the population that led to those individuals under the <a
+                        href="populations">populations</a> directory and explore their variations.</p>
+
+                <h2 id="more-examples">More Examples<a class="anchorjs-link " href="#more-examples" aria-label="Anchor"
+                        data-anchorjs-icon="" style="font: 1em / 1 anchorjs-icons; padding-left: 0.375em;"></a></h2>
+
+                <div style="text-align: center;">
+                    <img src="https://raw.githubusercontent.com/Dor-sketch/game-of-life-ai/main/images/LightGreen.gif"
+                        alt="Light Green Theme" width="400">
+                    <img src="https://raw.githubusercontent.com/Dor-sketch/game-of-life-ai/main/images/individual_purple_long.gif"
+                        alt="Purple Theme" width="400">
+                    <br>
+                    <i>Evolution of fitted individuals in the GUI, light green theme (left) and purple theme (right)</i>
+                </div>
+
+                <div style="text-align: center;">
+                    <img src="https://raw.githubusercontent.com/Dor-sketch/game-of-life-ai/main/images/metal_blue_reduced.gif"
+                        alt="Metal Blue Theme" width="400">
+                    <img src="https://raw.githubusercontent.com/Dor-sketch/game-of-life-ai/main/images/metal_red_reduced.gif"
+                        alt="Metal Red Theme" width="400">
+                    <br>
+                    <i>270 Generations of the Genetic Algorithm in the GUI, metal blue theme (left) and metal red theme
+                        (right)</i>
+                </div>
+
+                <div style="text-align: center;">
+                    <img src="https://raw.githubusercontent.com/Dor-sketch/game-of-life-ai/main/images/forest.gif"
+                        alt="Forest Theme" width="500">
+                    <br>
+                    <i>Evolution of a fitted individual in the GUI, forest theme</i>
+                </div>
+
+                <div style="text-align: center;">
+                    <br>
+                    <i>267 Generations of the Genetic Algorithm in the GUI, metal red theme</i>
+                </div>
+
+                <h3 id="insights">Insights<a class="anchorjs-link " href="#insights" aria-label="Anchor"
+                        data-anchorjs-icon="" style="font: 1em / 1 anchorjs-icons; padding-left: 0.375em;"></a></h3>
+
+                <p>The algorithm produced some interesting results. Here are more insights:</p>
+
+                <ol>
+                    <li>
+                        <p><strong>Short simulation tends to produce better individuals</strong>: This can be explained
+                            by the fact that mutations are most likely to turn cells alive than dead. This observation
+                            is based on the fact that the initial shapes are usually small, and the algorithm prefers to
+                            keep them small.</p>
+                    </li>
+                    <li>
+                        <p><strong>Low <code class="language-plaintext highlighter-rouge">mutationRate</code> tends to
+                                produce better individuals</strong>: This can be explained by the fact that the best
+                            individuals are usually consist of the same basic shapes - like the <code
+                                class="language-plaintext highlighter-rouge">T_shape</code> and the <code
+                                class="language-plaintext highlighter-rouge">Dragon</code> shape.</p>
+                    </li>
+                    <li>
+                        <p><strong>The algorithm prefers symmetric shapes</strong>: This can be explained by the fact
+                            that the evaluation function gives a bonus for bigger shapes. The bigger the shape is, the
+                            more likely it is to be symmetric.</p>
+                    </li>
+                    <li>
+                        <p><strong>The algorithm parameters are affected by the size of the board</strong>: This insight
+                            connects some parameters that at first sight might not seem related. For example, the number
+                            of simulations should align with the board size.</p>
+                    </li>
+                    <li>
+                        <p><strong>Cycles Tracking</strong>: To address undesired individuals surviving for a long time,
+                            a hash table that keeps track of visited boards during the simulation was added. To enhance
+                            performance, the boards are encoded into occurrences string, and the hash table is
+                            implemented as a <code
+                                class="language-plaintext highlighter-rouge">std::unordered_set&lt;std::string&gt;</code>.
+                        </p>
+                    </li>
+                </ol>
+
+                <hr>
+
+                <h2 id="technical-details">Technical Details<a class="anchorjs-link " href="#technical-details"
+                        aria-label="Anchor" data-anchorjs-icon=""
+                        style="font: 1em / 1 anchorjs-icons; padding-left: 0.375em;"></a></h2>
+
+                <h3 id="game-of-life-implementation">Game of Life Implementation<a class="anchorjs-link "
+                        href="#game-of-life-implementation" aria-label="Anchor" data-anchorjs-icon=""
+                        style="font: 1em / 1 anchorjs-icons; padding-left: 0.375em;"></a></h3>
+
+                <p>This section delves into the technical implementation of the Game of Life, highlighting specific
+                    optimizations. For details on the Genetic Algorithm implementation, please see the subsequent
+                    section.</p>
+
+                <h4 id="static-board-padding">Static Board Padding<a class="anchorjs-link " href="#static-board-padding"
+                        aria-label="Anchor" data-anchorjs-icon=""
+                        style="font: 1em / 1 anchorjs-icons; padding-left: 0.375em;"></a></h4>
+
+                <p>To mitigate edge-related anomalies and simulate an infinite board, the implementation employs static
+                    padding around the board. This method enhances the simulation’s realism by ensuring edge cells have
+                    an equal opportunity for evolution as those in the center.</p>
+
+                <div class="language-cpp highlighter-rouge">
+                    <div class="highlight">
+                        <pre class="highlight"><code><span class="k">static</span> <span class="kt">int</span> <span class="n">paddingRows</span><span class="p">[</span><span class="n">BOARD_SIZE</span> <span class="o">+</span> <span class="mi">2</span><span class="p">][</span><span class="n">BOARD_SIZE</span> <span class="o">+</span> <span class="mi">4</span><span class="p">];</span>
+
+<span class="c1">// Ensure the board is only copied if there are differences</span>
+<span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">row</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">row</span> <span class="o">&lt;</span> <span class="n">BOARD_SIZE</span><span class="p">;</span> <span class="n">row</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">memcmp</span><span class="p">(</span><span class="n">paddingRows</span><span class="p">[</span><span class="n">row</span> <span class="o">+</span> <span class="mi">2</span><span class="p">]</span> <span class="o">+</span> <span class="mi">2</span><span class="p">,</span> <span class="n">board</span><span class="p">[</span><span class="n">row</span><span class="p">],</span> <span class="n">BOARD_SIZE</span> <span class="o">*</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">int</span><span class="p">))</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">r</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">r</span> <span class="o">&lt;</span> <span class="n">BOARD_SIZE</span><span class="p">;</span> <span class="n">r</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">memcpy</span><span class="p">(</span><span class="n">paddingRows</span><span class="p">[</span><span class="n">r</span> <span class="o">+</span> <span class="mi">2</span><span class="p">]</span> <span class="o">+</span> <span class="mi">2</span><span class="p">,</span> <span class="n">board</span><span class="p">[</span><span class="n">r</span><span class="p">],</span> <span class="n">BOARD_SIZE</span> <span class="o">*</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">int</span><span class="p">));</span>
+        <span class="p">}</span>
+        <span class="n">memset</span><span class="p">(</span><span class="n">paddingRows</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">0</span><span class="p">,</span> <span class="p">(</span><span class="n">BOARD_SIZE</span> <span class="o">+</span> <span class="mi">4</span><span class="p">)</span> <span class="o">*</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">int</span><span class="p">));</span>
+        <span class="n">memset</span><span class="p">(</span><span class="n">paddingRows</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="mi">0</span><span class="p">,</span> <span class="p">(</span><span class="n">BOARD_SIZE</span> <span class="o">+</span> <span class="mi">4</span><span class="p">)</span> <span class="o">*</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">int</span><span class="p">));</span>
+        <span class="n">memset</span><span class="p">(</span><span class="n">paddingRows</span><span class="p">[</span><span class="n">BOARD_SIZE</span> <span class="o">+</span> <span class="mi">2</span><span class="p">],</span> <span class="mi">0</span><span class="p">,</span> <span class="p">(</span><span class="n">BOARD_SIZE</span> <span class="o">+</span> <span class="mi">4</span><span class="p">)</span> <span class="o">*</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">int</span><span class="p">));</span>
+        <span class="n">memset</span><span class="p">(</span><span class="n">paddingRows</span><span class="p">[</span><span class="n">BOARD_SIZE</span> <span class="o">+</span> <span class="mi">3</span><span class="p">],</span> <span class="mi">0</span><span class="p">,</span> <span class="p">(</span><span class="n">BOARD_SIZE</span> <span class="o">+</span> <span class="mi">4</span><span class="p">)</span> <span class="o">*</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">int</span><span class="p">));</span>
+        <span class="k">break</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre>
+                    </div>
+                </div>
+
+                <p>This padding strategy not only simplifies the edge case handling but also optimizes memory usage by
+                    avoiding unnecessary copies of the board. The comparison step ensures the board is only updated when
+                    changes occur, reducing computational overhead.</p>
+
+                <h4 id="efficient-update-process">Efficient Update Process<a class="anchorjs-link "
+                        href="#efficient-update-process" aria-label="Anchor" data-anchorjs-icon=""
+                        style="font: 1em / 1 anchorjs-icons; padding-left: 0.375em;"></a></h4>
+
+                <p>The update mechanism employs a two-bit strategy to encode both the current and next states of each
+                    cell within a single integer. This approach eliminates the need for a separate buffer to hold the
+                    next state, thereby halving memory usage and improving performance.</p>
+
+                <div class="language-cpp highlighter-rouge">
+                    <div class="highlight">
+                        <pre class="highlight"><code><span class="c1">// Apply game rules and set the next state in the second bit</span>
+<span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">row</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span> <span class="n">row</span> <span class="o">&lt;</span> <span class="n">BOARD_SIZE</span> <span class="o">+</span> <span class="mi">2</span><span class="p">;</span> <span class="n">row</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">col</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span> <span class="n">col</span> <span class="o">&lt;</span> <span class="n">BOARD_SIZE</span> <span class="o">+</span> <span class="mi">2</span><span class="p">;</span> <span class="n">col</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kt">int</span> <span class="n">liveNeighbors</span> <span class="o">=</span> <span class="n">calculateLiveNeighbors</span><span class="p">(</span><span class="n">paddingRows</span><span class="p">,</span> <span class="n">row</span><span class="p">,</span> <span class="n">col</span><span class="p">);</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">paddingRows</span><span class="p">[</span><span class="n">row</span><span class="p">][</span><span class="n">col</span><span class="p">]</span> <span class="o">&amp;</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// Current state is alive</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">liveNeighbors</span> <span class="o">==</span> <span class="mi">2</span> <span class="o">||</span> <span class="n">liveNeighbors</span> <span class="o">==</span> <span class="mi">3</span><span class="p">)</span>
+                <span class="n">paddingRows</span><span class="p">[</span><span class="n">row</span><span class="p">][</span><span class="n">col</span><span class="p">]</span> <span class="o">|=</span> <span class="mi">2</span><span class="p">;</span> <span class="c1">// Survives</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span> <span class="c1">// Current state is dead</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">liveNeighbors</span> <span class="o">==</span> <span class="mi">3</span><span class="p">)</span>
+                <span class="n">paddingRows</span><span class="p">[</span><span class="n">row</span><span class="p">][</span><span class="n">col</span><span class="p">]</span> <span class="o">|=</span> <span class="mi">2</span><span class="p">;</span> <span class="c1">// Becomes alive</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// Finalize the state transition by shifting bits</span>
+<span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">row</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span> <span class="n">row</span> <span class="o">&lt;</span> <span class="n">BOARD_SIZE</span> <span class="o">+</span> <span class="mi">2</span><span class="p">;</span> <span class="n">row</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">col</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span> <span class="n">col</span> <span class="o">&lt;</span> <span class="n">BOARD_SIZE</span> <span class="o">+</span> <span class="mi">2</span><span class="p">;</span> <span class="n">col</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">paddingRows</span><span class="p">[</span><span class="n">row</span><span class="p">][</span><span class="n">col</span><span class="p">]</span> <span class="o">&gt;&gt;=</span> <span class="mi">1</span><span class="p">;</span> <span class="c1">// Complete the transition</span>
+        <span class="n">board</span><span class="p">[</span><span class="n">row</span> <span class="o">-</span> <span class="mi">2</span><span class="p">][</span><span class="n">col</span> <span class="o">-</span> <span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">paddingRows</span><span class="p">[</span><span class="n">row</span><span class="p">][</span><span class="n">col</span><span class="p">]</span> <span class="o">&amp;</span> <span class="mi">1</span><span class="p">;</span> <span class="c1">// Update the main board</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre>
+                    </div>
+                </div>
+
+                <p>This bit manipulation technique allows for an in-place update of the board state, significantly
+                    optimizing the simulation’s performance.</p>
+
+                <p>Inspiration for this optimization came from solving a related problem on LeetCode, where I first
+                    encountered Conway’s Game of Life. You can explore my solution, originally written in C, in my
+                    December 2023 LeetCode post <a
+                        href="https://leetcode.com/problems/game-of-life/solutions/4383051">here</a>. If you find the
+                    approach insightful, I would appreciate your upvote.</p>
+
+                <p><strong>Note:</strong> The board utilizes a fixed-size array (<code
+                        class="language-plaintext highlighter-rouge">int [size][size]</code>), chosen for its simplicity
+                    and efficiency due to compile-time size knowledge and contiguous memory allocation. Adjusting the
+                    <code class="language-plaintext highlighter-rouge">BOARD_SIZE</code> macro in <a
+                        href="/game-of-life-ai/config.hpp">config.hpp</a> allows for easy size modifications.</p>
+
+                <hr>
+
+                <h3 id="chromosome-representation">Chromosome Representation<a class="anchorjs-link "
+                        href="#chromosome-representation" aria-label="Anchor" data-anchorjs-icon=""
+                        style="font: 1em / 1 anchorjs-icons; padding-left: 0.375em;"></a></h3>
+
+                <p>The <code class="language-plaintext highlighter-rouge">Chromosome</code> class encapsulates a
+                    configuration of Conway’s Game of Life.</p>
+
+                <h4 id="initial-state">Initial State<a class="anchorjs-link " href="#initial-state" aria-label="Anchor"
+                        data-anchorjs-icon="" style="font: 1em / 1 anchorjs-icons; padding-left: 0.375em;"></a></h4>
+
+                <p>The initial population is generated by the <code
+                        class="language-plaintext highlighter-rouge">Population</code> class through the <code
+                        class="language-plaintext highlighter-rouge">Chromosome</code> default constructor, which
+                    creates a random configuration at the board’s center. This task proved more complex than
+                    anticipated. The challenge was to ensure the initial configuration was random, yet small and
+                    diverse. My solution involved:</p>
+
+                <ol>
+                    <li>
+                        <p>Selecting an <code class="language-plaintext highlighter-rouge">aliveProbability</code>
+                            parameter (detailed in <a href="/game-of-life-ai/config.hpp">config.hpp</a>). This parameter
+                            dictates the likelihood of each cell being alive.</p>
+                    </li>
+                    <li>
+                        <p>Defining lambda functions to outline basic shapes: <code
+                                class="language-plaintext highlighter-rouge">square</code>, <code
+                                class="language-plaintext highlighter-rouge">circle</code>, and <code
+                                class="language-plaintext highlighter-rouge">triangle</code>. These functions accept
+                            cell coordinates and return <code class="language-plaintext highlighter-rouge">true</code>
+                            if the cell resides on the shape’s border, and <code
+                                class="language-plaintext highlighter-rouge">false</code> otherwise.</p>
+                    </li>
+                    <li>
+                        <p>Adjusting weights for each shape to mitigate biases, as certain shapes tended to have a
+                            higher probability of containing alive cells, which I aimed to avoid.</p>
+                    </li>
+                    <li>
+                        <p>Choosing a random shape.</p>
+                    </li>
+                    <li>
+                        <p>Iterating over the board, setting each cell within the chosen shape’s border to be alive
+                            based on the <code class="language-plaintext highlighter-rouge">aliveProbability</code>.</p>
+                    </li>
+                </ol>
+
+                <p><strong>Note:</strong> By confining the initial configuration to the middle of the board, I’ve
+                    effectively reduced the search space. According to the assignment’s requirements, we are permitted
+                    to assume a finite space. Additionally, I implemented dynamic sizes and tested the algorithm on
+                    various board sizes. The size factor can be adjusted by modifying the <code
+                        class="language-plaintext highlighter-rouge">BOARD_SIZE</code> macro in <a
+                        href="/game-of-life-ai/config.hpp">config.hpp</a>. However, it is recommended to maintain a
+                    value of <code class="language-plaintext highlighter-rouge">20</code> to guarantee optimal results.
+                </p>
+
+                <h4 id="crossover-the-binary-genetic-operator">Crossover (The Binary Genetic Operator)<a
+                        class="anchorjs-link " href="#crossover-the-binary-genetic-operator" aria-label="Anchor"
+                        data-anchorjs-icon="" style="font: 1em / 1 anchorjs-icons; padding-left: 0.375em;"></a></h4>
+
+                <p>Crossover implementation in the <code class="language-plaintext highlighter-rouge">Chromosome</code>
+                    class constructor:</p>
+
+                <div class="language-cpp highlighter-rouge">
+                    <div class="highlight">
+                        <pre class="highlight"><code> <span class="n">Chromosome</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">Chromosome</span><span class="o">&gt;</span> <span class="n">parent1</span><span class="p">,</span>
+      <span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">Chromosome</span><span class="o">&gt;</span> <span class="n">parent2</span><span class="p">);</span>
+</code></pre>
+                    </div>
+                </div>
+
+                <p>After thorough testing of various crossover methods, I opted to forgo the <code
+                        class="language-plaintext highlighter-rouge">point</code> crossover method described on pages
+                    94-95 of the book (Biological Computation). Instead, I chose the <code
+                        class="language-plaintext highlighter-rouge">uniform</code> crossover approach. This method is
+                    encapsulated within the <code class="language-plaintext highlighter-rouge">Chromosome</code> class
+                    constructor. The constructor accepts two parent chromosomes and generates a new chromosome by
+                    randomly selecting each cell’s state from one of the two parents.</p>
+
+                <div class="language-cpp highlighter-rouge">
+                    <div class="highlight">
+                        <pre class="highlight"><code>    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">row</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">row</span> <span class="o">&lt;</span> <span class="n">BOARD_SIZE</span><span class="p">;</span> <span class="n">row</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">col</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">col</span> <span class="o">&lt;</span> <span class="n">BOARD_SIZE</span><span class="p">;</span> <span class="n">col</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">rand</span><span class="p">()</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+                <span class="n">board</span><span class="p">[</span><span class="n">row</span><span class="p">][</span><span class="n">col</span><span class="p">]</span> <span class="o">=</span> <span class="n">parent1</span><span class="o">-&gt;</span><span class="n">board</span><span class="p">[</span><span class="n">row</span><span class="p">][</span><span class="n">col</span><span class="p">];</span>
+            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+                <span class="n">board</span><span class="p">[</span><span class="n">row</span><span class="p">][</span><span class="n">col</span><span class="p">]</span> <span class="o">=</span> <span class="n">parent2</span><span class="o">-&gt;</span><span class="n">board</span><span class="p">[</span><span class="n">row</span><span class="p">][</span><span class="n">col</span><span class="p">];</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+</code></pre>
+                    </div>
+                </div>
+
+                <p align="center">
+                    <img src="https://raw.githubusercontent.com/Dor-sketch/game-of-life-ai/main/images/crossover.png"
+                        width="200">
+                    <br>
+                    <i>Another example to crossover (`aliveProbability` is 100% for this example) </i>
+                </p>
+
+                <p>Note that the <code class="language-plaintext highlighter-rouge">crossoverPointX</code> ctor is also
+                    implemented, and you can use it by calling the following constructor:</p>
+
+                <div class="language-cpp highlighter-rouge">
+                    <div class="highlight">
+                        <pre class="highlight"><code><span class="n">Chromosome</span><span class="p">(</span><span class="kt">int</span> <span class="n">crossoverPoint</span><span class="p">,</span> <span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">Chromosome</span><span class="o">&gt;</span> <span class="n">parent1</span><span class="p">,</span>
+      <span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">Chromosome</span><span class="o">&gt;</span> <span class="n">parent2</span><span class="p">);</span>
+</code></pre>
+                    </div>
+                </div>
+
+                <h4 id="mutation">Mutation<a class="anchorjs-link " href="#mutation" aria-label="Anchor"
+                        data-anchorjs-icon="" style="font: 1em / 1 anchorjs-icons; padding-left: 0.375em;"></a></h4>
+
+                <p>The mutation process is uniquely orchestrated outside the <code
+                        class="language-plaintext highlighter-rouge">Chromosome</code> class, specifically within the
+                    <code class="language-plaintext highlighter-rouge">Population</code> class through a <code
+                        class="language-plaintext highlighter-rouge">mutation</code> method. This method requires a
+                    <code class="language-plaintext highlighter-rouge">mutationRate</code> parameter and applies
+                    mutations across the population with a probability determined by this rate. The mutation operation
+                    involves randomly selecting a cell (or Gene) within a chromosome and toggling its state.</p>
+
+                <p>Strategically situating the mutation functionality outside of the <code
+                        class="language-plaintext highlighter-rouge">Chromosome</code> class. It allows for a
+                    comprehensive application of mutations across all chromosomes within the population, rather than
+                    restricting mutation to individual chromosomes. This approach ensures that the mutation process can
+                    consider the entire population’s genetic diversity when applying changes.</p>
+
+                <p>The mutation methodology employed here aligns with the <code
+                        class="language-plaintext highlighter-rouge">uniform</code> mutation strategy as discussed on
+                    page 95 of the book (Biological Computation). By applying mutations uniformly across the population,
+                    this method enhances the likelihood of generating viable and diverse genetic configurations.</p>
+
+                <p>An important aspect of our mutation strategy is its focus on the central region of the chromosome for
+                    mutation application. This focused approach ensures that mutations have a meaningful impact on the
+                    genetic configuration, thereby supporting the generation of viable and diverse outcomes. The
+                    following code snippet illustrates how mutations are specifically applied to the central region of
+                    the chromosome:</p>
+
+                <div class="language-cpp highlighter-rouge">
+                    <div class="highlight">
+                        <pre class="highlight"><code><span class="kt">void</span> <span class="n">Population</span><span class="o">::</span><span class="n">mutation</span><span class="p">(</span><span class="kt">double</span> <span class="n">mutationRate</span><span class="p">)</span> <span class="p">{</span>
+ <span class="c1">// Random mutation based on mutation rate</span>
+ <span class="k">for</span> <span class="p">(</span><span class="k">auto</span> <span class="o">&amp;</span><span class="n">individual</span> <span class="o">:</span> <span class="n">chromosomes</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">BOARD_SIZE</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+   <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">BOARD_SIZE</span><span class="p">;</span> <span class="o">++</span><span class="n">j</span><span class="p">)</span> <span class="p">{</span>
+     <span class="k">if</span> <span class="p">((</span><span class="n">rand</span><span class="p">()</span> <span class="o">/</span> <span class="p">(</span><span class="kt">double</span><span class="p">)</span><span class="n">RAND_MAX</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">mutationRate</span><span class="p">)</span> <span class="p">{</span>
+      <span class="n">individual</span><span class="o">-&gt;</span><span class="n">board</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span>
+       <span class="mi">1</span> <span class="o">-</span> <span class="n">individual</span><span class="o">-&gt;</span><span class="n">board</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">];</span> <span class="c1">// Flips the bit</span>
+     <span class="p">}</span>
+    <span class="p">}</span>
+   <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre>
+                    </div>
+                </div>
+
+                <h4 id="evaluation-function">Evaluation Function<a class="anchorjs-link " href="#evaluation-function"
+                        aria-label="Anchor" data-anchorjs-icon=""
+                        style="font: 1em / 1 anchorjs-icons; padding-left: 0.375em;"></a></h4>
+
+                <p>To pinpoint the desired configurations, a specialized evaluation function was crafted, encapsulated
+                    within the <code class="language-plaintext highlighter-rouge">calculateScore</code> method. This
+                    function draws upon three critical insights:</p>
+
+                <ol>
+                    <li>The longer it takes for the configuration to reach a stable state, the more favorable it is.
+                    </li>
+                    <li>The larger the configuration grows during its evolution, the better.</li>
+                    <li>The smaller the initial configuration, the more advantageous.</li>
+                </ol>
+
+                <p>These principles are operationalized in the evaluation process, where each chromosome undergoes a
+                    simulation spanning 500 generations. For every generation a chromosome remains stable, it earns +1
+                    to its score. Post-simulation, the score is determined by the formula: <code
+                        class="language-plaintext highlighter-rouge">std::max(1, maxAlive - static_cast&lt;int&gt;(startAlive*2.2) + stablePeriod);</code>.
+                    Here, <code class="language-plaintext highlighter-rouge">maxAlive</code> is granted a 100% bonus to
+                    promote the development of larger configurations—a decision reached after extensive testing.
+                    Conversely, <code class="language-plaintext highlighter-rouge">startAlive</code> incurs a 120%
+                    penalty to favor smaller starting configurations, while <code
+                        class="language-plaintext highlighter-rouge">stablePeriod</code> enjoys a 100% bonus,
+                    incentivizing longer-lasting simulations. The use of <code
+                        class="language-plaintext highlighter-rouge">std::max(1, ...)</code> ensures that scores do not
+                    dip into the negative.</p>
+
+                <p>Stable states are detected using <code class="language-plaintext highlighter-rouge">prevAlive</code>
+                    and <code class="language-plaintext highlighter-rouge">curAlive</code> variables, alongside a <code
+                        class="language-plaintext highlighter-rouge">pastStates</code> hash table. The <code
+                        class="language-plaintext highlighter-rouge">pastStates</code> table checks if a current state
+                    has previously occurred by transforming the board into a run-length encoded string, converting
+                    sequences like <code
+                        class="language-plaintext highlighter-rouge">0 0 0 0 1 1 1 0 0 0 0 0 0 0 0 0 1 1 1 1</code> into
+                    <code class="language-plaintext highlighter-rouge">0#4 1#3 0#7 1#4</code>. This encoding
+                    significantly reduces the hash table’s size and accelerates comparisons. While <code
+                        class="language-plaintext highlighter-rouge">prevAlive</code> and <code
+                        class="language-plaintext highlighter-rouge">curAlive</code> could also indicate stability,
+                    employing the hash table method is markedly more efficient.</p>
+
+                <h4 id="fitness-vs-score">Fitness vs Score<a class="anchorjs-link " href="#fitness-vs-score"
+                        aria-label="Anchor" data-anchorjs-icon=""
+                        style="font: 1em / 1 anchorjs-icons; padding-left: 0.375em;"></a></h4>
+
+                <p>In the context of genetic algorithms within this program, each chromosome is characterized by two
+                    distinct attributes: <code class="language-plaintext highlighter-rouge">score</code> and <code
+                        class="language-plaintext highlighter-rouge">fitness</code>. The <code
+                        class="language-plaintext highlighter-rouge">score</code> reflects the chromosome’s performance
+                    in the simulation, serving as a measure of its effectiveness in reaching desirable states. On the
+                    other hand, <code class="language-plaintext highlighter-rouge">fitness</code> quantifies the
+                    likelihood of a chromosome being chosen for reproduction in the subsequent generation.</p>
+
+                <p>The calculation of <code class="language-plaintext highlighter-rouge">fitness</code> is derived from
+                    the <code class="language-plaintext highlighter-rouge">score</code> of an individual chromosome in
+                    relation to the aggregate score of the entire population. Specifically, <code
+                        class="language-plaintext highlighter-rouge">fitness</code> represents a proportion of the total
+                    score, ensuring that chromosomes with superior scores are accorded higher fitness values.
+                    Consequently, these chromosomes stand a better chance of being selected for the next generation,
+                    aligning with the principle that the fittest individuals have the greatest likelihood of survival
+                    and reproduction.</p>
+
+                <hr>
+
+                <h3 id="population-implementation">Population Implementation<a class="anchorjs-link "
+                        href="#population-implementation" aria-label="Anchor" data-anchorjs-icon=""
+                        style="font: 1em / 1 anchorjs-icons; padding-left: 0.375em;"></a></h3>
+
+                <p>The <code class="language-plaintext highlighter-rouge">Population</code> class encapsulates a
+                    collective of <code class="language-plaintext highlighter-rouge">Chromosome</code> instances,
+                    managing their lifecycle and evolutionary processes. Implemented in <a
+                        href="/game-of-life-ai/population.cpp">population.cpp</a>, this class oversees a vector of
+                    chromosomes, <code
+                        class="language-plaintext highlighter-rouge">std::vector&lt;std::shared_ptr&lt;Chromosome&gt;&gt; chromosomes</code>,
+                    handling tasks such as selection and crossover to foster the development of successive generations.
+                </p>
+
+                <p>Selection within the population is governed by <code
+                        class="language-plaintext highlighter-rouge">selectionPressure</code> and <code
+                        class="language-plaintext highlighter-rouge">selectionMethod</code> parameters. <code
+                        class="language-plaintext highlighter-rouge">selectionPressure</code> dictates the count of
+                    chromosomes to be selected, while <code
+                        class="language-plaintext highlighter-rouge">selectionMethod</code> determines the technique of
+                    selection. These selection strategies are detailed in the <code
+                        class="language-plaintext highlighter-rouge">GeneticAlgorithm</code> class, which will be
+                    explored further.</p>
+
+                <h4 id="crossover-reproduction-part">Crossover (Reproduction Part)<a class="anchorjs-link "
+                        href="#crossover-reproduction-part" aria-label="Anchor" data-anchorjs-icon=""
+                        style="font: 1em / 1 anchorjs-icons; padding-left: 0.375em;"></a></h4>
+
+                <p>To regenerate the population for the next generation, the <code
+                        class="language-plaintext highlighter-rouge">Population</code> class leverages the <code
+                        class="language-plaintext highlighter-rouge">Chromosome</code> API, utilizing <code
+                        class="language-plaintext highlighter-rouge">selectionPressure</code> and the chosen selection
+                    method to guide the process. This design ensures versatility, enabling the class to support a wide
+                    array of problems beyond the specific challenge addressed by this program. The aim is to foster a
+                    generic, adaptable framework for genetic algorithm applications.</p>
+
+                <div class="language-cpp highlighter-rouge">
+                    <div class="highlight">
+                        <pre class="highlight"><code><span class="kt">void</span> <span class="n">Population</span><span class="o">::</span><span class="n">crossover</span><span class="p">()</span> <span class="p">{</span>
+ <span class="c1">// create a new population</span>
+ <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">Chromosome</span><span class="o">&gt;&gt;</span> <span class="n">newPopulation</span><span class="p">;</span>
+
+ <span class="c1">// Generate new individuals until the new population is full</span>
+ <span class="k">while</span> <span class="p">(</span><span class="k">static_cast</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="n">newPopulation</span><span class="p">.</span><span class="n">size</span><span class="p">())</span> <span class="o">&lt;</span> <span class="n">populationSize</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">// Select two parents</span>
+  <span class="kt">int</span> <span class="n">parent1Id</span> <span class="o">=</span> <span class="n">rand</span><span class="p">()</span> <span class="o">%</span> <span class="n">chromosomes</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
+  <span class="kt">int</span> <span class="n">parent2Id</span> <span class="o">=</span> <span class="n">rand</span><span class="p">()</span> <span class="o">%</span> <span class="n">chromosomes</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
+
+  <span class="c1">// Perform crossover</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">Chromosome</span><span class="o">&gt;</span> <span class="n">parent1</span> <span class="o">=</span> <span class="n">chromosomes</span><span class="p">[</span><span class="n">parent1Id</span><span class="p">];</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">Chromosome</span><span class="o">&gt;</span> <span class="n">parent2</span> <span class="o">=</span> <span class="n">chromosomes</span><span class="p">[</span><span class="n">parent2Id</span><span class="p">];</span>
+
+  <span class="k">auto</span> <span class="n">offspring</span> <span class="o">=</span> <span class="n">getOffsprings</span><span class="p">(</span><span class="n">parent1</span><span class="p">,</span> <span class="n">parent2</span><span class="p">);</span>
+
+  <span class="c1">// Add the new individuals to the new population</span>
+  <span class="n">newPopulation</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">offspring</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>
+  <span class="n">newPopulation</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">offspring</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
+
+  <span class="c1">// If the new population is not full, add the fittest parent to the new</span>
+  <span class="c1">// population</span>
+  <span class="k">if</span> <span class="p">(</span><span class="n">newPopulation</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">&lt;</span> <span class="n">chromosomes</span><span class="p">.</span><span class="n">size</span><span class="p">())</span> <span class="p">{</span>
+   <span class="n">newPopulation</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">chromosomes</span><span class="p">[</span><span class="n">parent1Id</span><span class="p">]);</span>
+  <span class="p">}</span>
+ <span class="p">}</span>
+
+ <span class="c1">// Replace the old population with the new population</span>
+ <span class="n">chromosomes</span> <span class="o">=</span> <span class="n">newPopulation</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre>
+                    </div>
+                </div>
+
+                <p><code class="language-plaintext highlighter-rouge">GetOffsprings</code> simple calls the <code
+                        class="language-plaintext highlighter-rouge">Chromosome</code> constructor with the two parents
+                    that were selected from the <code class="language-plaintext highlighter-rouge">survivors</code>
+                    selected by the <code class="language-plaintext highlighter-rouge">selection</code> method. The
+                    process is repeated until the new population is full.</p>
+
+                <p>After each generation is created - including the initial one, the <code
+                        class="language-plaintext highlighter-rouge">calculateScore</code> method is called on each
+                    chromosome to calculate its score.</p>
+
+                <p>The method updates the fitness of each chromosome based on the score and the total score of the
+                    population. The fitness is calculated by the following formula: <code
+                        class="language-plaintext highlighter-rouge">fitness = score / totalScore</code>.</p>
+
+                <div class="language-cpp highlighter-rouge">
+                    <div class="highlight">
+                        <pre class="highlight"><code> <span class="c1">// update the fitness score for each chromosome</span>
+ <span class="k">for</span> <span class="p">(</span><span class="k">auto</span> <span class="n">chromosome</span> <span class="o">:</span> <span class="n">chromosomes</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">chromosome</span><span class="o">-&gt;</span><span class="n">calculateFitness</span><span class="p">(</span><span class="k">static_cast</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="p">(</span><span class="n">totalFitnessScore</span><span class="p">));</span>
+ <span class="p">}</span>
+</code></pre>
+                    </div>
+                </div>
+
+                <p>Note that due to the way the rouletteWheelSelection method is implemented, the totalFitnessScore is
+                    actually the totalScore of the population.</p>
+
+                <p>Because it takes for each chromosome its score, in relation to the total score, the fitness is
+                    actually a percentage of the total score. This way, the chromosomes with the highest scores get the
+                    highest fitness, and the chromosomes with the lowest scores get the lowest fitness.</p>
+
+                <hr>
+
+                <h3 id="genetic-algorithm-implementation">Genetic Algorithm Implementation<a class="anchorjs-link "
+                        href="#genetic-algorithm-implementation" aria-label="Anchor" data-anchorjs-icon=""
+                        style="font: 1em / 1 anchorjs-icons; padding-left: 0.375em;"></a></h3>
+
+                <p>The <code class="language-plaintext highlighter-rouge">GeneticAlgorithm</code> is imlemented based on
+                    the psudo-code describe in p. 131 of the book (Biological Computation). The class is implemented in
+                    <a href="/game-of-life-ai/ga.cpp">ga.cpp</a>. The class is responsible for running the genetic
+                    algorithm on the population of chromosomes.</p>
+
+                <p>The main process is implemented in the <code class="language-plaintext highlighter-rouge">run</code>
+                    method.</p>
+
+                <div class="language-cpp highlighter-rouge">
+                    <div class="highlight">
+                        <pre class="highlight"><code><span class="kt">void</span> <span class="n">GeneticAlgorithm</span><span class="o">::</span><span class="n">run</span><span class="p">()</span> <span class="p">{</span>
+ <span class="k">while</span> <span class="p">(</span><span class="n">population</span><span class="o">-&gt;</span><span class="n">generation</span> <span class="o">&lt;</span> <span class="n">maxGenerations</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">population</span><span class="o">-&gt;</span><span class="n">calculateTotalScore</span><span class="p">();</span>
+  <span class="n">report</span><span class="p">();</span>
+  <span class="n">population</span><span class="o">-&gt;</span><span class="n">selection</span><span class="p">(</span><span class="n">selectionPressure</span><span class="p">,</span>
+         <span class="o">&amp;</span><span class="n">GeneticAlgorithm</span><span class="o">::</span><span class="n">rouletteWheelSelection</span><span class="p">);</span>
+  <span class="n">population</span><span class="o">-&gt;</span><span class="n">crossover</span><span class="p">();</span>
+  <span class="n">population</span><span class="o">-&gt;</span><span class="n">mutation</span><span class="p">(</span><span class="n">mutationRate</span><span class="p">);</span>
+  <span class="n">population</span><span class="o">-&gt;</span><span class="n">generation</span><span class="o">++</span><span class="p">;</span>
+ <span class="p">}</span>
+ <span class="n">population</span><span class="o">-&gt;</span><span class="n">calculateTotalScore</span><span class="p">();</span>
+ <span class="n">save</span><span class="p">();</span>
+ <span class="n">printSummary</span><span class="p">();</span>
+<span class="p">}</span>
+</code></pre>
+                    </div>
+                </div>
+
+                <h4 id="roulette-wheel-selection">Roulette Wheel Selection<a class="anchorjs-link "
+                        href="#roulette-wheel-selection" aria-label="Anchor" data-anchorjs-icon=""
+                        style="font: 1em / 1 anchorjs-icons; padding-left: 0.375em;"></a></h4>
+
+                <p>After testing different kinds of selection methods, I’ve decided to use the <code
+                        class="language-plaintext highlighter-rouge">Roulette Wheel Selection</code> method. This method
+                    is implemented in the <code class="language-plaintext highlighter-rouge">GeneticAlgorithm</code>
+                    class. The method is implemented in the <code
+                        class="language-plaintext highlighter-rouge">selection</code> method. The method gets the <code
+                        class="language-plaintext highlighter-rouge">selectionPresure</code> parameter and returns a
+                    vector of selected chromosomes.</p>
+
+                <div class="language-cpp highlighter-rouge">
+                    <div class="highlight">
+                        <pre class="highlight"><code><span class="kt">void</span> <span class="n">GeneticAlgorithm</span><span class="o">::</span><span class="n">rouletteWheelSelection</span><span class="p">(</span>
+ <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">Chromosome</span><span class="o">&gt;&gt;</span> <span class="o">&amp;</span><span class="n">chromosomes</span><span class="p">,</span> <span class="kt">int</span> <span class="n">survivorsSize</span><span class="p">)</span> <span class="p">{</span>
+ <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">cumulativeScores</span><span class="p">(</span><span class="n">chromosomes</span><span class="p">.</span><span class="n">size</span><span class="p">());</span>
+ <span class="kt">int</span> <span class="n">totalScore</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+ <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="k">static_cast</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="n">chromosomes</span><span class="p">.</span><span class="n">size</span><span class="p">());</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">totalScore</span> <span class="o">+=</span> <span class="n">chromosomes</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">score</span><span class="p">;</span>
+  <span class="n">cumulativeScores</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">totalScore</span><span class="p">;</span>
+ <span class="p">}</span>
+
+ <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">Chromosome</span><span class="o">&gt;&gt;</span> <span class="n">survivors</span><span class="p">;</span>
+ <span class="k">while</span> <span class="p">(</span><span class="n">survivors</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">&lt;</span> <span class="n">survivorsSize</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kt">int</span> <span class="n">random</span> <span class="o">=</span> <span class="n">rand</span><span class="p">()</span> <span class="o">%</span> <span class="n">totalScore</span><span class="p">;</span>
+  <span class="k">auto</span> <span class="n">it</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">lower_bound</span><span class="p">(</span><span class="n">cumulativeScores</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span>
+           <span class="n">cumulativeScores</span><span class="p">.</span><span class="n">end</span><span class="p">(),</span> <span class="n">random</span><span class="p">);</span>
+  <span class="kt">int</span> <span class="n">index</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">distance</span><span class="p">(</span><span class="n">cumulativeScores</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">it</span><span class="p">);</span>
+  <span class="n">survivors</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">chromosomes</span><span class="p">[</span><span class="n">index</span><span class="p">]);</span>
+ <span class="p">}</span>
+ <span class="n">chromosomes</span> <span class="o">=</span> <span class="n">survivors</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre>
+                    </div>
+                </div>
+
+                <p>Note that the <code class="language-plaintext highlighter-rouge">selectionPressure</code> parameter
+                    is used to determine the number of chromosomes to select (<code
+                        class="language-plaintext highlighter-rouge">survivorsSize</code>) by applying the following
+                    formula: <code
+                        class="language-plaintext highlighter-rouge">survivorsSize = (int)(chromosomes.size() * selectionPressure)</code>.
+                </p>
+
+                <h4 id="report">Report<a class="anchorjs-link " href="#report" aria-label="Anchor"
+                        data-anchorjs-icon="" style="font: 1em / 1 anchorjs-icons; padding-left: 0.375em;"></a></h4>
+
+                <p>The <code class="language-plaintext highlighter-rouge">report</code> method is designed to provide a
+                    visually engaging overview of the algorithm’s progress. Initially, I utilized <code
+                        class="language-plaintext highlighter-rouge">csv</code> files for tracking, but later
+                    transitioned to real-time console output for a more dynamic observation experience. Given the
+                    algorithm’s rapid execution, the progress visualization resembles a fast-forward movie.</p>
+
+                <p>The <code class="language-plaintext highlighter-rouge">bestChromosome</code> is displayed in an
+                    accessible format, utilizing square (<code class="language-plaintext highlighter-rouge">■</code>)
+                    and space symbols to represent different states or values.</p>
+
+                <p>I encourage you to experience the evolution process in real-time. For a demonstration, please refer
+                    to attachment A.</p>
+
+                <h4 id="save">Save<a class="anchorjs-link " href="#save" aria-label="Anchor" data-anchorjs-icon=""
+                        style="font: 1em / 1 anchorjs-icons; padding-left: 0.375em;"></a></h4>
+
+                <p>The <code class="language-plaintext highlighter-rouge">save</code> method facilitates the
+                    preservation of algorithm outcomes. Each member of the final population is saved into a <code
+                        class="language-plaintext highlighter-rouge">.txt</code> file, prioritized by performance with
+                    the file names reflecting the score of the individual. Additionally, a comprehensive <code
+                        class="language-plaintext highlighter-rouge">report.txt</code> file compiles the algorithm’s
+                    parameters, the concluding population, and a summary of the process. The report delineates each
+                    individual with detailed descriptions and includes command line instructions for replicating the
+                    experiment with specific individuals. An example can be found in attachment B.</p>
+
+                <h2 id="contributions-and-feedback">Contributions and Feedback<a class="anchorjs-link "
+                        href="#contributions-and-feedback" aria-label="Anchor" data-anchorjs-icon=""
+                        style="font: 1em / 1 anchorjs-icons; padding-left: 0.375em;"></a></h2>
+
+                <p>Feel free to fork this project, submit pull requests, or send me suggestions to improve the algorithm
+                    or the implementation. Your feedback is highly appreciated!</p>
+
+                <h2 id="acknowledgements">Acknowledgements<a class="anchorjs-link " href="#acknowledgements"
+                        aria-label="Anchor" data-anchorjs-icon=""
+                        style="font: 1em / 1 anchorjs-icons; padding-left: 0.375em;"></a></h2>
+
+                <p>This project was inspired by my continuous exploration of computational biology and my desire to
+                    blend software engineering with biological systems’ complexity. Special thanks to my course
+                    instructors and peers for their invaluable insights and support.</p>
+
+                <h2 id="license">License<a class="anchorjs-link " href="#license" aria-label="Anchor"
+                        data-anchorjs-icon="" style="font: 1em / 1 anchorjs-icons; padding-left: 0.375em;"></a></h2>
+
+                <p>This project is licensed under the MIT License - see the <a
+                        href="https://github.com/Dor-sketch/game-of-life-ai/blob/main/LICENSE">LICENSE</a> file for
+                    details.</p>
+
+
+
+                <div class="footer border-top border-gray-light mt-5 pt-3 text-right text-gray">
+                    This site is open source. <a
+                        href="https://raw.githubusercontent.com/Dor-sketch/game-of-life-ai/main/LICENSE">Improve this
+                        page</a>.
+                </div>
+
+            </div>
+    </main>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.1.0/anchor.min.js"
+        integrity="sha256-lZaRhKri35AyJSypXXs4o6OPFTbTmUoltBbDCbdzegg=" crossorigin="anonymous"></script>
+    <script>anchors.add();</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/prism.min.js"></script>
+
+
+</body>
