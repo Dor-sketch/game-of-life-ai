@@ -92,12 +92,3 @@ body {
     font-size: large;
     font-weight: bold;
 }
-
-.octicon-mark-github {
-fill: #4b0082 !important;
-}
-
-footer a {
-    color: #ffffff;
-    font-weight: bold;
-}

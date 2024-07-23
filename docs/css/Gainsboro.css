@@ -110,7 +110,7 @@ drawingarea {
 }
 
 body {
-    background-color: /*chocolate*/ #D2691E;
+    background-color: /*Gainsboro*/ #DCDCDC;
     color: #333333;
     font-weight: bold;
     /* DarkGrey */
@@ -120,12 +120,4 @@ footer {
     background-color: /*chocolate*/ #D2691E;
     color: #333333;
     /* DarkGrey */
-}
-
-.octicon-mark-github {
-fill: #ffffff !important;
-}
-
-footer a {
-    color: #ffffff;
 }

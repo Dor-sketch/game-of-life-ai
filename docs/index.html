@@ -115,22 +115,22 @@ flex-direction: row;
 font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
-        footer a {
+        header a {
             /* color: #ffffff; */
-            color: #007BFF;
+            color: #00FFFFFC;
             transition: color 0.3s ease-in-out;
         }
-        footer a:hover {
+        header a:hover {
             color: #ade8f4;
             text-decoration: none;
             transform: scale(1.05);
         }
-        footer svg {
-            /* fill: #ffffff; */
-            margin: 0 5px;
+        header svg {
+filter: brightness(110%);
+            margin: 0 6px;
             transition: fill 0.3s ease-in-out, transform 0.3s ease-in-out;
         }
-        footer svg:hover {
+        header svg:hover {
             fill: #ade8f4;
             transform: rotate(15deg);
         }
@@ -155,7 +155,9 @@ box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             h1 {
                 font-size: 2.8rem;
             }
-
+            header {
+            line-height: 1;
+            }
             button {
                 font-size: small !important;
                 margin: 0 0 0.5em 0;
@@ -199,32 +201,55 @@ box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 .cell{
 transition: all 0.3s;
 }
+
+header {
+    padding: 0 20px;
+    padding-top: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: normal;
+    background: linear-gradient(to right, #6a11cb 0%, #2575fc 100%);
+    color: #ffffff;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+
+
+header p {
+    margin: 0;
+    text-align: left;
+}
+
     </style>
 </head>
 <body>
     <div class="content">
-        <h1>Conway's Game of Life</h1>
-
-        <div id="gameBoard" class="drawingarea"></div>
-        <link id="themeStylesheet" rel="stylesheet" type="text/css" href="">
-     <div id="controls">
-            <button onclick="toggleGame()">Start</button>
-            <button onclick="clearBoard()">Clear</button>
-            <button onclick="randomizeBoard()">Random</button>
-            <button onclick="performNextGeneration()">Next</button>
-            <select id="themeSelector" onchange="changeTheme()">
-                <!-- Options will be populated by JavaScript -->
-            </select>
-        </div>
-    </div>
-    <footer>
+        <header>
+        <p>Back to <a href="https://dorpascal.com">DorPascal.com</a></p>
         <a href="https://github.com/Dor-sketch/game-of-life-ai">
             <svg height="32" class="octicon octicon-mark-github" viewBox="0 0 16 16" version="1.1" width="32" aria-hidden="true">
                 <path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.58.82-2.14-.08-.2-.36-1.02.08-2.13 0 0 .67-.22 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.11.16 1.93.08 2.13.51.56.82 1.27.82 2.14 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.19 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path>
             </svg>
         </a>
-        <p>Back to <a href="https://dorpascal.com">DorPascal.com</a></p>
-    </footer>
+                <select id="themeSelector" onchange="changeTheme()">
+                <!-- Options will be populated by JavaScript -->
+            </select>
+    </header>
+        <h1>Conway's Game of Life</h1>
+
+        <div id="gameBoard" class="drawingarea"></div>
+        <link id="themeStylesheet" rel="stylesheet" type="text/css" href="css/Lavender.css">
+     <div id="controls">
+            <button onclick="toggleGame()">Start</button>
+            <button onclick="clearBoard()">Clear</button>
+            <button onclick="randomizeBoard()">Random</button>
+            <button onclick="performNextGeneration()">Next</button>
+
+        </div>
+    </div>
+
     <script>
         const INITIAL_BOARD_SIZE = 30;
         let boardSize = INITIAL_BOARD_SIZE;
@@ -232,7 +257,7 @@ transition: all 0.3s;
         let ageBoard = createBoard(boardSize); // Separate board to track the age of cells
         let interval;
         let isRunning = false;
-        const themeFiles = ['AliceBlue.css', 'MintCream.css', 'Lavender.css', 'LightBlue.css', 'DarkGreen.css', 'Maroon.css', 'PaleVioletRed.css', 'PeachPuff.css', 'MediumPurple.css', 'Chocolate.css', 'SeaGreen.css'];
+        const themeFiles = ['Lavender.css', 'LightBlue.css', 'AliceBlue.css', 'MintCream.css',  'LightGreen.css', 'Orange.css', 'PaleVioletRed.css', 'PeachPuff.css', 'MediumPurple.css', 'Gainsboro.css', 'SeaGreen.css'];
 
         document.addEventListener('DOMContentLoaded', () => {
             populateThemeSelector();
@@ -395,8 +420,12 @@ transition: all 0.3s;
             const themeColor = themeSelector.value.replace('css/', '').replace('.css', '');
             document.querySelector('meta[name="theme-color"]').setAttribute('content', themeColor);
             // update github link color
-            document.querySelector('footer svg').style.fill = themeColor;
-
+            document.querySelector('.octicon-mark-github').style.fill = themeColor;
+            // update header background color
+            document.querySelector('header').style.background = `linear-gradient(to right, #6a11cb 0%, ${themeColor} 100%)`;
+            // update select border color
+            document.querySelector('#themeSelector').style.borderColor = themeColor;
+            
         }
 
 

@@ -76,7 +76,3 @@ body {
         font-size: large;
     font-weight: bold;
 }
-
-footer svg {
-    fill: #333333 !important; /* DarkGrey */
-}

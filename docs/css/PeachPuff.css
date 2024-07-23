@@ -132,11 +132,3 @@ footer {
     font-weight: bold;
 }
 
-footer svg {
-    fill: #8B4513;
-    /* SaddleBrown */
-}
-
-.octicon-mark-github {
-fill: #8B4513 !important;
-}
