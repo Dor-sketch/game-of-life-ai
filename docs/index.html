@@ -1,54 +1,43 @@
 <!DOCTYPE html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<!-- Begin Jekyll SEO tag v2.8.0 -->
-<meta name="generator" content="vscode">
-<meta property="og:title" content="Game of Life Online Simulator">
-<meta property="og:locale" content="en_US">
-<meta name="description" content="Conway's Game of Life Online Simulator with costumizable themes. Including interactive controls to start, pause, clear, randomize, and advance to the next generation.">
-<meta name="keywords" content="Conway's Game of Life, Game of Life, Cellular Automata, Online Simulator, Genetic Algorithm, Artificial Intelligence, AI, Machine Learning, ML, Evolutionary Algorithm, Evolutionary Computation, Optimization, Pattern Recognition, Emergent Behavior, Simulation, Interactive, Controls, Start, Pause, Clear, Randomize, Next Generation, Theme, Costumizable, Blue, Forest, Green, Lavender, Metal Blue, Metal Red, Orange, Pink, Purple, Red, Smoke">
-<meta property="og:description" content="Conway's Game of Life Online Simulator with costumizable themes. Including interactive controls to start, pause, clear, randomize, and advance to the next generation.">
-<link rel="canonical" href="https://dorpascal.com/game-of-life-ai/">
-<meta property="og:url" content="https://dorpascal.com/game-of-life-ai/">
-<meta property="og:site_name" content="Game of Life Online">
-<meta property="og:type" content="website">
-<meta name="twitter:card" content="summary">
-<meta property="twitter:title" content="Genetic Algorithm for Conway’s Game of Life">
-<script type="application/ld+json">
-{"@context":"https://schema.org","@type":"WebSite","description":"Implementing Conway’s Game of Life with genetic algorithms to optimize patterns and explore emergent behaviors within the simulation.","headline":"Genetic Algorithm for Conway’s Game of Life Online","name":"game-of-life-ai","url":"https://dorpascal.com/apps/game-of-life-ai-program.html"}</script>
-<!-- End Jekyll SEO tag -->
+    <!-- SEO and Metadata -->
+    <meta name="generator" content="vscode">
+    <meta property="og:title" content="Game of Life Online Simulator">
+    <meta property="og:locale" content="en_US">
+    <meta name="description" content="Conway's Game of Life Online Simulator with customizable themes. Including interactive controls to start, pause, clear, randomize, and advance to the next generation.">
+    <meta name="keywords" content="Conway's Game of Life, Game of Life, Cellular Automata, Online Simulator, Genetic Algorithm, Artificial Intelligence, AI, Machine Learning, ML, Evolutionary Algorithm, Evolutionary Computation, Optimization, Pattern Recognition, Emergent Behavior, Simulation, Interactive, Controls, Start, Pause, Clear, Randomize, Next Generation, Theme, Customizable, Blue, Forest, Green, Lavender, Metal Blue, Metal Red, Orange, Pink, Purple, Red, Smoke">
+    <meta property="og:description" content="Conway's Game of Life Online Simulator with customizable themes. Including interactive controls to start, pause, clear, randomize, and advance to the next generation.">
+    <link rel="canonical" href="https://dorpascal.com/game-of-life-ai/">
+    <meta property="og:url" content="https://dorpascal.com/game-of-life-ai/">
+    <meta property="og:site_name" content="Game of Life Online">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary">
+    <meta property="twitter:title" content="Genetic Algorithm for Conway’s Game of Life">
+    <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "WebSite",
+            "description": "Implementing Conway’s Game of Life with genetic algorithms to optimize patterns and explore emergent behaviors within the simulation.",
+            "headline": "Genetic Algorithm for Conway’s Game of Life Online",
+            "name": "game-of-life-ai",
+            "url": "https://dorpascal.com/apps/game-of-life-ai-program.html"
+        }
+    </script>
 
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic">
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Mono:400,700">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/milligram/1.4.1/milligram.min.css">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/themes/prism.min.css">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/plugins/line-numbers/prism-line-numbers.min.css">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/plugins/line-highlight/prism-line-highlight.min.css">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/plugins/line-numbers/prism-line-numbers.min.css">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/plugins/line-highlight/prism-line-highlight.min.css">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/plugins/line-highlight/prism-line-highlight.min.css">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/plugins/line-highlight/prism-line-highlight.min.css">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/plugins/line-highlight/prism-line-highlight.min.css">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/plugins/line-highlight/prism-line-highlight.min.css">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/plugins/line-highlight/prism-line-highlight.min.css">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/plugins/line-highlight/prism-line-highlight.min.css">
-          <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag() { dataLayer.push(arguments); }
-    gtag('js', new Date());
-    gtag('config', 'G-T7HFKFX0PR');
-  </script>
-
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/themes/prism.min.css" rel="stylesheet" />
-
-<!-- You can set your favicon here -->
-<link rel="icon" type="image/png" href="https://dorpascal.com/favicon.ico">
-<!-- link rel="shortcut icon" type="image/x-icon" href="/meta-decorator-program/favicon.ico" -->
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Mono:400,700">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/milligram/1.4.1/milligram.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/themes/prism.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/plugins/line-numbers/prism-line-numbers.min.css">
+    <link rel="icon" type="image/png" href="https://dorpascal.com/favicon.ico">
 
     <title>Conway's Game of Life Online Simulator</title>
     <style>
@@ -59,6 +48,9 @@
             margin: 0;
             padding: 0;
             text-align: center;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
         }
         h1 {
             margin: 20px 0;
@@ -87,10 +79,11 @@
             background: #FFFFFF;
             border: 2px solid #555555;
             width: fit-content;
+            overflow: hidden;
         }
         .cell {
-            width: 20px;
-            height: 20px;
+            width: 100%;
+            height: 100%;
             border: 1px solid #ddd;
             cursor: pointer;
         }
@@ -106,107 +99,147 @@
         .veteran {
             background-color: #0077b3;
         }
-html, body {
-    height: 100%;
-    margin: 0;
-}
+        .content {
+            flex: 1;
+        }
+        footer {
+            margin-top: 20px;
+            padding: 20px 0;
+            background: linear-gradient(to right, #6a11cb 0%, #2575fc 100%);
+            color: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        footer a {
+            color: #ffffff;
+            transition: color 0.3s ease-in-out;
+        }
+        footer a:hover {
+            color: #ade8f4;
+            text-decoration: none;
+            transform: scale(1.05);
+        }
+        footer svg {
+            fill: #ffffff;
+            margin: 0 5px;
+            transition: fill 0.3s ease-in-out, transform 0.3s ease-in-out;
+        }
+        footer svg:hover {
+            fill: #ade8f4;
+            transform: rotate(15deg);
+        }
+        footer p {
+            margin: 5px 0;
+            text-align: center;
+        }
+        footer p:first-child {
+            margin-top: 20px;
+        }
 
-body {
-    display: flex;
-    flex-direction: column;
-}
+        @media (max-width: 400px) {
+            .drawingarea {
+                grid-template-columns: repeat(auto-fit, minmax(10px, 1fr));
+                grid-template-rows: repeat(auto-fit, minmax(10px, 1fr));
+                width: 100%;
+            }
+            #controls {
+                flex-direction: column;
+                align-items: center;
+            }
+            h1 {
+                font-size: 2.8rem;
+            }
 
-.content {
-    flex: 1;
-    /* Ensures content pushes the footer down */
-}
-footer {
-    margin-top: 20px;
-    padding: 20px 0;
-    background: linear-gradient(to right, #6a11cb 0%, #2575fc 100%);
-    color: #ffffff;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
+            button {
+                font-size: small !important;
+                margin: 0 0 0.5em 0;
+                padding-left: 1em !important;
+                padding-right: 1em !important;
+            }
 
-footer a {
-    color: #ffffff;
-    transition: color 0.3s ease-in-out;
-}
-
-footer a:hover {
-    color: #ade8f4;
-    text-decoration: none;
-    transform: scale(1.05);
-}
-
-footer svg {
-    fill: #ffffff;
-    margin: 0 5px;
-    transition: fill 0.3s ease-in-out, transform 0.3s ease-in-out;
-}
-
-footer svg:hover {
-    fill: #ade8f4;
-    transform: rotate(15deg);
-}
-
-footer p {
-    margin: 5px 0;
+            footer {
+            font-size: small;
+            }
+        }
+#themeSelector {
     text-align: center;
+    width: 100%;
+    border: 2px solid #007BFF; /* Stylish border */
+    border-radius: 5px; /* Rounded corners */
+    background-color: #fff; /* Background color */
+    transition: border-color 0.25s ease-in-out, box-shadow 0.25s ease-in-out; /* Smooth transition for hover */
 }
 
-footer p:first-child {
-    margin-top: 20px;
+#themeSelector:hover {
+    cursor: pointer;
+    border-color: #0056b3; /* Darker border on hover */
+    box-shadow: 0 0 8px #007BFF; /* Subtle shadow for depth */
 }
 
-footer p:last-child {
-    margin-bottom: 20px;
+#themeSelector option {
+    text-align: center;
+    padding: 10px; /* Add padding for options for better readability */
 }
 
+#themeStylesheet {
+    display: none;
+}
 
+.cell:hover {
+    box-shadow: 0 0 5px #555555;
+    border: 1px solid #555555;
+}
+
+.cell{
+transition: all 0.3s;
+}
     </style>
 </head>
 <body>
-<div class="content">
-    <h1>Conway's Game of Life</h1>
-    <div id="controls">
-        <button onclick="toggleGame()">Start</button>
-        <button onclick="clearBoard()">Clear</button>
-        <button onclick="randomizeBoard()">Random</button>
-        <button onclick="performNextGeneration()">Next</button>
-        <select id="themeSelector" onchange="changeTheme()">
-            <!-- Options will be populated by JavaScript -->
-        </select>
+    <div class="content">
+        <h1>Conway's Game of Life</h1>
+        <div id="controls">
+            <button onclick="toggleGame()">Start</button>
+            <button onclick="clearBoard()">Clear</button>
+            <button onclick="randomizeBoard()">Random</button>
+            <button onclick="performNextGeneration()">Next</button>
+            <select id="themeSelector" onchange="changeTheme()">
+                <!-- Options will be populated by JavaScript -->
+            </select>
+        </div>
+        <div id="gameBoard" class="drawingarea"></div>
+        <link id="themeStylesheet" rel="stylesheet" type="text/css" href="">
     </div>
-    <div id="gameBoard" class="drawingarea"></div>
-    <link id="themeStylesheet" rel="stylesheet" type="text/css" href="">
-    </div>
-<footer>
-    <p>Source code available on <a href="https://github.com/dorpascal/game-of-life-ai">GitHub</a></p>
-    <a href="https://github.com/dorpascal/game-of-life-ai">
-        <svg height="32" class="octicon octicon-mark-github" viewBox="0 0 16 16" version="1.1" width="32" aria-hidden="true">
-            <path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.58.82-2.14-.08-.2-.36-1.02.08-2.13 0 0 .67-.22 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.11.16 1.93.08 2.13.51.56.82 1.27.82 2.14 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.19 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path>
-        </svg>
-    </a>
-    <p>Back to <a href="https://dorpascal.com">DorPascal.com</a></p>
-</footer>
+    <footer>
+        <a href="https://github.com/Dor-sketch/game-of-life-ai">
+            <svg height="32" class="octicon octicon-mark-github" viewBox="0 0 16 16" version="1.1" width="32" aria-hidden="true">
+                <path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.58.82-2.14-.08-.2-.36-1.02.08-2.13 0 0 .67-.22 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.11.16 1.93.08 2.13.51.56.82 1.27.82 2.14 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.19 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path>
+            </svg>
+        </a>
+        <p>Source code available on <a href="https://github.com/Dor-sketch/game-of-life-ai">GitHub</a></p>
+        <p>Back to <a href="https://dorpascal.com">DorPascal.com</a></p>
+    </footer>
     <script>
-        const BOARD_SIZE = 30;
-        let board = createBoard(BOARD_SIZE);
-        let ageBoard = createBoard(BOARD_SIZE); // Separate board to track the age of cells
+        const INITIAL_BOARD_SIZE = 30;
+        let boardSize = INITIAL_BOARD_SIZE;
+        let board = createBoard(boardSize);
+        let ageBoard = createBoard(boardSize); // Separate board to track the age of cells
         let interval;
         let isRunning = false;
-        const themeFiles = ['blue.css', 'forest.css', 'green.css',
-        'lavender.css','metal_blue.css','metal_red.css','orange.css','pink.css','purple.css','red.css', 'smoke.css'];
+        const themeFiles = ['blue.css', 'forest.css', 'green.css', 'lavender.css', 'metal_blue.css', 'metal_red.css', 'orange.css', 'pink.css', 'purple.css', 'red.css', 'smoke.css'];
 
         document.addEventListener('DOMContentLoaded', () => {
             populateThemeSelector();
+            adjustBoardSize();
             drawBoard();
+            window.addEventListener('resize', () => {
+                adjustBoardSize();
+                drawBoard();
+            });
         });
 
         function createBoard(size) {
@@ -215,12 +248,12 @@ footer p:last-child {
 
         function drawBoard() {
             const gameBoard = document.getElementById('gameBoard');
-            gameBoard.style.gridTemplateRows = `repeat(${BOARD_SIZE}, 20px)`;
-            gameBoard.style.gridTemplateColumns = `repeat(${BOARD_SIZE}, 20px)`;
             gameBoard.innerHTML = '';
+            gameBoard.style.gridTemplateRows = `repeat(${boardSize}, 20px)`;
+            gameBoard.style.gridTemplateColumns = `repeat(${boardSize}, 20px)`;
 
-            for (let i = 0; i < BOARD_SIZE; i++) {
-                for (let j = 0; j < BOARD_SIZE; j++) {
+            for (let i = 0; i < boardSize; i++) {
+                for (let j = 0; j < boardSize; j++) {
                     const cell = document.createElement('div');
                     cell.classList.add('cell');
                     updateCellClass(cell, i, j);
@@ -270,23 +303,23 @@ footer p:last-child {
         }
 
         function clearBoard() {
-            board = createBoard(BOARD_SIZE);
-            ageBoard = createBoard(BOARD_SIZE);
+            board = createBoard(boardSize);
+            ageBoard = createBoard(boardSize);
             drawBoard();
         }
 
         function randomizeBoard() {
-            board = createBoard(BOARD_SIZE).map(row => row.map(() => (Math.random() > 0.7 ? 1 : 0)));
-            ageBoard = createBoard(BOARD_SIZE);
+            board = createBoard(boardSize).map(row => row.map(() => (Math.random() > 0.7 ? 1 : 0)));
+            ageBoard = createBoard(boardSize);
             drawBoard();
         }
 
         function performNextGeneration() {
-            const newBoard = createBoard(BOARD_SIZE);
-            const newAgeBoard = createBoard(BOARD_SIZE);
+            const newBoard = createBoard(boardSize);
+            const newAgeBoard = createBoard(boardSize);
 
-            for (let i = 0; i < BOARD_SIZE; i++) {
-                for (let j = 0; j < BOARD_SIZE; j++) {
+            for (let i = 0; i < boardSize; i++) {
+                for (let j = 0; j < boardSize; j++) {
                     const aliveNeighbors = countAliveNeighbors(i, j);
                     if (board[i][j]) {
                         newBoard[i][j] = aliveNeighbors === 2 || aliveNeighbors === 3 ? 1 : 0;
@@ -304,9 +337,9 @@ footer p:last-child {
 
         function updateBoard() {
             const cells = document.getElementsByClassName('cell');
-            for (let i = 0; i < BOARD_SIZE; i++) {
-                for (let j = 0; j < BOARD_SIZE; j++) {
-                    const cell = cells[i * BOARD_SIZE + j];
+            for (let i = 0; i < boardSize; i++) {
+                for (let j = 0; j < boardSize; j++) {
+                    const cell = cells[i * boardSize + j];
                     updateCellClass(cell, i, j);
                 }
             }
@@ -319,7 +352,7 @@ footer p:last-child {
                     if (i === 0 && j === 0) continue;
                     const nx = x + i;
                     const ny = y + j;
-                    if (nx >= 0 && nx < BOARD_SIZE && ny >= 0 && ny < BOARD_SIZE) {
+                    if (nx >= 0 && nx < boardSize && ny >= 0 && ny < boardSize) {
                         count += board[nx][ny];
                     }
                 }
@@ -341,6 +374,19 @@ footer p:last-child {
             const themeSelector = document.getElementById('themeSelector');
             const themeStylesheet = document.getElementById('themeStylesheet');
             themeStylesheet.href = themeSelector.value;
+        }
+
+        function adjustBoardSize() {
+            const screenWidth = window.innerWidth;
+
+            if (screenWidth <= 600) {
+                boardSize = 20; // Reduce the size of the board for smaller screens
+            } else {
+                boardSize = INITIAL_BOARD_SIZE; // Default size for larger screens
+            }
+
+            board = createBoard(boardSize);
+            ageBoard = createBoard(boardSize);
         }
     </script>
 </body>
