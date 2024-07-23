@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -9,15 +10,18 @@
     <meta name="generator" content="vscode">
     <meta property="og:title" content="Game of Life Online Simulator">
     <meta property="og:locale" content="en_US">
-    <meta name="description" content="Conway's Game of Life Online Simulator with customizable themes. Including interactive controls to start, pause, clear, randomize, and advance to the next generation.">
-    <meta name="keywords" content="Conway's Game of Life, Game of Life, Cellular Automata, Online Simulator, Genetic Algorithm, Artificial Intelligence, AI, Machine Learning, ML, Evolutionary Algorithm, Evolutionary Computation, Optimization, Pattern Recognition, Emergent Behavior, Simulation, Interactive, Controls, Start, Pause, Clear, Randomize, Next Generation, Theme, Customizable, Blue, Forest, Green, Lavender, Metal_Blue, Metal_Red, Orange, LightPink, Purple, Maroon, Smoke">
-    <meta property="og:description" content="Conway's Game of Life Online Simulator with customizable themes. Including interactive controls to start, pause, clear, randomize, and advance to the next generation.">
+    <meta name="description"
+        content="Conway's Game of Life Online Simulator with customizable themes. Including interactive controls to start, pause, clear, randomize, and advance to the next generation.">
+    <meta name="keywords"
+        content="Conway's Game of Life, Game of Life, Cellular Automata, Online Simulator, Genetic Algorithm, Artificial Intelligence, AI, Machine Learning, ML, Evolutionary Algorithm, Evolutionary Computation, Optimization, Pattern Recognition, Emergent Behavior, Simulation, Interactive, Controls, Start, Pause, Clear, Randomize, Next Generation, Theme, Customizable, Blue, Forest, Green, Lavender, Metal_Blue, Metal_Red, Orange, LightPink, Purple, Maroon, Smoke">
+    <meta property="og:description"
+        content="Conway's Game of Life Online Simulator with customizable themes. Including interactive controls to start, pause, clear, randomize, and advance to the next generation.">
     <link rel="canonical" href="https://dorpascal.com/game-of-life-ai/">
     <meta property="og:url" content="https://dorpascal.com/game-of-life-ai/">
     <meta property="og:site_name" content="Game of Life Online">
     <meta property="og:type" content="website">
     <meta name="twitter:card" content="summary">
-    <meta name="theme-color" content="BlueViolet">
+    <meta name="theme-color" content="Lavender">
     <meta property="twitter:title" content="Genetic Algorithm for Conway’s Game of Life">
     <script type="application/ld+json">
         {
@@ -37,14 +41,15 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/milligram/1.4.1/milligram.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/themes/prism.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/plugins/line-numbers/prism-line-numbers.min.css">
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/plugins/line-numbers/prism-line-numbers.min.css">
     <link rel="icon" type="image/png" href="https://dorpascal.com/favicon.ico">
 
     <title>Conway's Game of Life Online Simulator</title>
     <style>
         body {
             font-family: 'Courier New', monospace;
-            background-color: #f0f0f0;
+            background-color: Lavender;
             color: #333333;
             margin: 0;
             padding: 0;
@@ -55,12 +60,15 @@
             font-size: large;
             font-weight: bold;
         }
+
         h1 {
             margin: 20px 0;
         }
+
         #controls {
             margin-bottom: 20px;
         }
+
         button {
             background: #11307d;
             color: #FFFFFF;
@@ -71,11 +79,13 @@
             margin: 5px;
             transition: 0.3s;
         }
+
         button:hover {
             box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
             background: #ee6161;
             border-color: #555555;
         }
+
         .drawingarea {
             display: grid;
             margin: 0 auto;
@@ -84,60 +94,74 @@
             width: fit-content;
             overflow: hidden;
         }
+
         .cell {
             width: 100%;
             height: 100%;
             border: 1px solid #ddd;
             cursor: pointer;
         }
+
         .alive {
             background-color: #80e5ff;
         }
+
         .young {
             background-color: #33b5e5;
         }
+
         .old {
             background-color: #0099cc;
         }
+
         .veteran {
             background-color: #0077b3;
         }
+
         .content {
             flex: 1;
         }
-footer {
-margin-top: 20px;
-padding: 20px 0;
-display: flex;
-justify-content: start;
-align-items: start;
-flex-direction: row;
-font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
+
+        footer {
+            margin-top: 20px;
+            padding: 20px 0;
+            display: flex;
+            justify-content: start;
+            align-items: start;
+            flex-direction: row;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
         header a {
             /* color: #ffffff; */
             color: #00FFFFFC;
             transition: color 0.3s ease-in-out;
         }
+
         header a:hover {
             color: #ade8f4;
             text-decoration: none;
             transform: scale(1.05);
         }
+
         header svg {
-filter: brightness(110%);
+            filter: brightness(110%);
+            fill: lavender;
             margin: 0 6px;
             transition: fill 0.3s ease-in-out, transform 0.3s ease-in-out;
         }
+
         header svg:hover {
             fill: #ade8f4;
             transform: rotate(15deg);
         }
+
         footer p {
             margin: 5px 0;
             text-align: center;
         }
+
         footer p:first-child {
             margin-top: 20px;
         }
@@ -148,16 +172,20 @@ filter: brightness(110%);
                 grid-template-rows: repeat(auto-fit, minmax(10px, 1fr));
                 width: 100%;
             }
+
             #controls {
                 flex-direction: column;
                 align-items: center;
             }
+
             h1 {
                 font-size: 2.8rem;
             }
+
             header {
-            line-height: 1;
+                line-height: 1;
             }
+
             button {
                 font-size: small !important;
                 margin: 0 0 0.5em 0;
@@ -166,87 +194,98 @@ filter: brightness(110%);
             }
 
             footer {
-            font-size: small;
+                font-size: small;
             }
         }
-#themeSelector {
-    text-align: center;
-    width: calc(min(100%, 200px)); /* Limit width to 200px or 100% of the screen */
-    border: 2px solid #007BFF; /* Stylish border */
-    border-radius: 5px; /* Rounded corners */
-    background-color: #fff; /* Background color */
-    transition: border-color 0.25s ease-in-out, box-shadow 0.25s ease-in-out; /* Smooth transition for hover */
-}
 
-#themeSelector:hover {
-    cursor: pointer;
-    border-color: #0056b3; /* Darker border on hover */
-    box-shadow: 0 0 8px #007BFF; /* Subtle shadow for depth */
-}
+        #themeSelector {
+            text-align: center;
+            width: calc(min(100%, 200px));
+            /* Limit width to 200px or 100% of the screen */
+            border: 2px solid lavender;
+            /* Stylish border */
+            border-radius: 5px;
+            /* Rounded corners */
+            background-color: #fff;
+            /* Background color */
+            transition: border-color 0.25s ease-in-out, box-shadow 0.25s ease-in-out;
+            /* Smooth transition for hover */
+        }
 
-#themeSelector option {
-    text-align: center;
-    padding: 10px; /* Add padding for options for better readability */
-}
+        #themeSelector:hover {
+            cursor: pointer;
+            border-color: #0056b3;
+            /* Darker border on hover */
+            box-shadow: 0 0 8px #007BFF;
+            /* Subtle shadow for depth */
+        }
 
-#themeStylesheet {
-    display: none;
-}
+        #themeSelector option {
+            text-align: center;
+            padding: 10px;
+            /* Add padding for options for better readability */
+        }
 
-.cell:hover {
-    box-shadow: 0 0 5px #555555;
-    border: 1px solid #555555;
-}
+        #themeStylesheet {
+            display: none;
+        }
 
-.cell{
-transition: all 0.3s;
-}
+        .cell:hover {
+            box-shadow: 0 0 5px #555555;
+            border: 1px solid #555555;
+        }
 
-header {
-    padding: 0 20px;
-    padding-top: 10px;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: normal;
-    background: linear-gradient(to right, #6a11cb 0%, #2575fc 100%);
-    color: #ffffff;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
+        .cell {
+            transition: all 0.3s;
+        }
+
+        header {
+            padding: 0 20px;
+            padding-top: 10px;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: normal;
+            background: linear-gradient(to right, #6a11cb 0%, Lavender 100%);
+            color: #ffffff;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
 
 
 
-header p {
-    margin: 0;
-    text-align: left;
-}
-
+        header p {
+            margin: 0;
+            text-align: left;
+        }
     </style>
 </head>
+
 <body>
     <div class="content">
         <header>
-        <p>Back to <a href="https://dorpascal.com">DorPascal.com</a></p>
-        <a href="https://github.com/Dor-sketch/game-of-life-ai">
-            <svg height="32" class="octicon octicon-mark-github" viewBox="0 0 16 16" version="1.1" width="32" aria-hidden="true">
-                <path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.58.82-2.14-.08-.2-.36-1.02.08-2.13 0 0 .67-.22 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.11.16 1.93.08 2.13.51.56.82 1.27.82 2.14 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.19 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path>
-            </svg>
-        </a>
-                <select id="themeSelector" onchange="changeTheme()">
+            <p>Back to <a href="https://dorpascal.com">DorPascal.com</a></p>
+            <a href="https://github.com/Dor-sketch/game-of-life-ai">
+                <svg height="32" class="octicon octicon-mark-github" viewBox="0 0 16 16" version="1.1" width="32"
+                    aria-hidden="true">
+                    <path fill-rule="evenodd"
+                        d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.58.82-2.14-.08-.2-.36-1.02.08-2.13 0 0 .67-.22 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.11.16 1.93.08 2.13.51.56.82 1.27.82 2.14 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.19 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z">
+                    </path>
+                </svg>
+            </a>
+            <select id="themeSelector" onchange="changeTheme()">
                 <!-- Options will be populated by JavaScript -->
             </select>
-    </header>
+        </header>
         <h1>Conway's Game of Life</h1>
 
         <div id="gameBoard" class="drawingarea"></div>
         <link id="themeStylesheet" rel="stylesheet" type="text/css" href="css/Lavender.css">
-     <div id="controls">
+        <div id="controls">
             <button onclick="toggleGame()">Start</button>
             <button onclick="clearBoard()">Clear</button>
             <button onclick="randomizeBoard()">Random</button>
             <button onclick="performNextGeneration()">Next</button>
-
         </div>
     </div>
 
@@ -257,7 +296,7 @@ header p {
         let ageBoard = createBoard(boardSize); // Separate board to track the age of cells
         let interval;
         let isRunning = false;
-        const themeFiles = ['Lavender.css', 'LightBlue.css', 'AliceBlue.css', 'MintCream.css',  'LightGreen.css', 'Orange.css', 'PaleVioletRed.css', 'PeachPuff.css', 'MediumPurple.css', 'Gainsboro.css', 'SeaGreen.css'];
+        const themeFiles = ['Lavender.css', 'LightBlue.css', 'AliceBlue.css', 'MintCream.css', 'LightGreen.css', 'Orange.css', 'PaleVioletRed.css', 'PeachPuff.css', 'MediumPurple.css', 'Gainsboro.css', 'SeaGreen.css'];
 
         document.addEventListener('DOMContentLoaded', () => {
             populateThemeSelector();
@@ -425,7 +464,7 @@ header p {
             document.querySelector('header').style.background = `linear-gradient(to right, #6a11cb 0%, ${themeColor} 100%)`;
             // update select border color
             document.querySelector('#themeSelector').style.borderColor = themeColor;
-            
+
         }
 
 
@@ -433,4 +472,5 @@ header p {
 
 
 </body>
+
 </html>
