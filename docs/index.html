@@ -10,13 +10,14 @@
     <meta property="og:title" content="Game of Life Online Simulator">
     <meta property="og:locale" content="en_US">
     <meta name="description" content="Conway's Game of Life Online Simulator with customizable themes. Including interactive controls to start, pause, clear, randomize, and advance to the next generation.">
-    <meta name="keywords" content="Conway's Game of Life, Game of Life, Cellular Automata, Online Simulator, Genetic Algorithm, Artificial Intelligence, AI, Machine Learning, ML, Evolutionary Algorithm, Evolutionary Computation, Optimization, Pattern Recognition, Emergent Behavior, Simulation, Interactive, Controls, Start, Pause, Clear, Randomize, Next Generation, Theme, Customizable, Blue, Forest, Green, Lavender, Metal Blue, Metal Red, Orange, Pink, Purple, Red, Smoke">
+    <meta name="keywords" content="Conway's Game of Life, Game of Life, Cellular Automata, Online Simulator, Genetic Algorithm, Artificial Intelligence, AI, Machine Learning, ML, Evolutionary Algorithm, Evolutionary Computation, Optimization, Pattern Recognition, Emergent Behavior, Simulation, Interactive, Controls, Start, Pause, Clear, Randomize, Next Generation, Theme, Customizable, Blue, Forest, Green, Lavender, Metal_Blue, Metal_Red, Orange, LightPink, Purple, Maroon, Smoke">
     <meta property="og:description" content="Conway's Game of Life Online Simulator with customizable themes. Including interactive controls to start, pause, clear, randomize, and advance to the next generation.">
     <link rel="canonical" href="https://dorpascal.com/game-of-life-ai/">
     <meta property="og:url" content="https://dorpascal.com/game-of-life-ai/">
     <meta property="og:site_name" content="Game of Life Online">
     <meta property="og:type" content="website">
     <meta name="twitter:card" content="summary">
+    <meta name="theme-color" content="BlueViolet">
     <meta property="twitter:title" content="Genetic Algorithm for Conway’s Game of Life">
     <script type="application/ld+json">
         {
@@ -167,7 +168,7 @@
         }
 #themeSelector {
     text-align: center;
-    width: 100%;
+    width: calc(min(100%, 200px)); /* Limit width to 200px or 100% of the screen */
     border: 2px solid #007BFF; /* Stylish border */
     border-radius: 5px; /* Rounded corners */
     background-color: #fff; /* Background color */
@@ -230,7 +231,7 @@ transition: all 0.3s;
         let ageBoard = createBoard(boardSize); // Separate board to track the age of cells
         let interval;
         let isRunning = false;
-        const themeFiles = ['blue.css', 'forest.css', 'green.css', 'lavender.css', 'metal_blue.css', 'metal_red.css', 'orange.css', 'pink.css', 'purple.css', 'red.css', 'smoke.css'];
+        const themeFiles = ['DodgerBlue.css', 'ForestGreen.css', 'MistyRose.css', 'LightBlue.css', 'DarkGreen.css', 'Maroon.css', 'PaleVioletRed.css', 'SaddleBrown.css', 'Purple.css', 'Tomato.css', 'SeaGreen.css'];
 
         document.addEventListener('DOMContentLoaded', () => {
             populateThemeSelector();
@@ -384,6 +385,19 @@ transition: all 0.3s;
             board = createBoard(boardSize);
             ageBoard = createBoard(boardSize);
         }
+        // change meta tag color theme based on theme selected
+
+        function changeTheme() {
+            const themeSelector = document.getElementById('themeSelector');
+            const themeStylesheet = document.getElementById('themeStylesheet');
+            themeStylesheet.href = themeSelector.value;
+            const themeColor = themeSelector.value.replace('css/', '').replace('.css', '');
+            document.querySelector('meta[name="theme-color"]').setAttribute('content', themeColor);
+        }
+
+
     </script>
+
+
 </body>
 </html>
