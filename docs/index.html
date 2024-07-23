@@ -151,7 +151,8 @@
 
         footer {
             margin-top: 20px;
-            padding: 20px 0;
+            padding: 10px 0;
+            padding-left: 20px;
             display: flex;
             justify-content: start;
             align-items: start;
@@ -186,10 +187,6 @@
         footer p {
             margin: 5px 0;
             text-align: center;
-        }
-
-        footer p:first-child {
-            margin-top: 20px;
         }
 
         @media (max-width: 400px) {
@@ -294,8 +291,7 @@
 <body>
     <div class="content">
         <header>
-            <p>Back to <a href="https://dorpascal.com" target="_blank" aria-label="Dor Pascal's WebSite"
-                    title="Dor Pascal's WebSite">Dor Pascal's WebSite</a></p>
+
             <a href="https://github.com/Dor-sketch/game-of-life-ai" target="_blank" aria-label="View source on GitHub"
                 title="View source on GitHub">
                 <svg height="32" class="octicon octicon-mark-github" viewBox="0 0 16 16" version="1.1" width="32"
@@ -324,6 +320,9 @@
             <button onclick="performNextGeneration()">Next</button>
         </div>
     </div>
+    <footer>
+        <p>Dessigned by <a href="https://dorpascal.com" target="_blank" aria-label="Dor Pascal" title="Dor Pascal">Dor
+                Pascal </a>  &copy; 2024 | <a href="./about/" title="About" aria-label="About">Getting Started</a></p>
 
     <script>
         const INITIAL_BOARD_SIZE = 30;
