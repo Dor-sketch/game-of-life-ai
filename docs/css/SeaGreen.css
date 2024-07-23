@@ -78,5 +78,5 @@ body {
 }
 
 footer svg {
-    fill: #333333; /* DarkGrey */
+    fill: #333333 !important; /* DarkGrey */
 }

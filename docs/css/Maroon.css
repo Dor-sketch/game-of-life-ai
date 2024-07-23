@@ -91,3 +91,7 @@ body {
     font-size: large;
     font-weight: bold;
 }
+
+footer svg {
+    fill: #FFFFFF !important;
+}

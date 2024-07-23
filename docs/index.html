@@ -52,6 +52,8 @@
             display: flex;
             flex-direction: column;
             min-height: 100vh;
+            font-size: large;
+            font-weight: bold;
         }
         h1 {
             margin: 20px 0;
@@ -103,18 +105,18 @@
         .content {
             flex: 1;
         }
-        footer {
-            margin-top: 20px;
-            padding: 20px 0;
-            /* background: linear-gradient(to right, #6a11cb 0%, #2575fc 100%); */
-            /* color: #ffffff; */
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
+footer {
+margin-top: 20px;
+padding: 20px 0;
+/* background: linear-gradient(to right, #6a11cb 0%, #2575fc 100%); */
+/* color: #ffffff; */
+display: flex;
+justify-content: start;
+align-items: start;
+flex-direction: row;
+font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
         footer a {
             /* color: #ffffff; */
             color: #007BFF;
@@ -204,7 +206,10 @@ transition: all 0.3s;
 <body>
     <div class="content">
         <h1>Conway's Game of Life</h1>
-        <div id="controls">
+
+        <div id="gameBoard" class="drawingarea"></div>
+        <link id="themeStylesheet" rel="stylesheet" type="text/css" href="">
+     <div id="controls">
             <button onclick="toggleGame()">Start</button>
             <button onclick="clearBoard()">Clear</button>
             <button onclick="randomizeBoard()">Random</button>
@@ -213,8 +218,6 @@ transition: all 0.3s;
                 <!-- Options will be populated by JavaScript -->
             </select>
         </div>
-        <div id="gameBoard" class="drawingarea"></div>
-        <link id="themeStylesheet" rel="stylesheet" type="text/css" href="">
     </div>
     <footer>
         <a href="https://github.com/Dor-sketch/game-of-life-ai">
@@ -231,7 +234,7 @@ transition: all 0.3s;
         let ageBoard = createBoard(boardSize); // Separate board to track the age of cells
         let interval;
         let isRunning = false;
-        const themeFiles = ['AliceBlue.css', 'MintCream.css', 'Lavender.css', 'LightBlue.css', 'DarkGreen.css', 'DarkGray.css', 'PaleVioletRed.css', 'PeachPuff.css', 'MediumPurple.css', 'Chocolate.css', 'SeaGreen.css'];
+        const themeFiles = ['AliceBlue.css', 'MintCream.css', 'Lavender.css', 'LightBlue.css', 'DarkGreen.css', 'Maroon.css', 'PaleVioletRed.css', 'PeachPuff.css', 'MediumPurple.css', 'Chocolate.css', 'SeaGreen.css'];
 
         document.addEventListener('DOMContentLoaded', () => {
             populateThemeSelector();
