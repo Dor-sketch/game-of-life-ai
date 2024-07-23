@@ -69,4 +69,10 @@ drawingarea {
 body {
     background-color: #ADD8E6; /* LightBlue */
     color: #333333; /* DarkGrey */
+        font-size: large;
+    font-weight: bold;
+}
+
+.octicon-mark-github {
+fill: #0000CD !important;
 }

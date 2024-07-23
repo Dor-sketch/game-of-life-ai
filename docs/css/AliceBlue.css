@@ -88,6 +88,12 @@ body {
     color: #333333; /* Lighter gray for softer contrast */
     font-family: 'Courier New', monospace;
     border-radius: 0px;
-    font-size: large;
+        font-weight: bold;
+            font-size: large;
     font-weight: bold;
+
+}
+
+.octicon-mark-github {
+fill: #00008B !important;
 }

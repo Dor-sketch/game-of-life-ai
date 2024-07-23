@@ -89,5 +89,11 @@ body {
     background-color: #E6E6FA;
     /* Lavender */
     color: #333333;
+        font-weight: bold;
+
     /* DarkGrey */
+}
+
+.octicon-mark-github {
+fill: #333333 !important;
 }

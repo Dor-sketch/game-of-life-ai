@@ -85,10 +85,19 @@ drawingarea {
 }
 
 body {
-    background-color: #FFFFFF; /* White */
+    background-color: /*MediumPurple*/ #9370DB;
     color: #333333; /* Lighter gray for softer contrast */
     font-family: 'Courier New', monospace;
     border-radius: 0px;
     font-size: large;
+    font-weight: bold;
+}
+
+.octicon-mark-github {
+fill: #4b0082 !important;
+}
+
+footer a {
+    color: #ffffff;
     font-weight: bold;
 }

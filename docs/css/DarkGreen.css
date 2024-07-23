@@ -93,3 +93,7 @@ button {
     border-radius: 0;
     transition: 0.3s;
 }
+
+body {
+    font-weight: bold;
+}

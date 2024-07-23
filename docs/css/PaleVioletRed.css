@@ -69,6 +69,10 @@ body {
     color: #333333; /* DarkGrey */
     font-family: 'Courier New', monospace;
     border-radius: 0px;
-    font-size: large;
+        font-size: large;
     font-weight: bold;
+}
+
+footer svg {
+    fill: #333333; /* DarkGrey */
 }
