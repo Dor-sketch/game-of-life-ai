@@ -49,7 +49,8 @@
             max-width: 100%;
         }
     </style>
-
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <!-- PrismJS -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/themes/prism.min.css" rel="stylesheet" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/plugins/line-numbers/prism-line-numbers.min.css"
@@ -284,21 +285,19 @@
                     all possible terminals in the tree, and the latter includes all possible functions. Another notable
                     difference lies in the chromosome representation: genetic programming may involve trees of varying
                     sizes, contrasting with genetic algorithms where chromosomes typically have uniform sizes.</p>
+<p>To summarize, the flow of the genetic algorithm is as follows:</p>
 
-                <p>To summerize, the flow of the genetic algorithm is as follows:</p>
+<p>
+    \( p_0 \rightarrow \text{Evaluation} \rightarrow \text{Selection} \rightarrow \text{Crossover} \rightarrow \text{Mutation} \rightarrow \)
+</p>
+<p>
+    \( p_1 \rightarrow \text{Evaluation} \rightarrow \text{Selection} \rightarrow \text{Crossover} \rightarrow \text{Mutation} \rightarrow \)
+</p>
+<p>
+    \( p_2 \rightarrow \text{Evaluation} \rightarrow \text{Selection} \rightarrow \text{Crossover} \rightarrow \text{Mutation} \rightarrow \ldots \)
+</p>
 
-                \[p_0 \rightarrow \text{Evaluation} \rightarrow \text{Selection} \rightarrow \text{Crossover}
-                \rightarrow \text{Mutation} \rightarrow\]
-
-                \[p_1 \rightarrow \text{Evaluation} \rightarrow \text{Selection} \rightarrow \text{Crossover}
-                \rightarrow \text{Mutation} \rightarrow\]
-
-                \[p_2 \rightarrow \text{Evaluation} \rightarrow \text{Selection} \rightarrow \text{Crossover}
-                \rightarrow \text{Mutation} \rightarrow \ldots\]
-
-                <p>where $p_0$ is the initial population, and $p_1, p_2, \ldots$ are the next generations. The algorithm
-                    continues until a stopping criterion is met, such as a maximum number of generations or a
-                    satisfactory solution.</p>
+<p>where \( p_0 \) is the initial population, and \( p_1, p_2, \ldots \) are the next generations. The algorithm continues until a stopping criterion is met, such as a maximum number of generations or a satisfactory solution.</p>
 
                 <hr>
 
@@ -609,7 +608,7 @@
                         class="language-plaintext highlighter-rouge">Run GA</code> button. The algorithm will continue
                     until the maximum number of generations is reached, at which point the final generation will be
                     displayed. See <a
-                        href="/game-of-life-ai/images/run_ga.gif">https://raw.githubusercontent.com/Dor-sketch/game-of-life-ai/main/images/run_ga.gif</a>
+                        href="https://raw.githubusercontent.com/Dor-sketch/game-of-life-ai/main/images/run_ga.gif">images/run_ga.gif</a>
                     for a demonstration of the algorithm’s execution.</p>
 
                 <p>After execution of the <code class="language-plaintext highlighter-rouge">Run GA</code> , a new
@@ -650,7 +649,7 @@
                         class="language-plaintext highlighter-rouge">border-radius</code> can slow down the GUI. It is
                     recommended to use simple <code class="language-plaintext highlighter-rouge">css</code> files. For a
                     demonstration of the theme change, refer to <a
-                        href="/game-of-life-ai/images/themes.gif">https://raw.githubusercontent.com/Dor-sketch/game-of-life-ai/main/images/themes.gif</a>.
+                        href="https://raw.githubusercontent.com/Dor-sketch/game-of-life-ai/main/images/themes.gif">imgaes/themes.gif</a>.
                 </p>
 
                 <h3 id="using-the-command-line">Using the Command Line<a class="anchorjs-link "
@@ -830,8 +829,7 @@
                 <p>The <code class="language-plaintext highlighter-rouge">hi</code> shape demonstrates a long evolution
                     period of more than 230 generations and more than ten times bigger than the initial shape.</p>
 
-                <p>You can see the population that led to those individuals under the <a
-                        href="populations">populations</a> directory and explore their variations.</p>
+                <p>You can see the population that led to those individuals under the populations directory and explore their variations.</p>
 
                 <h2 id="more-examples">More Examples<a class="anchorjs-link " href="#more-examples" aria-label="Anchor"
                         data-anchorjs-icon="" style="font: 1em / 1 anchorjs-icons; padding-left: 0.375em;"></a></h2>
@@ -1001,7 +999,7 @@
                         class="language-plaintext highlighter-rouge">int [size][size]</code>), chosen for its simplicity
                     and efficiency due to compile-time size knowledge and contiguous memory allocation. Adjusting the
                     <code class="language-plaintext highlighter-rouge">BOARD_SIZE</code> macro in <a
-                        href="/game-of-life-ai/config.hpp">config.hpp</a> allows for easy size modifications.</p>
+                        href="https://raw.githubusercontent.com/Dor-sketch/game-of-life-ai/main/config.hpp">config.hpp</a> allows for easy size modifications.</p>
 
                 <hr>
 
@@ -1025,7 +1023,7 @@
                 <ol>
                     <li>
                         <p>Selecting an <code class="language-plaintext highlighter-rouge">aliveProbability</code>
-                            parameter (detailed in <a href="/game-of-life-ai/config.hpp">config.hpp</a>). This parameter
+                            parameter (detailed in <a href="https://raw.githubusercontent.com/Dor-sketch/game-of-life-ai/main/config.hpp">config.hpp</a>). This parameter
                             dictates the likelihood of each cell being alive.</p>
                     </li>
                     <li>
@@ -1055,7 +1053,7 @@
                     to assume a finite space. Additionally, I implemented dynamic sizes and tested the algorithm on
                     various board sizes. The size factor can be adjusted by modifying the <code
                         class="language-plaintext highlighter-rouge">BOARD_SIZE</code> macro in <a
-                        href="/game-of-life-ai/config.hpp">config.hpp</a>. However, it is recommended to maintain a
+                        href="https://raw.githubusercontent.com/Dor-sketch/game-of-life-ai/main/config.hpp">config.hpp</a>. However, it is recommended to maintain a
                     value of <code class="language-plaintext highlighter-rouge">20</code> to guarantee optimal results.
                 </p>
 
@@ -1233,7 +1231,7 @@
                 <p>The <code class="language-plaintext highlighter-rouge">Population</code> class encapsulates a
                     collective of <code class="language-plaintext highlighter-rouge">Chromosome</code> instances,
                     managing their lifecycle and evolutionary processes. Implemented in <a
-                        href="/game-of-life-ai/population.cpp">population.cpp</a>, this class oversees a vector of
+                        href="https://github.com/Dor-sketch/game-of-life-ai/blob/main/population.cpp">population.cpp</a>, this class oversees a vector of
                     chromosomes, <code
                         class="language-plaintext highlighter-rouge">std::vector&lt;std::shared_ptr&lt;Chromosome&gt;&gt; chromosomes</code>,
                     handling tasks such as selection and crossover to foster the development of successive generations.
@@ -1336,7 +1334,7 @@
 
                 <p>The <code class="language-plaintext highlighter-rouge">GeneticAlgorithm</code> is imlemented based on
                     the psudo-code describe in p. 131 of the book (Biological Computation). The class is implemented in
-                    <a href="/game-of-life-ai/ga.cpp">ga.cpp</a>. The class is responsible for running the genetic
+                    <a href="https://github.com/Dor-sketch/game-of-life-ai/blob/main/ga.cpp">ga.cpp</a>. The class is responsible for running the genetic
                     algorithm on the population of chromosomes.</p>
 
                 <p>The main process is implemented in the <code class="language-plaintext highlighter-rouge">run</code>
@@ -1453,14 +1451,14 @@
                         data-anchorjs-icon="" style="font: 1em / 1 anchorjs-icons; padding-left: 0.375em;"></a></h2>
 
                 <p>This project is licensed under the MIT License - see the <a
-                        href="https://github.com/Dor-sketch/game-of-life-ai/blob/main/LICENSE">LICENSE</a> file for
+                        href="https://raw.githubusercontent.com/Dor-sketch/game-of-life-ai/main/LICENSE">LICENSE</a> file for
                     details.</p>
 
 
 
                 <div class="footer border-top border-gray-light mt-5 pt-3 text-right text-gray">
                     This site is open source. <a
-                        href="https://raw.githubusercontent.com/Dor-sketch/game-of-life-ai/main/LICENSE">Improve this
+                        href="https://github.com/Dor-sketch/game-of-life-ai/edit/main/README.md">Improve this
                         page</a>.
                 </div>
 
