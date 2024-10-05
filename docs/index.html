@@ -358,14 +358,61 @@
             font-size: 1.2rem;
             background-color: transparent;
         }
+
+        #modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgb(0, 0, 0);
+            background-color: rgba(0, 0, 0, 0.4);
+        }
+
+        #modal-content {
+            background-color: #fefefe;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+        }
+
+        #close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        #close:hover, #close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
     </style>
 </head>
-
-
 <body>
+    <div id="modal">
+        <div id="modal-content">
+            <span id="close">&times;</span>
+            <h2>Game of Life AI</h2>
+            <p>Conway's Game of Life Simulator with customizable themes and interactive controls to start, pause, clear,
+                randomize, and advance generations.</p>
+            <p>View the full Methuselah project and the source code on <a href="https://github.com/Dor-sketch/game-of-life-ai" target="_blank"
+                    aria-label="View source on GitHub" title="View source on GitHub">GitHub</a></p>
+            <p>Chrome extension available on the <a href="https://chromewebstore.google.com/detail/game-of-life-extension/jiaoidmocpfggkklhleleghgkknnjpjh" target="_blank"
+                    aria-label="Chrome Web Store" title="Chrome Web Store">Chrome Web Store</a></p>
+                    <p>Firefox extension available on the <a href="https://addons.mozilla.org/en-US/firefox/addon/game-of-life-extension/" target="_blank"
+                    aria-label="Firefox Add-ons" title="Firefox Add-ons">Firefox Add-ons</a></p>
+            <p>Designed by <a href="https://dorpascal.com" target="_blank" aria-label="Dor Pascal" title="Dor Pascal">Dor
+                    Pascal</a> &copy; 2024</p>
+        </div>
+    </div>
     <div class="content">
         <header>
-
             <a href="https://github.com/Dor-sketch/game-of-life-ai" target="_blank" aria-label="View source on GitHub"
                 title="View source on GitHub">
                 <svg height="32" class="octicon octicon-mark-github" viewBox="0 0 16 16" version="1.1" width="32"
@@ -384,7 +431,6 @@
             </div>
         </header>
         <h1>Conway's Game of Life</h1>
-
         <div id="gameBoard" class="drawingarea"></div>
         <link id="themeStylesheet" rel="stylesheet" type="text/css" href="css/Lavender.css">
         <div id="controls">
@@ -578,11 +624,26 @@
             document.querySelector('#themeSelector').style.borderColor = themeColor;
 
         }
-
-
     </script>
+    <script>
+        const modal = document.getElementById('modal');
+        const modalContent = document.getElementById('modal-content');
+        const close = document.getElementById('close');
 
+        document.addEventListener('DOMContentLoaded', () => {
+            modal.style.display = 'block';
+        });
 
+        close.onclick = () => {
+            modal.style.display = 'none';
+        };
+
+        window.onclick = (event) => {
+            if (event.target === modal) {
+                modal.style.display = 'none';
+            }
+        };
+    </script>
 </body>
 
 </html>
