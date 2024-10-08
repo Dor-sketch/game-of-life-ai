@@ -392,6 +392,59 @@
             text-decoration: none;
             cursor: pointer;
         }
+
+
+.tutorial-popup {
+display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    line-height: 1.5;
+    transform: translate(-50%, -50%);
+    padding: 20px 10px;
+    border-radius: 10px;
+    max-width: 90%;
+    width: 400px;
+    z-index: 2;
+    transition: all 0.3s ease;
+    overflow-y: auto;
+    max-height: 80vh;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.tutorial-popup p,
+.tutorial-popup ul {
+    margin: 0 0 15px 0;
+    padding: 0;
+    align-self: start;
+    text-align: left;
+}
+
+.tutorial-step {
+    display: none;
+    animation: fadeIn 0.3s ease;
+    align-items: center;
+    text-align: center;
+    background: #ffe4e4;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.tutorial-step p,
+.tutorial-step ul {
+    margin: 0 0 15px 0;
+    padding: 0;
+}
+
+.tutorial-step ul {
+    list-style: disc;
+    padding-left: 20px;
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
     </style>
 </head>
 <body>
@@ -409,8 +462,55 @@
                     aria-label="Firefox Add-ons" title="Firefox Add-ons">Firefox Add-ons</a></p>
             <p>Designed by <a href="https://dorpascal.com" target="_blank" aria-label="Dor Pascal" title="Dor Pascal">Dor
                     Pascal</a> &copy; 2024</p>
+                                      <a href="https://chromewebstore.google.com/detail/game-of-life-extension/jiaoidmocpfggkklhleleghgkknnjpjh">
+                        <img src="https://storage.googleapis.com/web-dev-uploads/image/WlD8wC6g8khYWPJUsQceQkhXSlv1/HRs9MPufa1J1h5glNhut.png" alt="Available in the Chrome Web Store"  height="60">
+                    </a>
+                    <a href="https://addons.mozilla.org/en-US/firefox/addon/game-of-life-extension/">
+                        <img src="https://blog.mozilla.org/addons/files/2015/11/get-the-addon.png" alt="Available in the Firefox Add-ons" width="172" height="60">
+                    </a>
+                    <a href="https://github.com/Dor-sketch/game-of-life-extension" target="_blank" aria-label="View source on GitHub" title="View source on GitHub">
+                        <img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" alt="View source on GitHub" width="60" height="60">
+                    </a>
         </div>
     </div>
+    <div id="tutorial-popup" class="tutorial-popup" role="dialog" aria-labelledby="tutorial-title"
+            aria-describedby="tutorial-desc">
+            <div class="tutorial-step" data-step="1">
+                <p id="tutorial-title">👋 Welcome to the Game of Life Online Simulator!"</p>
+                <p id="tutorial-desc">Conway's Game of Life Simulator with customizable themes and interactive controls to
+                    start, pause, clear, randomize, and advance generations.</p>
+                <div class="button-group">
+                    <button class="close-btn" aria-label="Close tutorial">❌ Close</button>
+                    <button class="next-btn" aria-label="Next step">➡️ Next</button>
+                </div>
+            </div>
+            <div class="tutorial-step" data-step="2" style="display:none;">
+                <h2>How to use the Interactive Board</h2>
+                <ul class="tutorial-instructions">
+                    <li>
+                        <p>🖱️ Click on a cell to toggle its state (alive or dead).</p>
+                    </li>
+                    <li>
+                        <p>🚀 Start the simulation to see the cells evolve over time.</p>
+                    </li>
+                    <li>
+                        <p>🔄 Clear the board to start over.</p>
+                    </li>
+                    <li>
+                        <p>🎲 Randomize the board to see different patterns.</p>
+                    </li>
+                    <li>
+                        <p>➡️ Advance to the next generation manually.</p>
+                    </li>
+                </ul>
+                <div class="button-group">
+                    <button class="close-btn" aria-label="Close tutorial">❌ Close</button>
+                    <button class="next-btn" aria-label="Next step">➡️ Next</button>
+                </div>
+            </div>
+
+
+        </div>
     <div class="content">
         <header>
             <a href="https://github.com/Dor-sketch/game-of-life-ai" target="_blank" aria-label="View source on GitHub"
@@ -422,6 +522,7 @@
                     </path>
                 </svg>
             </a>
+            <button id="help-btn" aria-label="Open tutorial">📚 Tutorial</button>
             <div id="themes">
                 <label for="themeSelector">Theme:</label>
                 <select id="themeSelector" onchange="changeTheme()" aria-label="Select a theme" title="Select a theme"
@@ -644,6 +745,7 @@
             }
         };
     </script>
+    <script src="tutorial.js"></script>
 </body>
 
 </html>
